@@ -18,7 +18,6 @@ sap.ui.define([
 					"setId":"", 
 					"carId": "", 
 					"set_car_sap":false
-
 			};
 			this.routeData = {
 					"fromView": "",
