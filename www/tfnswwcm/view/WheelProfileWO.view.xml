@@ -1,0 +1,204 @@
+<mvc:View controllerName="tfnswequip.tfnswwcm.view.WheelProfileWO"
+	xmlns:core="sap.ui.core" xmlns:m="sap.m" xmlns:tnt="sap.tnt"
+	xmlns:form="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc" xmlns:uxap="sap.uxap">
+	<m:Page class="" enableScrolling="true" showFooter="true"
+		showHeader="true" showNavButton="false" showSubHeader="false"
+		title="{parts: ['/workOrder'],formatter:'tfnswwcm.util.formatter.woTitleFormat'}"
+		titleLevel="Auto">
+		<m:content>
+			<m:ObjectHeader id="header1" height="60%"
+				title="Wheel Profile Order" number="{/carNum}" numberUnit="{/setNum}">
+				<m:statuses>
+					<m:ObjectStatus title="" text="" />
+					<m:ObjectStatus title="" text="" />
+				</m:statuses>
+				<m:attributes id="detailsAttributes">
+					<m:ObjectAttribute id="ATTR5" title="Priority"
+						text="{SheetDetails>/0/ZzuserPernr}" />
+					<m:ObjectAttribute id="ATTR6" title="Status"
+						text="{SheetDetails>/0/ZzpersonIntname}" />
+				</m:attributes>
+			</m:ObjectHeader>
+			<form:Form id="form1" maxContainerCols="2" editable="true"
+				class="formInput">
+				<form:layout>
+					<form:ResponsiveGridLayout labelSpanL="3"
+						labelSpanM="3" columnsL="1" />
+				</form:layout>
+				<form:formContainers>
+					<form:FormContainer>
+						<form:formElements>
+							<form:FormElement label="Is this profile at 7/8 WPR2007">
+								<form:fields>
+									<m:RadioButtonGroup id="groupRadio" class="sapUiNoMarginBottom"
+										columns="4" selectedIndex="{/radio}" select="onSelectinRadioButton">
+										<m:buttons>
+											<m:RadioButton editable="true" text="Yes" />
+											<m:RadioButton editable="true" text="No" />
+										</m:buttons>
+									</m:RadioButtonGroup>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Enter flange thickness(mm)"
+								visible="{/flangVisible}">
+								<form:fields>
+									<m:Input fieldWidth="50%" filterSuggests="true"
+										imaxLength="0" showSuggestion="false"
+										showTableSuggestionValueHelp="true" showValueHelp="false"
+										startSuggestion="1" type="Text" valueHelpOnly="false"
+										valueLiveUpdate="false" width="30%" value="{/FlangeMeasurement}"
+										change="handleFlangChange" valueState="{valueStateFng}"
+										valueStateText="{valueStateFngText}"></m:Input>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement>
+								<form:fields>
+									<m:Toolbar>
+										<m:Text text="Wheel Profile Measurements" wrapping="false">
+										</m:Text>
+									</m:Toolbar>
+								</form:fields>
+							</form:FormElement>
+
+							<form:FormElement>
+								<form:fields>
+									<m:Table backgroundDesign="Translucent" fixedLayout="true"
+										growing="false" growingScrollToLoad="false" growingThreshold="20"
+										includeItemInSelection="false" inset="false" mode="None"
+										modeAnimationOn="true" noDataText="No data"
+										rememberSelections="true" showNoData="true" showOverlay="false"
+										showSeparators="All" showUnread="false" swipeDirection="Both"
+										visible="true" width="100%"
+										items="{path:'/wheelsData',templateShareable : true}">
+										<m:items>
+											<m:ColumnListItem itype="Active">
+												<m:cells>
+													<m:Text maxLines="1" text="{WheelNumber}" textAlign="Begin"
+														textDirection="Inherit" width="auto" wrapping="true" />
+													<m:Text
+														text="{parts: ['BogieModel','BogieSerialNo','WheelSerialNo'],formatter:'tfnswwcm.util.formatter.stringEscape'}"
+														textAlign="Begin" textDirection="Inherit" width="auto"
+														wrapping="true" />
+													<m:Text
+														text="{parts: ['Measurement','MeasureDate'],formatter:'tfnswwcm.util.formatter.escapeWithDate'}"
+														textAlign="Begin" textDirection="Inherit" width="auto"
+														wrapping="true" />
+													<m:Input fieldWidth="510%" filterSuggests="true"
+														maxLength="0" showSuggestion="false"
+														showTableSuggestionValueHelp="true" showValueHelp="false"
+														startSuggestion="1" type="Number" valueHelpOnly="false"
+														valueLiveUpdate="false" width="auto" value="{PreTurnMeasurement}"
+														change="handlePreChange" valueState="{valueStatePre}"
+														valueStateText="{valueStatePreText}"></m:Input>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														maxLength="0" showSuggestion="false"
+														showTableSuggestionValueHelp="true" showValueHelp="false"
+														startSuggestion="1" type="Number" valueHelpOnly="false"
+														valueLiveUpdate="false" width="auto" value="{PostTurnMeasurement}"
+														change="handlePostChange" valueState="{valueStatePost}"
+														valueStateText="{valueStatePostText}"></m:Input>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														imaxLength="0" showSuggestion="false"
+														showTableSuggestionValueHelp="true" showValueHelp="false"
+														startSuggestion="1" type="Number" valueHelpOnly="false"
+														valueLiveUpdate="false" width="auto" value="{RadialMeasurement}"
+														change="handleRadChange" valueState="{valueStateRad}"
+														valueStateText="{valueStateRadText}"></m:Input>
+												</m:cells>
+											</m:ColumnListItem>
+										</m:items>
+										<m:headerToolbar>
+											<m:Toolbar design="Transparent" enabled="true"
+												height="46px" visible="true" width="auto">
+												<m:content>
+													<m:ToolbarSpacer visible="true" width="" />
+													<m:Text id="np-sap_m_Text-1452744489040-1VJ"
+														maxLines="1" text="" textAlign="Begin" textDirection="Inherit"
+														width="auto" wrapping="true" />
+													<m:ToolbarSpacer visible="true" width="" />
+												</m:content>
+											</m:Toolbar>
+										</m:headerToolbar>
+										<m:columns>
+											<m:Column demandPopin="true" hAlign="Begin"
+												mergeDuplicates="false" mergeFunctionName="getText"
+												minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+												width="auto">
+												<m:header>
+													<m:Text maxLines="2" text="Wheel No." textAlign="Begin"
+														textDirection="Inherit" width="auto" wrapping="true" />
+												</m:header>
+											</m:Column>
+											<m:Column demandPopin="true" hAlign="Begin"
+												mergeDuplicates="false" mergeFunctionName="getText"
+												minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+												width="auto">
+												<m:header>
+													<m:Text text="{/boggie}" textAlign="Begin"
+														textDirection="Inherit" width="auto" wrapping="true" />
+												</m:header>
+											</m:Column>
+
+
+											<m:Column demandPopin="true" hAlign="Begin"
+												mergeDuplicates="false" mergeFunctionName="getText"
+												minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+												width="auto">
+												<m:header>
+													<m:Text maxLines="4" text="{/last}" textAlign="Begin"
+														textDirection="Inherit" width="auto" wrapping="true" />
+												</m:header>
+											</m:Column>
+											<m:Column demandPopin="true" hAlign="Begin"
+												mergeDuplicates="false" mergeFunctionName="getText"
+												minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+												width="auto">
+												<m:header>
+													<m:Text maxLines="4" text="Pre-Turn Diameter (mm)"
+														textAlign="Begin" textDirection="Inherit" width="auto"
+														wrapping="true" />
+												</m:header>
+											</m:Column>
+											<m:Column demandPopin="true" hAlign="Begin"
+												mergeDuplicates="false" mergeFunctionName="getText"
+												minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+												width="auto">
+												<m:header>
+													<m:Text maxLines="4" text="Post-Turn Diameter (mm)"
+														textAlign="Begin" textDirection="Inherit" width="auto"
+														wrapping="true" />
+												</m:header>
+											</m:Column>
+											<m:Column demandPopin="true" hAlign="Begin"
+												mergeDuplicates="false" mergeFunctionName="getText"
+												minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+												width="auto">
+												<m:header>
+													<m:Text maxLines="4" text="Post Radial Difference (mm)"
+														textAlign="Begin" textDirection="Inherit" width="auto"
+														wrapping="true" />
+												</m:header>
+											</m:Column>
+										</m:columns>
+									</m:Table>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+					</form:FormContainer>
+				</form:formContainers>
+			</form:Form>
+
+		</m:content>
+		<m:footer>
+			<m:Bar design="Footer" enableFlexBox="false" translucent="false">
+				<m:contentLeft />
+				<m:contentMiddle />
+				<m:contentRight>
+					<m:Button enabled="true" icon="" iconDensityAware="false"
+						iconFirst="true" text="Post Measurements" press="pressPostMeasurements"
+						width="auto" />
+				</m:contentRight>
+			</m:Bar>
+		</m:footer>
+	</m:Page>
+</mvc:View>

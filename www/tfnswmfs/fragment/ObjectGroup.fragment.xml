@@ -1,0 +1,69 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:m="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<m:ResponsivePopover class="sapUiPopupWithPadding"
+		placement="Auto" title="Select Object Part" contentHeight="auto"
+		contentWidth="auto" PlacementType="auto" verticalScrolling="true">
+		<m:content>
+			<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L6 M6 S6"
+				hSpacing="1" vSpacing="0" width="auto">
+				<layout:content>
+					<m:Table backgroundDesign="Solid" busy="false" fixedLayout="true"
+						growing="false" growingScrollToLoad="true" growingThreshold="20"
+						headerDesign="Standard" height="95%" includeItemInSelection="true"
+						itemPress="onSelectObjectPartGroup"
+						id="objectGroupCode"
+						items="{ path: 'objectPartGroupModel>/listitems', sorter: { path: 'ZzkurztextCg' } }"
+						mode="SingleSelectMaster" rememberSelections="true" showNoData="false"
+						width="auto">
+						<m:customData>
+							<core:CustomData key="sap-ui-fastnavgroup" value="true"
+								writeToDom="true" />
+						</m:customData>
+						<m:items>
+							<m:ColumnListItem counter="0" type="Active">
+								<m:cells>
+									<m:ObjectIdentifier badgeAttachments="false"
+										badgeNotes="false" badgePeople="false"
+										text="{objectPartGroupModel>ZzkurztextCg}" value="{objectPartGroupModel>Zzcodegruppe}" />
+								</m:cells>
+							</m:ColumnListItem>
+						</m:items>
+						<m:columns>
+							<m:Column>
+								<m:header>
+									<m:Label design="Bold" text="Object Part Group" />
+								</m:header>
+							</m:Column>
+						</m:columns>
+					</m:Table>
+					<m:Table backgroundDesign="Solid" busy="false" fixedLayout="false"
+						growing="true" growingScrollToLoad="true" growingThreshold="20"
+						headerDesign="Standard" height="95%" includeItemInSelection="true"
+						itemPress="onSelectObjectPart"
+						id="objectCode"
+						items="{ path: 'objectPartModel>/listitems', sorter: { path: 'ZzkurztextC' } }"
+						mode="SingleSelectMaster" noDataText="No symptoms Found"
+						rememberSelections="true" showNoData="false" width="auto">
+						<m:items>
+							<m:ColumnListItem counter="0" type="Active">
+								<m:cells>
+									<m:ObjectIdentifier badgeAttachments="false"
+										badgeNotes="false" badgePeople="false" text="{objectPartModel>ZzkurztextC}"
+										value="{objectPartModel>Zzcode}" />
+								</m:cells>
+							</m:ColumnListItem>
+						</m:items>
+						<m:columns>
+							<m:Column>
+								<m:header>
+									<m:Label design="Bold" text="Object Part" />
+								</m:header>
+							</m:Column>
+						</m:columns>
+					</m:Table>
+				</layout:content>
+			</layout:Grid>
+		</m:content>
+	</m:ResponsivePopover>
+</core:FragmentDefinition>

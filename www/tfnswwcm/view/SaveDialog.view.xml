@@ -1,0 +1,40 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" controllerName="tfnswequip.tfnswwcm.view.SaveDialog">
+	<m:Dialog horizontalScrolling="true" id="sap_m_Dialog_0"
+		showHeader="true" state="None" stretch="false" title="Save Your Changes"
+		type="Standard" verticalScrolling="true">
+		<m:beginButton />
+		<m:buttons>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				id="np-sap_m_Button-14510-0XR" text="Save" width="auto" press="onSave" />
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				id="np-sap_m_Button-110-0XR" text="Don't Save" width="auto" press="onDontSave" />
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				id="np-sap_m_Button-145273-0XT" text="Cancel" width="auto" press="onExit" />
+		</m:buttons>
+		<m:content>
+			<form:SimpleForm breakpointL="1024" breakpointM="600"
+				columnsL="2" columnsM="1" editable="false" emptySpanL="0"
+				emptySpanM="0" emptySpanS="0"
+				id="np-sap_ui_layout_form_SimpleForm-1452566741459-0X7"
+				labelMinWidth="192" labelSpanL="4" labelSpanM="2" labelSpanS="12"
+				layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="-1"
+				visible="true">
+				<form:title />
+				<form:content>
+					<m:VBox>
+						<m:Text text="To Keep your changes before changing screens,Click Save"
+							width="auto" />
+						<m:Text text="To Discard your changes ,Click Don't Save"
+							width="auto" />
+						<m:Text text="To stay on current screen ,Click Cancel"
+							width="auto" />
+					</m:VBox>
+				</form:content>
+			</form:SimpleForm>
+		</m:content>
+		<m:customHeader />
+		<m:endButton />
+		<m:subHeader />
+	</m:Dialog>
+</mvc:View>

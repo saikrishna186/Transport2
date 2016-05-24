@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<ResponsivePopover class="sapUiPopupWithPadding"
+		placement="Bottom" title="Select Audit Type" contentWidth="auto"
+		contentHeight="auto" horizontalScrolling="false" verticalScrolling="true">
+		<content>
+			<!-- <List headerText="" selectionChange="onSelAuditType" items="{ path:'auditTypeModel>/listitems' 
+				}" backgroundDesign="Transparent" growing="true" growingScrollToLoad="true" 
+				growingThreshold="10" includeItemInSelection="true" showSeparators="All" 
+				showUnread="true" rememberSelections="false" width="auto" mode="SingleSelectMaster"> 
+				<items> <StandardListItem title="{auditTypeModel>Zzdesc}" value="{auditTypeModel>ZzauditType}" 
+				adaptTitleSize="true" titleTextDirection="LTR" class="popList" /> </items> 
+				</List> -->
+			<Table backgroundDesign="Solid" busy="false" fixedLayout="false"
+				growing="true" growingScrollToLoad="true" growingThreshold="20"
+				headerDesign="Standard" includeItemInSelection="true" itemPress="onSelAuditType"
+				items="{path:'auditTypeModel>/listitems'  }" mode="SingleSelectMaster"
+				rememberSelections="true" showNoData="false" width="auto">
+				<items>
+					<ColumnListItem counter="0" type="Active">
+						<cells>
+							<ObjectIdentifier badgeAttachments="false"
+								badgeNotes="false" badgePeople="false" text="{auditTypeModel>Zzdesc}"
+								value="{auditTypeModel>ZzauditType}" design="Bold" />
+						</cells>
+					</ColumnListItem>
+				</items>
+				<columns>
+					<Column>
+						<header>
+						</header>
+					</Column>
+				</columns>
+			</Table>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

@@ -1,0 +1,30 @@
+<mvc:View controllerName="tfnsw.eam.cleaning.view.Attachments" xmlns:core="sap.ui.core" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<m:Page class="sapUiContentPadding" enableScrolling="false" id="sap_Responsive_Page_0" navButtonPress="onNavBack" showFooter="true"
+		showHeader="true" showNavButton="true" showSubHeader="true" title="Train Cleaning App" titleLevel="Auto">
+		<m:content>
+		<m:Panel id="oDocumentListPanel">
+				<m:headerToolbar>
+					<m:Toolbar design="Solid" enabled="true" height="46px" id="np-sap_m_Toolbar_3-1449708664189-0Q4" visible="true" width="100%">
+						<m:tooltip/>
+						<m:content>
+							<m:ToolbarSpacer id="np-sap_m_ToolbarSpacer-1449708664190-0Q5" visible="true" width="20px"/>
+							<m:Text id="id_attachmentTitle" maxLines="1" text="Attachments" textAlign="Begin" textDirection="Inherit" width="113px"
+								wrapping="true"/>
+							<m:ToolbarSpacer/>
+							<m:Button enabled="true" icon="sap-icon://add" iconDensityAware="false" iconFirst="false" id="id_AddAttachment" text=""
+								type="Transparent" width="auto" press="_onPressAdd"/>
+						</m:content>
+					</m:Toolbar>
+				</m:headerToolbar>
+				<m:content>
+					<m:List id="attachmentlist" mode="Delete" delete="handleDelete"
+						showUnread="true" itemPress="listPress">
+					</m:List>
+				</m:content>
+			</m:Panel>
+		</m:content>
+		<m:headerContent/>
+		<m:subHeader/>
+		<m:customHeader/>
+	</m:Page>
+</mvc:View>

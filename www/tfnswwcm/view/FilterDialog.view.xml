@@ -1,0 +1,57 @@
+<mvc:View controllerName="tfnswequip.tfnswwcm.view.FilterDialog"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<m:Dialog horizontalScrolling="false" id="sap_m_Dialog_0"
+		showHeader="true" state="None" stretch="false" title="Filter By" type="Standard"
+		verticalScrolling="false">
+		<m:beginButton>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				id="np-sap_m_Button-1453701693334-0D6" text="OK" type="Default"
+				width="auto" />
+		</m:beginButton>
+		<m:buttons />
+		<m:content>
+			<m:ObjectListItem id="np-sap_m_ObjectListItem-1453701715544-0D8"
+				intro="" number="" numberState="Success" numberUnit="" selected="false"
+				showMarkers="false" title="Set Number" type="Active" unread="false">
+				<m:attributes />
+				<m:firstStatus />
+				<m:secondStatus />
+			</m:ObjectListItem>
+			<m:ObjectListItem id="np-sap_m_ObjectListItem-1453701763516-0DL"
+				intro="" number="" numberState="Success" numberUnit="" selected="false"
+				showMarkers="false" title="Car Number" type="Active" unread="false">
+				<m:attributes />
+				<m:firstStatus />
+				<m:secondStatus />
+			</m:ObjectListItem>
+			<m:ObjectListItem id="np-sap_m_ObjectListItem-1453701765144-0DY"
+				intro="" number="" numberState="Success" numberUnit="" selected="false"
+				showMarkers="false" title="Depot" type="Active" unread="false">
+				<m:attributes />
+				<m:firstStatus />
+				<m:secondStatus />
+			</m:ObjectListItem>
+			<m:ObjectListItem id="np-sap_m_ObjectListItem-1453701766795-0EB"
+				intro="" number="" numberState="Success" numberUnit="" selected="false"
+				showMarkers="false" title="Work Order Number" type="Active" unread="false">
+				<m:attributes />
+				<m:firstStatus />
+				<m:secondStatus />
+			</m:ObjectListItem>
+			<m:ObjectListItem id="np-sap_m_ObjectListItem-1453701868114-0EO"
+				intro="" number="" numberState="Success" numberUnit="" selected="false"
+				showMarkers="false" title="Work Order Type" type="Active" unread="false">
+				<m:attributes />
+				<m:firstStatus />
+				<m:secondStatus />
+			</m:ObjectListItem>
+		</m:content>
+		<m:customHeader />
+		<m:endButton>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				id="np-sap_m_Button-1453701690770-0D4" text="Cancel" press="onPresscancelFilter"
+				type="Default" width="auto" />
+		</m:endButton>
+		<m:subHeader />
+	</m:Dialog>
+</mvc:View>

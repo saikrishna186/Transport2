@@ -1,0 +1,27 @@
+-x
+objective-c
+-arch
+i386
+-std=c99
+-fobjc-arc
+-gmodules
+-fpascal-strings
+-O0
+-isysroot
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.3.sdk
+-fasm-blocks
+-mios-simulator-version-min=9.2
+-g
+-fobjc-abi-version=2
+-fobjc-legacy-dispatch
+-iquote
+-iquote
+-I/Developments/EquipV1_mFS_Active/platforms/ios/build/emulator/include
+-I/Developments/EquipV1_mFS_Active/platforms/ios/build/emulator/usr/local/lib/include
+-I/Developments/EquipV1_mFS_Active/platforms/ios/build/UninstalledProducts/include
+-I/Developments/EquipV1_mFS_Active/platforms/ios/build/emulator
+-F/Developments/EquipV1_mFS_Active/platforms/ios/build/emulator
+i386-apple-darwin15.4.0
+"4.2.1 Compatible Apple LLVM 7.3.0 (clang-703.0.29)"
+SDK_PRODUCT_BUILD_VERSION=13E230
+13E230

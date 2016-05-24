@@ -1,0 +1,25 @@
+<mvc:View controllerName="tfnsw.erp.wcm.view.CancelDialog"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<m:Dialog horizontalScrolling="false" id="sap_m_Dialog_0"
+		showHeader="true" state="Warning" stretch="false" title="Confirmation"
+		type="Message" verticalScrolling="false">
+		<m:beginButton>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				id="np-sap_m_Button-1453336019076-1BW" press="_onPressNpsapmButton14533360190761BW"
+				text="Yes" type="Default" width="auto" />
+		</m:beginButton>
+		<m:buttons />
+		<m:content>
+			<m:Text id="np-sap_m_Text-1453335800568-1BS" maxLines="1"
+				text="Cancel updates on this page?" textAlign="Center"
+				textDirection="Inherit" width="300px" wrapping="true" />
+		</m:content>
+		<m:customHeader />
+		<m:endButton>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				id="np-sap_m_Button-1453336015556-1BU" press="_onPressNpsapmButton14533360155561BU"
+				text="No" type="Default" width="auto" />
+		</m:endButton>
+		<m:subHeader />
+	</m:Dialog>
+</mvc:View>

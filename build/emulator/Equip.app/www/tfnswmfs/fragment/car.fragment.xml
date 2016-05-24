@@ -1,0 +1,5 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns:m="sap.m" xmlns:layout="sap.ui.layout">
+	<m:Button activeIcon="off" class="CarOff" text="{carModel>Carid}"
+		width="100px" press="oncarPress" />
+</core:FragmentDefinition>

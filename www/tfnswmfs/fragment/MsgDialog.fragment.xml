@@ -1,0 +1,63 @@
+      <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout">
+	<Dialog horizontalScrolling="true" showHeader="true" state="None" stretch="false" title="{msgDialogModel>/titleText}" type="Standard" verticalScrolling="true" contentWidth="99%" contentHeight="auto">
+		<beginButton/>
+		<buttons>
+			<Button enabled="true" text="Close" width="auto" press="onCloseMSGDialog" type="Emphasized"/>
+		</buttons>
+		<customHeader/>
+		<endButton/>
+		<subHeader/>
+		<content>
+			<ToolbarSpacer class="height15" width="15px" />
+			<HBox width="100%">
+				<items>
+					<ToolbarSpacer class="height15" width="15px" /> <Label text="Symptom :" width="100%" design="Bold"/> <ToolbarSpacer class="height15" width="15px" />
+					<Label text="{msgDialogModel>/symptom}" width="100%"/>
+				</items>
+			</HBox>
+			<ToolbarSpacer class="height15" width="15px" />
+			<Table backgroundDesign="Solid" items="{ path:'msgDialogModel>/listitems' }">
+				<items>
+					<ColumnListItem counter="0">
+						<cells>
+							<Text text="{msgDialogModel>MessageV1}" maxLines="0"/>
+							<Text text="{msgDialogModel>MessageV2}" maxLines="0"/>
+							<Text text="{msgDialogModel>MessageV3}" maxLines="0" textAlign="Center"/>
+							<core:Icon src="sap-icon://status-completed" color="{msgDialogModel>color}" />
+							<Text text="{msgDialogModel>Message}" maxLines="0"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+				<columns>
+					<Column width="12%">
+						<header>
+							<Label text="Car" design="Bold"/>
+						</header>
+					</Column>
+					<Column width="26%">
+						<header>
+							<Label text="Description" design="Bold"/>
+						</header>
+					</Column>
+					<Column width="12%">
+						<header>
+							<Label text="Position" design="Bold"/>
+						</header>
+					</Column>
+					<Column width="5%">
+						<header>
+							<Label text="" design="Bold" />
+						</header>
+					</Column>
+					<Column width="45%">
+						<header>
+							<Label text="Result" design="Bold"/>
+						</header>
+					</Column>					
+				</columns>
+			</Table>
+			<ToolbarSpacer class="height15" width="15px" />
+			<ToolbarSpacer class="height15" width="15px" />
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

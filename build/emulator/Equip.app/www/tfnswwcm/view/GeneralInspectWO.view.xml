@@ -1,0 +1,1784 @@
+<mvc:View xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:sap.ui.core="sap.ui.core"
+	xmlns:semantic="sap.m.semantic" xmlns:uxap="sap.uxap"
+	controllerName="tfnswequip.tfnswwcm.view.GeneralInspectWO">
+	<m:Page class="" enableScrolling="true" showFooter="true"
+		showHeader="true" showNavButton="false" showSubHeader="false"
+		title="{parts: ['/workOrder'],formatter:'tfnswwcm.util.formatter.woTitleFormat'}"
+		titleLevel="Auto">
+		<m:content>
+			<m:ObjectHeader id="header" height="60%"
+				title="General Inspection" number="{/carNum}" numberUnit="{/setNum}">
+				<m:statuses>
+					<m:ObjectStatus title="" text="" />
+					<m:ObjectStatus title="" text="" />
+				</m:statuses>
+				<m:attributes id="detailsAttributes">
+					<m:ObjectAttribute id="ATTR0" title="Priority"
+						text="{SheetDetails>/0/ZzuserPernr}" />
+					<m:ObjectAttribute id="ATTR1" title="Status"
+						text="{SheetDetails>/0/ZzpersonIntname}" />
+				</m:attributes>
+			</m:ObjectHeader>
+			<m:IconTabBar applyContentPadding="true"
+				backgroundDesign="Solid" expandable="true" expanded="{/tabExpanded}"
+				id="wheelViewFilter" selectedKey="{/selectedTab}"
+				stretchContentHeight="false" upperCase="false" visible="true"
+				select="handleTabSelect">
+				<m:items>
+					<m:IconTabFilter count="" design="Vertical"
+						enabled="true"
+						icon="{parts: ['/wheelsData/0/icon'],formatter:'tfnswwcm.util.formatter.iconFormat'}"
+						iconColor="{parts: ['/wheelsData/0/iconClr'],formatter:'tfnswwcm.util.formatter.iconColor'}"
+						iconDensityAware="false" showAll="false"
+						text="{parts: ['/wheelsData/0/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconTitleFormat'}"
+						textDirection="Inherit" visible="true" key="{/wheelsData/0/WheelNumber}">
+						<m:content>
+							<form:Form id="row1" maxContainerCols="2" editable="true"
+								class="formInput"
+								title="{parts: ['/wheelsData/0/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconContentFormat'}">
+								<form:layout>
+									<form:ResponsiveGridLayout
+										labelSpanL="3" labelSpanM="3" columnsL="2" emptySpanL="6" />
+								</form:layout>
+								<form:formContainers>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Series">
+												<form:fields>
+													<m:Text text="{/wheelsData/0/BogieModel}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Wheel Set Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/0/WheelSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia(mm) ">
+												<form:fields>
+													<m:Text text="{/wheelsData/0/Measurement}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Rim (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														change="handleRimChange" valueState="{/wheelsData/0/UiPurpose2}"
+														valueStateText="{/wheelsData/0/UiPurpose3}" showValueHelp="false"
+														startSuggestion="1" type="Number" valueHelpOnly="false"
+														valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/0/RimMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Flange (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														maxLength="0" change="handleFlangeChange" valueState="{/wheelsData/0/UiPurpose4}"
+														valueStateText="{/wheelsData/0/UiPurpose5}"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														showValueHelp="false" startSuggestion="1" type="Number"
+														valueHelpOnly="false" valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/0/FlangeMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Serial Number">
+												<form:fields>
+													<m:Text text="{/wheelsData/0/BogieSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:fields>
+													<m:Text text="" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia Date">
+												<form:fields>
+													<m:Text
+														text="{parts: ['/wheelsData/0/MeasureDate'],formatter:'tfnswwcm.util.formatter.jsonDatetoText'}"
+														width="auto" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+								</form:formContainers>
+							</form:Form>
+							<!-- Defect Table for each wheel -->
+
+							<form:SimpleForm breakpointL="1024" breakpointM="800"
+								columnsL="1" columnsM="1" editable="false" emptySpanL="0"
+								emptySpanM="0" emptySpanS="0" labelMinWidth="192" labelSpanL="4"
+								labelSpanM="2" labelSpanS="12" layout="ResponsiveLayout"
+								maxContainerCols="2" minWidth="20" visible="true">
+								<form:content>
+									<m:Panel expandable="false">
+										<m:headerToolbar>
+											<m:Toolbar height="3rem">
+												<m:Title
+													text="{parts: ['/wheelsData/0/WheelNumber'],formatter:'tfnswwcm.util.formatter.panelTitle'}" />
+												<m:ToolbarSpacer />
+												<m:Button enabled="true" icon="sap-icon://add"
+													iconDensityAware="false" iconFirst="false" press="onPressAddDefGenInspec"
+													text="" width="auto" />
+											</m:Toolbar>
+										</m:headerToolbar>
+										<m:Table mode="Delete" includeItemInSelection="false"
+											inset="false" delete="onPressDelDef" noDataText="No data"
+											rememberSelections="true" showNoData="true" title="Defects"
+											visible="true" width="100%"
+											items="{path:'/wheelsData/0/DefectperWheel',templateShareable : true}">
+											<m:swipeContent />
+											<m:items>
+												<m:ColumnListItem type="Active">
+													<m:cells>
+														<m:Text class="sapUiSmallMarginTop" text="{count}"
+															textAlign="Begin" textDirection="Inherit" width="auto"
+															wrapping="true" />
+														<m:Text class="sapUiSmallMarginTop" text="{defectType}"
+															textAlign="Begin" textDirection="Inherit" width="300px"
+															wrapping="true" />
+														<m:RadioButtonGroup class="sapUiNoMarginBottom"
+															columns="6"
+															selectedIndex="{parts: ['defectClass'],formatter:'tfnswwcm.util.formatter.stringtoNumber'}">
+															<m:buttons>
+																<m:RadioButton editable="false" text="1" />
+																<m:RadioButton editable="false" text="2" />
+																<m:RadioButton editable="false" text="3" />
+																<m:RadioButton editable="false" text="4" />
+																<m:RadioButton editable="false" text="5" />
+															</m:buttons>
+														</m:RadioButtonGroup>
+														<m:Button enabled="true" icon="sap-icon://edit"
+															iconDensityAware="false" iconFirst="false" press="editDefectDialog"
+															type="Transparent" text="" />
+														<m:Button enabled="true" icon=""
+															iconDensityAware="false" iconFirst="false" press=""
+															type="Transparent" text="" />
+													</m:cells>
+												</m:ColumnListItem>
+
+											</m:items>
+											<m:infoToolbar />
+											<m:columns>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="8%">
+													<m:header>
+														<m:Text maxLines="1" text="No." textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="15%">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Type" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="auto">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Class" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+											</m:columns>
+										</m:Table>
+									</m:Panel>
+								</form:content>
+							</form:SimpleForm>
+							<!-- Defects Table -->
+
+						</m:content>
+					</m:IconTabFilter>
+					<m:IconTabFilter count="" design="Vertical"
+						enabled="true"
+						icon="{parts: ['/wheelsData/1/icon'],formatter:'tfnswwcm.util.formatter.iconFormat'}"
+						iconColor="{parts: ['/wheelsData/1/iconClr'],formatter:'tfnswwcm.util.formatter.iconColor'}"
+						iconDensityAware="false" showAll="false"
+						text="{parts: ['/wheelsData/1/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconTitleFormat'}"
+						textDirection="Inherit" visible="true" key="{/wheelsData/1/WheelNumber}">
+						<m:content>
+							<form:Form id="row2" maxContainerCols="2" editable="true"
+								class="formInput"
+								title="{parts: ['/wheelsData/1/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconContentFormat'}">
+								<form:layout>
+									<form:ResponsiveGridLayout
+										labelSpanL="3" labelSpanM="3" columnsL="2" emptySpanL="6" />
+								</form:layout>
+								<form:formContainers>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Series">
+												<form:fields>
+													<m:Text text="{/wheelsData/1/BogieModel}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Wheel Set Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/1/WheelSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia(mm) ">
+												<form:fields>
+													<m:Text text="{/wheelsData/1/Measurement}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Rim (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														change="handleRimChange" valueState="{/wheelsData/1/UiPurpose2}"
+														valueStateText="{/wheelsData/1/UiPurpose3}" showValueHelp="false"
+														startSuggestion="1" type="Number" valueHelpOnly="false"
+														valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/1/RimMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Flange (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														maxLength="0" change="handleFlangeChange" valueState="{/wheelsData/1/UiPurpose4}"
+														valueStateText="{/wheelsData/1/UiPurpose5}"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														showValueHelp="false" startSuggestion="1" type="Number"
+														valueHelpOnly="false" valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/1/FlangeMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/1/BogieSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:fields>
+													<m:Text text="" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia Date">
+												<form:fields>
+													<m:Text
+														text="{parts: ['/wheelsData/1/MeasureDate'],formatter:'tfnswwcm.util.formatter.jsonDatetoText'}"
+														width="auto" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+								</form:formContainers>
+							</form:Form>
+							<!-- Measurements -->
+
+							<form:SimpleForm breakpointL="1024" breakpointM="800"
+								columnsL="1" columnsM="1" editable="false" emptySpanL="0"
+								emptySpanM="0" emptySpanS="0" labelMinWidth="192" labelSpanL="4"
+								labelSpanM="2" labelSpanS="12" layout="ResponsiveLayout"
+								maxContainerCols="2" minWidth="20" visible="true">
+								<form:content>
+									<m:Panel expandable="false">
+										<m:headerToolbar>
+											<m:Toolbar height="3rem">
+												<m:Title
+													text="{parts: ['/wheelsData/1/WheelNumber'],formatter:'tfnswwcm.util.formatter.panelTitle'}" />
+												<m:ToolbarSpacer />
+												<m:Button enabled="true" icon="sap-icon://add"
+													iconDensityAware="false" iconFirst="false" press="onPressAddDefGenInspec"
+													text="" width="auto" />
+											</m:Toolbar>
+										</m:headerToolbar>
+										<m:Table mode="Delete" includeItemInSelection="false"
+											inset="false" delete="onPressDelDef" noDataText="No data"
+											rememberSelections="true" showNoData="true" title="Defects"
+											visible="true" width="100%"
+											items="{path:'/wheelsData/1/DefectperWheel',templateShareable : true}">
+											<m:swipeContent />
+											<m:items>
+												<m:ColumnListItem type="Active">
+													<m:cells>
+														<m:Text class="sapUiSmallMarginTop" text="{count}"
+															textAlign="Begin" textDirection="Inherit" width="auto"
+															wrapping="true" />
+														<m:Text class="sapUiSmallMarginTop" text="{defectType}"
+															textAlign="Begin" textDirection="Inherit" width="300px"
+															wrapping="true" />
+														<m:RadioButtonGroup class="sapUiNoMarginBottom"
+															columns="6"
+															selectedIndex="{parts: ['defectClass'],formatter:'tfnswwcm.util.formatter.stringtoNumber'}">
+															<m:buttons>
+																<m:RadioButton editable="false" text="1" />
+																<m:RadioButton editable="false" text="2" />
+																<m:RadioButton editable="false" text="3" />
+																<m:RadioButton editable="false" text="4" />
+																<m:RadioButton editable="false" text="5" />
+															</m:buttons>
+														</m:RadioButtonGroup>
+														<m:Button enabled="true" icon="sap-icon://edit"
+															iconDensityAware="false" iconFirst="false" press="editDefectDialog"
+															type="Transparent" text="" />
+														<m:Button enabled="true" icon=""
+															iconDensityAware="false" iconFirst="false" press=""
+															type="Transparent" text="" />
+													</m:cells>
+												</m:ColumnListItem>
+
+											</m:items>
+											<m:infoToolbar />
+											<m:columns>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="8%">
+													<m:header>
+														<m:Text maxLines="1" text="No." textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="15%">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Type" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="auto">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Class" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+											</m:columns>
+										</m:Table>
+									</m:Panel>
+								</form:content>
+							</form:SimpleForm>
+							<!-- Defects Table -->
+
+						</m:content>
+					</m:IconTabFilter>
+					<m:IconTabFilter count="" design="Vertical"
+						enabled="true"
+						icon="{parts: ['/wheelsData/2/icon'],formatter:'tfnswwcm.util.formatter.iconFormat'}"
+						iconColor="{parts: ['/wheelsData/2/iconClr'],formatter:'tfnswwcm.util.formatter.iconColor'}"
+						iconDensityAware="false" showAll="false"
+						text="{parts: ['/wheelsData/2/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconTitleFormat'}"
+						textDirection="Inherit" visible="true" key="{/wheelsData/2/WheelNumber}">
+						<m:content>
+							<form:Form id="row3" maxContainerCols="2" editable="true"
+								class="formInput"
+								title="{parts: ['/wheelsData/2/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconContentFormat'}">
+								<form:layout>
+									<form:ResponsiveGridLayout
+										labelSpanL="3" labelSpanM="3" columnsL="2" emptySpanL="6" />
+								</form:layout>
+								<form:formContainers>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Series">
+												<form:fields>
+													<m:Text text="{/wheelsData/2/BogieModel}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Wheel Set Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/2/WheelSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia(mm) ">
+												<form:fields>
+													<m:Text text="{/wheelsData/2/Measurement}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Rim (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														change="handleRimChange" valueState="{/wheelsData/2/UiPurpose2}"
+														valueStateText="{/wheelsData/2/UiPurpose3}" showValueHelp="false"
+														startSuggestion="1" type="Number" valueHelpOnly="false"
+														valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/2/RimMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Flange (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														maxLength="0" change="handleFlangeChange" valueState="{/wheelsData/2/UiPurpose4}"
+														valueStateText="{/wheelsData/2/UiPurpose5}"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														showValueHelp="false" startSuggestion="1" type="Number"
+														valueHelpOnly="false" valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/2/FlangeMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/2/BogieSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:fields>
+													<m:Text text="" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia Date">
+												<form:fields>
+													<m:Text
+														text="{parts: ['/wheelsData/2/MeasureDate'],formatter:'tfnswwcm.util.formatter.jsonDatetoText'}"
+														width="auto" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+								</form:formContainers>
+							</form:Form>
+							<!-- Measurements -->
+
+							<form:SimpleForm breakpointL="1024" breakpointM="800"
+								columnsL="1" columnsM="1" editable="false" emptySpanL="0"
+								emptySpanM="0" emptySpanS="0" labelMinWidth="192" labelSpanL="4"
+								labelSpanM="2" labelSpanS="12" layout="ResponsiveLayout"
+								maxContainerCols="2" minWidth="20" visible="true">
+								<form:content>
+									<m:Panel expandable="false">
+										<m:headerToolbar>
+											<m:Toolbar height="3rem">
+												<m:Title
+													text="{parts: ['WheelNumber'],formatter:'tfnswwcm.util.formatter.panelTitle'}" />
+												<m:ToolbarSpacer />
+												<m:Button enabled="true" icon="sap-icon://add"
+													iconDensityAware="false" iconFirst="false" press="onPressAddDefGenInspec"
+													text="" width="auto" />
+											</m:Toolbar>
+										</m:headerToolbar>
+										<m:Table mode="Delete" includeItemInSelection="false"
+											inset="false" delete="onPressDelDef" noDataText="No data"
+											rememberSelections="true" showNoData="true" title="Defects"
+											visible="true" width="100%"
+											items="{path:'/wheelsData/2/DefectperWheel',templateShareable : true}">
+											<m:swipeContent />
+											<m:items>
+												<m:ColumnListItem type="Active">
+													<m:cells>
+														<m:Text class="sapUiSmallMarginTop" text="{count}"
+															textAlign="Begin" textDirection="Inherit" width="auto"
+															wrapping="true" />
+														<m:Text class="sapUiSmallMarginTop" text="{defectType}"
+															textAlign="Begin" textDirection="Inherit" width="300px"
+															wrapping="true" />
+														<m:RadioButtonGroup class="sapUiNoMarginBottom"
+															columns="6"
+															selectedIndex="{parts: ['defectClass'],formatter:'tfnswwcm.util.formatter.stringtoNumber'}">
+															<m:buttons>
+																<m:RadioButton editable="false" text="1" />
+																<m:RadioButton editable="false" text="2" />
+																<m:RadioButton editable="false" text="3" />
+																<m:RadioButton editable="false" text="4" />
+																<m:RadioButton editable="false" text="5" />
+															</m:buttons>
+														</m:RadioButtonGroup>
+														<m:Button enabled="true" icon="sap-icon://edit"
+															iconDensityAware="false" iconFirst="false" press="editDefectDialog"
+															type="Transparent" text="" />
+														<m:Button enabled="true" icon=""
+															iconDensityAware="false" iconFirst="false" press=""
+															type="Transparent" text="" />
+													</m:cells>
+												</m:ColumnListItem>
+
+											</m:items>
+											<m:infoToolbar />
+											<m:columns>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="8%">
+													<m:header>
+														<m:Text maxLines="1" text="No." textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="15%">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Type" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="auto">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Class" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+											</m:columns>
+										</m:Table>
+									</m:Panel>
+								</form:content>
+							</form:SimpleForm>
+							<!-- Defects Table -->
+
+						</m:content>
+					</m:IconTabFilter>
+					<m:IconTabFilter count="" design="Vertical"
+						enabled="true"
+						icon="{parts: ['/wheelsData/3/icon'],formatter:'tfnswwcm.util.formatter.iconFormat'}"
+						iconColor="{parts: ['/wheelsData/3/iconClr'],formatter:'tfnswwcm.util.formatter.iconColor'}"
+						iconDensityAware="false" showAll="false"
+						text="{parts: ['/wheelsData/3/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconTitleFormat'}"
+						textDirection="Inherit" visible="true" key="{/wheelsData/3/WheelNumber}">
+						<m:content>
+							<form:Form id="row4" maxContainerCols="2" editable="true"
+								class="formInput"
+								title="{parts: ['/wheelsData/3/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconContentFormat'}">
+								<form:layout>
+									<form:ResponsiveGridLayout
+										labelSpanL="3" labelSpanM="3" columnsL="2" emptySpanL="6" />
+								</form:layout>
+								<form:formContainers>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Series">
+												<form:fields>
+													<m:Text text="{/wheelsData/3/BogieModel}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Wheel Set Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/3/WheelSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia(mm) ">
+												<form:fields>
+													<m:Text text="{/wheelsData/3/Measurement}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Rim (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														change="handleRimChange" valueState="{/wheelsData/3/UiPurpose2}"
+														valueStateText="{/wheelsData/3/UiPurpose3}" showValueHelp="false"
+														startSuggestion="1" type="Number" valueHelpOnly="false"
+														valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/3/RimMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Flange (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														maxLength="0" change="handleFlangeChange" valueState="{/wheelsData/3/UiPurpose4}"
+														valueStateText="{/wheelsData/3/UiPurpose5}"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														showValueHelp="false" startSuggestion="1" type="Number"
+														valueHelpOnly="false" valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/3/FlangeMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/3/BogieSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:fields>
+													<m:Text text="" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia Date">
+												<form:fields>
+													<m:Text
+														text="{parts: ['/wheelsData/3/MeasureDate'],formatter:'tfnswwcm.util.formatter.jsonDatetoText'}"
+														width="auto" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+								</form:formContainers>
+							</form:Form>
+							<!-- Measurements -->
+
+							<form:SimpleForm breakpointL="1024" breakpointM="800"
+								columnsL="1" columnsM="1" editable="false" emptySpanL="0"
+								emptySpanM="0" emptySpanS="0" labelMinWidth="192" labelSpanL="4"
+								labelSpanM="2" labelSpanS="12" layout="ResponsiveLayout"
+								maxContainerCols="2" minWidth="20" visible="true">
+								<form:content>
+									<m:Panel expandable="false">
+										<m:headerToolbar>
+											<m:Toolbar height="3rem">
+												<m:Title
+													text="{parts: ['/wheelsData/3/WheelNumber'],formatter:'tfnswwcm.util.formatter.panelTitle'}" />
+												<m:ToolbarSpacer />
+												<m:Button enabled="true" icon="sap-icon://add"
+													iconDensityAware="false" iconFirst="false" press="onPressAddDefGenInspec"
+													text="" width="auto" />
+											</m:Toolbar>
+										</m:headerToolbar>
+										<m:Table mode="Delete" includeItemInSelection="false"
+											inset="false" delete="onPressDelDef" noDataText="No data"
+											rememberSelections="true" showNoData="true" title="Defects"
+											visible="true" width="100%"
+											items="{path:'/wheelsData/3/DefectperWheel',templateShareable : true}">
+											<m:swipeContent />
+											<m:items>
+												<m:ColumnListItem type="Active">
+													<m:cells>
+														<m:Text class="sapUiSmallMarginTop" text="{count}"
+															textAlign="Begin" textDirection="Inherit" width="auto"
+															wrapping="true" />
+														<m:Text class="sapUiSmallMarginTop" text="{defectType}"
+															textAlign="Begin" textDirection="Inherit" width="300px"
+															wrapping="true" />
+														<m:RadioButtonGroup class="sapUiNoMarginBottom"
+															columns="6"
+															selectedIndex="{parts: ['defectClass'],formatter:'tfnswwcm.util.formatter.stringtoNumber'}">
+															<m:buttons>
+																<m:RadioButton editable="false" text="1" />
+																<m:RadioButton editable="false" text="2" />
+																<m:RadioButton editable="false" text="3" />
+																<m:RadioButton editable="false" text="4" />
+																<m:RadioButton editable="false" text="5" />
+															</m:buttons>
+														</m:RadioButtonGroup>
+														<m:Button enabled="true" icon="sap-icon://edit"
+															iconDensityAware="false" iconFirst="false" press="editDefectDialog"
+															type="Transparent" text="" />
+														<m:Button enabled="true" icon=""
+															iconDensityAware="false" iconFirst="false" press=""
+															type="Transparent" text="" />
+													</m:cells>
+												</m:ColumnListItem>
+
+											</m:items>
+											<m:infoToolbar />
+											<m:columns>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="8%">
+													<m:header>
+														<m:Text maxLines="1" text="No." textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="15%">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Type" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="auto">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Class" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+											</m:columns>
+										</m:Table>
+									</m:Panel>
+								</form:content>
+							</form:SimpleForm>
+							<!-- Defects Table -->
+
+						</m:content>
+					</m:IconTabFilter>
+					<m:IconTabFilter count="" design="Vertical"
+						enabled="true"
+						icon="{parts: ['/wheelsData/4/icon'],formatter:'tfnswwcm.util.formatter.iconFormat'}"
+						iconColor="{parts: ['/wheelsData/4/iconClr'],formatter:'tfnswwcm.util.formatter.iconColor'}"
+						iconDensityAware="false" showAll="false"
+						text="{parts: ['/wheelsData/4/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconTitleFormat'}"
+						textDirection="Inherit" visible="true" key="{/wheelsData/4/WheelNumber}">
+						<m:content>
+							<form:Form id="row5" maxContainerCols="2" editable="true"
+								class="formInput"
+								title="{parts: ['/wheelsData/4/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconContentFormat'}">
+								<form:layout>
+									<form:ResponsiveGridLayout
+										labelSpanL="3" labelSpanM="3" columnsL="2" emptySpanL="6" />
+								</form:layout>
+								<form:formContainers>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Series">
+												<form:fields>
+													<m:Text text="{/wheelsData/4/BogieModel}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Wheel Set Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/4/WheelSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia(mm) ">
+												<form:fields>
+													<m:Text text="{/wheelsData/4/Measurement}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Rim (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														change="handleRimChange" valueState="{/wheelsData/4/UiPurpose2}"
+														valueStateText="{/wheelsData/4/UiPurpose3}" showValueHelp="false"
+														startSuggestion="1" type="Number" valueHelpOnly="false"
+														valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/4/RimMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Flange (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														maxLength="0" change="handleFlangeChange" valueState="{/wheelsData/4/UiPurpose4}"
+														valueStateText="{/wheelsData/4/UiPurpose5}"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														showValueHelp="false" startSuggestion="1" type="Number"
+														valueHelpOnly="false" valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/4/FlangeMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/4/BogieSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:fields>
+													<m:Text text="" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia Date">
+												<form:fields>
+													<m:Text
+														text="{parts: ['/wheelsData/4/MeasureDate'],formatter:'tfnswwcm.util.formatter.jsonDatetoText'}"
+														width="auto" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+								</form:formContainers>
+							</form:Form>
+							<!-- Measurements -->
+
+							<form:SimpleForm breakpointL="1024" breakpointM="800"
+								columnsL="1" columnsM="1" editable="false" emptySpanL="0"
+								emptySpanM="0" emptySpanS="0" labelMinWidth="192" labelSpanL="4"
+								labelSpanM="2" labelSpanS="12" layout="ResponsiveLayout"
+								maxContainerCols="2" minWidth="20" visible="true">
+								<form:content>
+									<m:Panel expandable="false">
+										<m:headerToolbar>
+											<m:Toolbar height="3rem">
+												<m:Title
+													text="{parts: ['/wheelsData/4/WheelNumber'],formatter:'tfnswwcm.util.formatter.panelTitle'}" />
+												<m:ToolbarSpacer />
+												<m:Button enabled="true" icon="sap-icon://add"
+													iconDensityAware="false" iconFirst="false" press="onPressAddDefGenInspec"
+													text="" width="auto" />
+											</m:Toolbar>
+										</m:headerToolbar>
+										<m:Table mode="Delete" includeItemInSelection="false"
+											inset="false" delete="onPressDelDef" noDataText="No data"
+											rememberSelections="true" showNoData="true" title="Defects"
+											visible="true" width="100%"
+											items="{path:'/wheelsData/4/DefectperWheel',templateShareable : true}">
+											<m:swipeContent />
+											<m:items>
+												<m:ColumnListItem type="Active">
+													<m:cells>
+														<m:Text class="sapUiSmallMarginTop" text="{count}"
+															textAlign="Begin" textDirection="Inherit" width="auto"
+															wrapping="true" />
+														<m:Text class="sapUiSmallMarginTop" text="{defectType}"
+															textAlign="Begin" textDirection="Inherit" width="300px"
+															wrapping="true" />
+														<m:RadioButtonGroup class="sapUiNoMarginBottom"
+															columns="6"
+															selectedIndex="{parts: ['defectClass'],formatter:'tfnswwcm.util.formatter.stringtoNumber'}">
+															<m:buttons>
+																<m:RadioButton editable="false" text="1" />
+																<m:RadioButton editable="false" text="2" />
+																<m:RadioButton editable="false" text="3" />
+																<m:RadioButton editable="false" text="4" />
+																<m:RadioButton editable="false" text="5" />
+															</m:buttons>
+														</m:RadioButtonGroup>
+														<m:Button enabled="true" icon="sap-icon://edit"
+															iconDensityAware="false" iconFirst="false" press="editDefectDialog"
+															type="Transparent" text="" />
+														<m:Button enabled="true" icon=""
+															iconDensityAware="false" iconFirst="false" press=""
+															type="Transparent" text="" />
+													</m:cells>
+												</m:ColumnListItem>
+
+											</m:items>
+											<m:infoToolbar />
+											<m:columns>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="8%">
+													<m:header>
+														<m:Text maxLines="1" text="No." textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="15%">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Type" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="auto">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Class" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+											</m:columns>
+										</m:Table>
+									</m:Panel>
+								</form:content>
+							</form:SimpleForm>
+							<!-- Defects Table -->
+
+						</m:content>
+					</m:IconTabFilter>
+					<m:IconTabFilter count="" design="Vertical"
+						enabled="true"
+						icon="{parts: ['/wheelsData/5/icon'],formatter:'tfnswwcm.util.formatter.iconFormat'}"
+						iconColor="{parts: ['/wheelsData/5/iconClr'],formatter:'tfnswwcm.util.formatter.iconColor'}"
+						iconDensityAware="false" showAll="false"
+						text="{parts: ['/wheelsData/5/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconTitleFormat'}"
+						textDirection="Inherit" visible="true" key="{/wheelsData/5/WheelNumber}">
+						<m:content>
+							<form:Form id="row6" maxContainerCols="2" editable="true"
+								class="formInput"
+								title="{parts: ['/wheelsData/5/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconContentFormat'}">
+								<form:layout>
+									<form:ResponsiveGridLayout
+										labelSpanL="3" labelSpanM="3" columnsL="2" emptySpanL="6" />
+								</form:layout>
+								<form:formContainers>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Series">
+												<form:fields>
+													<m:Text text="{/wheelsData/5/BogieModel}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Wheel Set Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/5/WheelSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia(mm) ">
+												<form:fields>
+													<m:Text text="{/wheelsData/5/Measurement}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Rim (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														change="handleRimChange" valueState="{/wheelsData/5/UiPurpose2}"
+														valueStateText="{/wheelsData/5/UiPurpose3}" showValueHelp="false"
+														startSuggestion="1" type="Number" valueHelpOnly="false"
+														valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/5/RimMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Flange (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														maxLength="0" change="handleFlangeChange" valueState="{/wheelsData/5/UiPurpose4}"
+														valueStateText="{/wheelsData/5/UiPurpose5}"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														showValueHelp="false" startSuggestion="1" type="Number"
+														valueHelpOnly="false" valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/5/FlangeMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/5/BogieSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:fields>
+													<m:Text text="" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia Date">
+												<form:fields>
+													<m:Text
+														text="{parts: ['/wheelsData/5/MeasureDate'],formatter:'tfnswwcm.util.formatter.jsonDatetoText'}"
+														width="auto" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+								</form:formContainers>
+							</form:Form>
+							<!-- Measurements -->
+
+							<form:SimpleForm breakpointL="1024" breakpointM="800"
+								columnsL="1" columnsM="1" editable="false" emptySpanL="0"
+								emptySpanM="0" emptySpanS="0" labelMinWidth="192" labelSpanL="4"
+								labelSpanM="2" labelSpanS="12" layout="ResponsiveLayout"
+								maxContainerCols="2" minWidth="20" visible="true">
+								<form:content>
+									<m:Panel expandable="false">
+										<m:headerToolbar>
+											<m:Toolbar height="3rem">
+												<m:Title
+													text="{parts: ['/wheelsData/5/WheelNumber'],formatter:'tfnswwcm.util.formatter.panelTitle'}" />
+												<m:ToolbarSpacer />
+												<m:Button enabled="true" icon="sap-icon://add"
+													iconDensityAware="false" iconFirst="false" press="onPressAddDefGenInspec"
+													text="" width="auto" />
+											</m:Toolbar>
+										</m:headerToolbar>
+										<m:Table mode="Delete" includeItemInSelection="false"
+											inset="false" delete="onPressDelDef" noDataText="No data"
+											rememberSelections="true" showNoData="true" title="Defects"
+											visible="true" width="100%"
+											items="{path:'/wheelsData/5/DefectperWheel',templateShareable : true}">
+											<m:swipeContent />
+											<m:items>
+												<m:ColumnListItem type="Active">
+													<m:cells>
+														<m:Text class="sapUiSmallMarginTop" text="{count}"
+															textAlign="Begin" textDirection="Inherit" width="auto"
+															wrapping="true" />
+														<m:Text class="sapUiSmallMarginTop" text="{defectType}"
+															textAlign="Begin" textDirection="Inherit" width="300px"
+															wrapping="true" />
+														<m:RadioButtonGroup class="sapUiNoMarginBottom"
+															columns="6"
+															selectedIndex="{parts: ['defectClass'],formatter:'tfnswwcm.util.formatter.stringtoNumber'}">
+															<m:buttons>
+																<m:RadioButton editable="false" text="1" />
+																<m:RadioButton editable="false" text="2" />
+																<m:RadioButton editable="false" text="3" />
+																<m:RadioButton editable="false" text="4" />
+																<m:RadioButton editable="false" text="5" />
+															</m:buttons>
+														</m:RadioButtonGroup>
+														<m:Button enabled="true" icon="sap-icon://edit"
+															iconDensityAware="false" iconFirst="false" press="editDefectDialog"
+															type="Transparent" text="" />
+														<m:Button enabled="true" icon=""
+															iconDensityAware="false" iconFirst="false" press=""
+															type="Transparent" text="" />
+													</m:cells>
+												</m:ColumnListItem>
+
+											</m:items>
+											<m:infoToolbar />
+											<m:columns>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="8%">
+													<m:header>
+														<m:Text maxLines="1" text="No." textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="15%">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Type" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="auto">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Class" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+											</m:columns>
+										</m:Table>
+									</m:Panel>
+								</form:content>
+							</form:SimpleForm>
+							<!-- Defects Table -->
+
+						</m:content>
+					</m:IconTabFilter>
+					<m:IconTabFilter count="" design="Vertical"
+						enabled="true"
+						icon="{parts: ['/wheelsData/6/icon'],formatter:'tfnswwcm.util.formatter.iconFormat'}"
+						iconColor="{parts: ['/wheelsData/6/iconClr'],formatter:'tfnswwcm.util.formatter.iconColor'}"
+						iconDensityAware="false" showAll="false"
+						text="{parts: ['/wheelsData/6/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconTitleFormat'}"
+						textDirection="Inherit" visible="true" key="{/wheelsData/6/WheelNumber}">
+						<m:content>
+							<form:Form id="row7" maxContainerCols="2" editable="true"
+								class="formInput"
+								title="{parts: ['/wheelsData/6/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconContentFormat'}">
+								<form:layout>
+									<form:ResponsiveGridLayout
+										labelSpanL="3" labelSpanM="3" columnsL="2" emptySpanL="6" />
+								</form:layout>
+								<form:formContainers>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Series">
+												<form:fields>
+													<m:Text text="{/wheelsData/6/BogieModel}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Wheel Set Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/6/WheelSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia(mm) ">
+												<form:fields>
+													<m:Text text="{/wheelsData/6/Measurement}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Rim (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														change="handleRimChange" valueState="{/wheelsData/6/UiPurpose2}"
+														valueStateText="{/wheelsData/6/UiPurpose3}" showValueHelp="false"
+														startSuggestion="1" type="Number" valueHelpOnly="false"
+														valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/6/RimMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Flange (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														maxLength="0" change="handleFlangeChange" valueState="{/wheelsData/6/UiPurpose4}"
+														valueStateText="{/wheelsData/6/UiPurpose5}"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														showValueHelp="false" startSuggestion="1" type="Number"
+														valueHelpOnly="false" valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/6/FlangeMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/6/BogieSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:fields>
+													<m:Text text="" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia Date">
+												<form:fields>
+													<m:Text
+														text="{parts: ['/wheelsData/6/MeasureDate'],formatter:'tfnswwcm.util.formatter.jsonDatetoText'}"
+														width="auto" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+								</form:formContainers>
+							</form:Form>
+							<!-- Measurements -->
+
+							<form:SimpleForm breakpointL="1024" breakpointM="800"
+								columnsL="1" columnsM="1" editable="false" emptySpanL="0"
+								emptySpanM="0" emptySpanS="0" labelMinWidth="192" labelSpanL="4"
+								labelSpanM="2" labelSpanS="12" layout="ResponsiveLayout"
+								maxContainerCols="2" minWidth="20" visible="true">
+								<form:content>
+									<m:Panel expandable="false">
+										<m:headerToolbar>
+											<m:Toolbar height="3rem">
+												<m:Title
+													text="{parts: ['/wheelsData/6/WheelNumber'],formatter:'tfnswwcm.util.formatter.panelTitle'}" />
+												<m:ToolbarSpacer />
+												<m:Button enabled="true" icon="sap-icon://add"
+													iconDensityAware="false" iconFirst="false" press="onPressAddDefGenInspec"
+													text="" width="auto" />
+											</m:Toolbar>
+										</m:headerToolbar>
+										<m:Table mode="Delete" includeItemInSelection="false"
+											inset="false" delete="onPressDelDef" noDataText="No data"
+											rememberSelections="true" showNoData="true" title="Defects"
+											visible="true" width="100%"
+											items="{path:'/wheelsData/6/DefectperWheel',templateShareable : true}">
+											<m:swipeContent />
+											<m:items>
+												<m:ColumnListItem type="Active">
+													<m:cells>
+														<m:Text class="sapUiSmallMarginTop" text="{count}"
+															textAlign="Begin" textDirection="Inherit" width="auto"
+															wrapping="true" />
+														<m:Text class="sapUiSmallMarginTop" text="{defectType}"
+															textAlign="Begin" textDirection="Inherit" width="300px"
+															wrapping="true" />
+														<m:RadioButtonGroup class="sapUiNoMarginBottom"
+															columns="6"
+															selectedIndex="{parts: ['defectClass'],formatter:'tfnswwcm.util.formatter.stringtoNumber'}">
+															<m:buttons>
+																<m:RadioButton editable="false" text="1" />
+																<m:RadioButton editable="false" text="2" />
+																<m:RadioButton editable="false" text="3" />
+																<m:RadioButton editable="false" text="4" />
+																<m:RadioButton editable="false" text="5" />
+															</m:buttons>
+														</m:RadioButtonGroup>
+														<m:Button enabled="true" icon="sap-icon://edit"
+															iconDensityAware="false" iconFirst="false" press="editDefectDialog"
+															type="Transparent" text="" />
+														<m:Button enabled="true" icon=""
+															iconDensityAware="false" iconFirst="false" press=""
+															type="Transparent" text="" />
+													</m:cells>
+												</m:ColumnListItem>
+
+											</m:items>
+											<m:infoToolbar />
+											<m:columns>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="8%">
+													<m:header>
+														<m:Text maxLines="1" text="No." textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="15%">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Type" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="auto">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Class" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+											</m:columns>
+										</m:Table>
+									</m:Panel>
+								</form:content>
+							</form:SimpleForm>
+							<!-- Defects Table -->
+
+						</m:content>
+					</m:IconTabFilter>
+					<m:IconTabFilter count="" design="Vertical"
+						enabled="true"
+						icon="{parts: ['/wheelsData/7/icon'],formatter:'tfnswwcm.util.formatter.iconFormat'}"
+						iconColor="{parts: ['/wheelsData/7/iconClr'],formatter:'tfnswwcm.util.formatter.iconColor'}"
+						iconDensityAware="false" showAll="false"
+						text="{parts: ['/wheelsData/7/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconTitleFormat'}"
+						textDirection="Inherit" visible="true" key="{/wheelsData/7/WheelNumber}">
+						<m:content>
+							<form:Form id="row8" maxContainerCols="2" editable="true"
+								class="formInput"
+								title="{parts: ['/wheelsData/7/WheelNumber'],formatter:'tfnswwcm.util.formatter.iconContentFormat'}">
+								<form:layout>
+									<form:ResponsiveGridLayout
+										labelSpanL="3" labelSpanM="3" columnsL="2" emptySpanL="6" />
+								</form:layout>
+								<form:formContainers>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Series">
+												<form:fields>
+													<m:Text text="{/wheelsData/7/BogieModel}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Wheel Set Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/7/WheelSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia(mm) ">
+												<form:fields>
+													<m:Text text="{/wheelsData/7/Measurement}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Rim (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														change="handleRimChange" valueState="{/wheelsData/7/UiPurpose2}"
+														valueStateText="{/wheelsData/7/UiPurpose3}" showValueHelp="false"
+														startSuggestion="1" type="Number" valueHelpOnly="false"
+														valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/7/RimMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Flange (mm)">
+												<form:fields>
+													<m:Input fieldWidth="50%" filterSuggests="true"
+														maxLength="0" change="handleFlangeChange" valueState="{/wheelsData/7/UiPurpose4}"
+														valueStateText="{/wheelsData/7/UiPurpose5}"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														showValueHelp="false" startSuggestion="1" type="Number"
+														valueHelpOnly="false" valueLiveUpdate="false" width="100px"
+														value="{/wheelsData/7/FlangeMeasurement}" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement label="Bogie Serial">
+												<form:fields>
+													<m:Text text="{/wheelsData/7/BogieSerialNo}" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:fields>
+													<m:Text text="" width="auto" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Last Known Dia Date">
+												<form:fields>
+													<m:Text
+														text="{parts: ['/wheelsData/7/MeasureDate'],formatter:'tfnswwcm.util.formatter.jsonDatetoText'}"
+														width="auto" />
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+								</form:formContainers>
+							</form:Form>
+							<!-- Measurements -->
+
+							<form:SimpleForm breakpointL="1024" breakpointM="800"
+								columnsL="1" columnsM="1" editable="false" emptySpanL="0"
+								emptySpanM="0" emptySpanS="0" labelMinWidth="192" labelSpanL="4"
+								labelSpanM="2" labelSpanS="12" layout="ResponsiveLayout"
+								maxContainerCols="2" minWidth="20" visible="true">
+								<form:content>
+									<m:Panel expandable="false">
+										<m:headerToolbar>
+											<m:Toolbar height="3rem">
+												<m:Title
+													text="{parts: ['/wheelsData/7/WheelNumber'],formatter:'tfnswwcm.util.formatter.panelTitle'}" />
+												<m:ToolbarSpacer />
+												<m:Button enabled="true" icon="sap-icon://add"
+													iconDensityAware="false" iconFirst="false" press="onPressAddDefGenInspec"
+													text="" width="auto" />
+											</m:Toolbar>
+										</m:headerToolbar>
+										<m:Table mode="Delete" includeItemInSelection="false"
+											inset="false" delete="onPressDelDef" noDataText="No data"
+											rememberSelections="true" showNoData="true" title="Defects"
+											visible="true" width="100%"
+											items="{path:'/wheelsData/7/DefectperWheel',templateShareable : true}">
+											<m:swipeContent />
+											<m:items>
+												<m:ColumnListItem type="Active">
+													<m:cells>
+														<m:Text class="sapUiSmallMarginTop" text="{count}"
+															textAlign="Begin" textDirection="Inherit" width="auto"
+															wrapping="true" />
+														<m:Text class="sapUiSmallMarginTop" text="{defectType}"
+															textAlign="Begin" textDirection="Inherit" width="300px"
+															wrapping="true" />
+														<m:RadioButtonGroup class="sapUiNoMarginBottom"
+															columns="6"
+															selectedIndex="{parts: ['defectClass'],formatter:'tfnswwcm.util.formatter.stringtoNumber'}">
+															<m:buttons>
+																<m:RadioButton editable="false" text="1" />
+																<m:RadioButton editable="false" text="2" />
+																<m:RadioButton editable="false" text="3" />
+																<m:RadioButton editable="false" text="4" />
+																<m:RadioButton editable="false" text="5" />
+															</m:buttons>
+														</m:RadioButtonGroup>
+														<m:Button enabled="true" icon="sap-icon://edit"
+															iconDensityAware="false" iconFirst="false" press="editDefectDialog"
+															type="Transparent" text="" />
+														<m:Button enabled="true" icon=""
+															iconDensityAware="false" iconFirst="false" press=""
+															type="Transparent" text="" />
+													</m:cells>
+												</m:ColumnListItem>
+
+											</m:items>
+											<m:infoToolbar />
+											<m:columns>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="8%">
+													<m:header>
+														<m:Text maxLines="1" text="No." textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="15%">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Type" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="auto">
+													<m:header>
+														<m:Text maxLines="1" text="Defect Class" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+												<m:Column demandPopin="true" hAlign="Begin"
+													mergeDuplicates="false" mergeFunctionName="getText"
+													minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+													width="50px">
+													<m:header>
+														<m:Text maxLines="1" text="" textAlign="Begin"
+															textDirection="Inherit" width="auto" wrapping="true" />
+													</m:header>
+													<m:footer />
+												</m:Column>
+											</m:columns>
+										</m:Table>
+									</m:Panel>
+								</form:content>
+							</form:SimpleForm>
+							<!-- Defects Table -->
+
+						</m:content>
+					</m:IconTabFilter>
+					<m:IconTabFilter count="" design="Vertical"
+						enabled="true" icon="sap-icon://newspaper" iconColor="Default"
+						iconDensityAware="false" showAll="false" text="all" textDirection="Inherit"
+						visible="true" key="9">
+						<m:content>
+
+							<m:Panel id="AllWheelMeasurementsPanel" visible="true">
+								<m:content>
+									<m:Table noDataText="No data" mode="SingleSelectMaster"
+										growing="true" includeItemInSelection="true"
+										itemPress="handleCarTableSelectionChange" items="{path:'/wheelsData',templateShareable : true}">
+										<m:items>
+											<m:ColumnListItem type="Active">
+												<m:cells>
+													<m:Text maxLines="1"
+														text="{parts: ['WheelNumber'],formatter:'tfnswwcm.util.formatter.iconTitleFormat'}"
+														width="auto" />
+													<m:Input width="auto" type="Number" value="{RimMeasurement}"
+														change="handleRimChange" valueState="{UiPurpose2}"
+														valueStateText="{UiPurpose3}" editable="{rimEditable}" />
+													<m:Input width="auto" type="Number" value="{FlangeMeasurement}"
+														change="handleFlangeChange" valueState="{UiPurpose4}"
+														valueStateText="{UiPurpose5}" editable="{flangEditable}" />
+													<m:Text class="sapUiSmallMarginTop" maxLines="1"
+														text="{parts: ['UiPurpose1'],formatter:'tfnswwcm.util.formatter.zeroToBlank'}"
+														textAlign="Center" width="50px" />
+													<m:Button icon="sap-icon://add" iconDensityAware="false"
+														iconFirst="false" press="onPressAddDefGenInspec" enabled="{rimEditable}"
+														width="auto" />
+												</m:cells>
+											</m:ColumnListItem>
+
+										</m:items>
+										<m:columns>
+											<m:Column demandPopin="true" minScreenWidth="tablet"
+												vAlign="Middle" width="10%">
+												<m:header>
+													<m:Text maxLines="2" text="Wheel Number" textAlign="Center"
+														width="auto" />
+												</m:header>
+											</m:Column>
+											<m:Column demandPopin="true" minScreenWidth="tablet"
+												width="25%">
+												<m:header>
+													<m:Text maxLines="2" text="Rim Thickness (mm)"
+														textAlign="Center" width="auto" />
+												</m:header>
+											</m:Column>
+											<m:Column demandPopin="true" minScreenWidth="tablet"
+												width="25%">
+												<m:header>
+													<m:Text maxLines="2" text="Flange Thickness (mm)"
+														textAlign="Center" width="auto" />
+												</m:header>
+											</m:Column>
+											<m:Column demandPopin="true" minScreenWidth="tablet"
+												width="10%">
+												<m:header>
+													<m:Text maxLines="2" text="No. of Defects" width="auto" />
+												</m:header>
+											</m:Column>
+											<m:Column demandPopin="true" minScreenWidth="tablet"
+												width="10%">
+												<m:header>
+													<m:Text maxLines="2" text="Add Defect" textAlign="Center"
+														width="auto" />
+												</m:header>
+											</m:Column>
+										</m:columns>
+									</m:Table>
+								</m:content>
+								<m:headerToolbar>
+									<m:Toolbar height="3rem">
+										<m:content>
+											<m:Title text="All Wheel Measurements" />
+											<m:ToolbarSpacer />
+											<m:ToggleButton enabled="true" icon="sap-icon://edit"
+												iconDensityAware="false" iconFirst="false" press="onPressEditTable"
+												text="" width="auto" />
+										</m:content>
+									</m:Toolbar>
+								</m:headerToolbar>
+							</m:Panel>
+							<m:Panel id="DefectTablePanel" visible="true">
+								<m:content>
+									<m:Table mode="Delete" includeItemInSelection="false"
+										inset="false" delete="onPressDelDef" noDataText="No data"
+										items="{path:'/defectTable'}">
+										<m:items>
+											<m:ColumnListItem counter="0" type="Active">
+												<m:cells>
+													<m:Text class="sapUiSmallMarginTop" maxLines="1"
+														text="{WheelNo}" width="auto" />
+													<m:Text class="sapUiSmallMarginTop" maxLines="1"
+														text="{count}" width="300px" />
+													<m:Text class="sapUiSmallMarginTop" maxLines="1"
+														text="{defectType}" width="300px" />
+													<m:RadioButtonGroup class="sapUiNoMarginBottom"
+														columns="7"
+														selectedIndex="{parts: ['defectClass'],formatter:'tfnswwcm.util.formatter.stringtoNumber'}">
+														<m:buttons>
+															<m:RadioButton editable="false" text="1" />
+															<m:RadioButton editable="false" text="2" />
+															<m:RadioButton editable="false" text="3" />
+															<m:RadioButton editable="false" text="4" />
+															<m:RadioButton editable="false" text="5" />
+														</m:buttons>
+													</m:RadioButtonGroup>
+													<m:Button icon="sap-icon://edit" iconDensityAware="false"
+														iconFirst="false" press="editDefectDialog" type="Transparent"
+														width="auto" />
+													<m:Button icon="" iconDensityAware="false"
+														iconFirst="false" press="" type="Transparent" width="auto" />
+												</m:cells>
+											</m:ColumnListItem>
+
+										</m:items>
+										<m:columns>
+											<m:Column demandPopin="true" minScreenWidth="tablet"
+												width="10%">
+												<m:header>
+													<m:Text maxLines="2" text="Wheel No." textAlign="Center"
+														width="auto" />
+												</m:header>
+											</m:Column>
+											<m:Column demandPopin="true" minScreenWidth="tablet"
+												width="10%">
+												<m:header>
+													<m:Text maxLines="2" text="Defect No." textAlign="Center"
+														width="auto" />
+												</m:header>
+											</m:Column>
+											<m:Column demandPopin="true" minScreenWidth="tablet"
+												width="15%">
+												<m:header>
+													<m:Text maxLines="2" text="Defect Type" width="auto" />
+												</m:header>
+											</m:Column>
+											<m:Column demandPopin="true" minScreenWidth="tablet"
+												width="70%">
+												<m:header>
+													<m:Text maxLines="1" text="Defect Class" width="auto" />
+												</m:header>
+											</m:Column>
+											<m:Column demandPopin="true" minScreenWidth="tablet"
+												width="8%">
+												<m:header>
+													<m:Text maxLines="1" width="50px" />
+												</m:header>
+											</m:Column>
+											<m:Column demandPopin="true" minScreenWidth="tablet"
+												width="8%">
+												<m:header>
+													<m:Text maxLines="1" width="50px" />
+												</m:header>
+											</m:Column>
+										</m:columns>
+									</m:Table>
+								</m:content>
+								<m:headerToolbar>
+									<m:Toolbar height="3rem">
+										<m:content>
+											<m:Title text="Defects" />
+										</m:content>
+									</m:Toolbar>
+								</m:headerToolbar>
+							</m:Panel>
+
+						</m:content>
+					</m:IconTabFilter>
+				</m:items>
+			</m:IconTabBar>
+		</m:content>
+		<m:footer>
+			<m:Bar design="Footer" enableFlexBox="false"
+				id="np-sap_m_Bar-1452744697792-1ZO" translucent="false">
+				<m:contentLeft />
+				<m:contentMiddle />
+				<m:contentRight>
+					<m:Button enabled="true" icon="" visible="{/postBtnVisible}"
+						iconDensityAware="false" iconFirst="true" press="pressPostMeasDefToast"
+						text="Post Measurements and Defects" width="auto" />
+				</m:contentRight>
+			</m:Bar>
+		</m:footer>
+
+	</m:Page>
+</mvc:View>

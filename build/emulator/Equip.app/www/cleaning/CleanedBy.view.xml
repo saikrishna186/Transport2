@@ -1,0 +1,107 @@
+<mvc:View controllerName="tfnsw.eam.cleaning.view.CleanedBy" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<m:Page enableScrolling="true" id="sap_Responsive_Page_0" showFooter="true" showHeader="true" showNavButton="true" navButtonPress="onNavBack" showSubHeader="true"
+		title="Train Cleaning App" titleLevel="Auto" class="sapUiContentPadding">
+		
+		<m:content>
+			<m:Toolbar design="Info" enabled="true" height="46px" id="np-sap_m_Toolbar_3-1449631608707-1GK" visible="true" width="100%">
+				<m:tooltip/>
+				<m:content>
+					<m:ToolbarSpacer id="np-sap_m_ToolbarSpacer-1449631608707-1GL" visible="true" width=""/>
+					<m:Text id="np-sap_m_Text-1449631608707-1GM" maxLines="1" text="Select Clean By" textAlign="Left" textDirection="LTR" width="auto"
+						wrapping="true"/>
+					<m:ToolbarSpacer id="np-sap_m_ToolbarSpacer-1449631608707-1GN" visible="true" width=""/>
+				</m:content>
+			</m:Toolbar>
+			
+			
+			
+			<m:VBox alignItems="Stretch" direction="Column" displayInline="false" fitContainer="false" id="np-sap_m_VBox-1449636327879-34I"
+				justifyContent="Start" renderType="Div" visible="true" width="100%">
+				
+				<m:items>
+					
+				
+   <m:List backgroundDesign="Solid" footerText="" growing="false" growingScrollToLoad="false" growingThreshold="20" headerText=""
+						id="cleanedBy" mode="None" width="100%" items="{path:'/cleanedByValues'}" itemPress="handleItemPress" >
+						
+<m:items>
+<m:ObjectListItem numberState="Success" selected="false" showMarkers="false" title="{Zzcleanedby}" type="Active" unread="false">
+</m:ObjectListItem>
+ </m:items> 	
+ <!-- <m:headerToolbar>
+							<m:Toolbar design="Solid" enabled="true" visible="true"
+								width="">
+								<m:content>
+									<m:SearchField id="np-sap_m_SearchField-1450425135621-0AT"
+										showSearchButton="true" visible="true" search="handleValueHelpSearch" />
+								</m:content>
+							</m:Toolbar>
+						</m:headerToolbar> -->
+								
+
+</m:List>					
+</m:items>		
+</m:VBox>
+			
+		</m:content>								        
+	</m:Page>
+	<!-- <m:Dialog contentWidth="40%" horizontalScrolling="false" id="sap_m_Dialog_0" showHeader="true" state="None" stretch="false"
+		title="Select Clean By" type="Standard" verticalScrolling="false">
+		<m:beginButton/>
+		<m:buttons>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false" id="np-sap_m_Button-1450243113991-2R9"
+				press="_onPressNpsapmButton14502431139912R9" text="OK" type="Default" width="auto"/>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false" id="np-sap_m_Button-1450243126517-2RD"
+				press="_onPressNpsapmButton14502431265172RD" text="Cancel" type="Default" width="auto"/>
+		</m:buttons>
+		<m:content>
+			<m:Table backgroundDesign="Translucent" fixedLayout="true" growing="false" growingScrollToLoad="false" growingThreshold="20"
+				id="np-sap_m_Table-1450243081246-2Q5" includeItemInSelection="false" inset="false" mode="SingleSelectLeft" modeAnimationOn="true"
+				noDataText="No data" rememberSelections="true" showNoData="true" showOverlay="false" showSeparators="All" showUnread="false"
+				swipeDirection="Both" visible="true" width="100%">
+				<m:swipeContent/>
+				<m:items>
+					<m:ColumnListItem id="np-sap_m_ColumnListItem-1450243081246-2Q6" type="Active">
+						<m:cells>
+							<m:ObjectIdentifier id="np-sap_m_ObjectIdentifier-1450243081246-2Q7" text="CSD" title="" titleActive="false" visible="true"/>
+							<m:Text id="np-sap_m_Text-1450243081246-2Q8" maxLines="1" text="Supplier Name" textAlign="Begin" textDirection="Inherit" width="auto"
+								wrapping="true"/>
+							<m:ObjectNumber id="np-sap_m_ObjectNumber-1450243081246-2Q9" number="150.00" state="None" unit="USD"/>
+						</m:cells>
+					</m:ColumnListItem>
+					<m:ColumnListItem id="np-sap_m_ColumnListItem-1450243081246-2QA" type="Active">
+						<m:cells>
+							<m:ObjectIdentifier id="np-sap_m_ObjectIdentifier-1450243081246-2QB" text="CSB 2" title="" titleActive="false" visible="true"/>
+							<m:Text id="np-sap_m_Text-1450243081246-2QC" maxLines="1" text="Supplier Name" textAlign="Begin" textDirection="Inherit" width="auto"
+								wrapping="true"/>
+							<m:ObjectNumber id="np-sap_m_ObjectNumber-1450243081246-2QD" number="150.00" state="None" unit="USD"/>
+						</m:cells>
+					</m:ColumnListItem>
+					<m:ColumnListItem id="np-sap_m_ColumnListItem-1450243081246-2QE" type="Active">
+						<m:cells>
+							<m:ObjectIdentifier id="np-sap_m_ObjectIdentifier-1450243081246-2QF" text="CSB 3" title="" titleActive="false" visible="true"/>
+							<m:Text id="np-sap_m_Text-1450243081246-2QG" maxLines="1" text="Supplier Name" textAlign="Begin" textDirection="Inherit" width="auto"
+								wrapping="true"/>
+							<m:ObjectNumber id="np-sap_m_ObjectNumber-1450243081246-2QH" number="150.00" state="None" unit="USD"/>
+						</m:cells>
+					</m:ColumnListItem>
+				</m:items>
+				<m:infoToolbar/>
+				<m:headerToolbar/>
+				<m:columns>
+					<m:Column demandPopin="true" hAlign="Begin" id="np-sap_m_Column_Product-1450243081246-2QI" mergeDuplicates="false"
+						mergeFunctionName="getText" minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit" width="50%">
+						<m:header>
+							<m:Text id="np-sap_m_Text-1450243081246-2QJ" maxLines="1" text="Cleaned By" textAlign="Begin" textDirection="Inherit" width="auto"
+								wrapping="true"/>
+						</m:header>
+						<m:footer/>
+					</m:Column>
+				</m:columns>
+			</m:Table>
+		</m:content>
+		<m:customHeader/>
+		<m:endButton/>
+		<m:subHeader/>
+	</m:Dialog> -->
+</mvc:View>

@@ -1,0 +1,53 @@
+<mvc:View controllerName="tfnsw.eam.cleaning.view.CleaningLocation"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc">
+
+	<m:Page class="sapUiContentPadding Title" enableScrolling="true"
+		id="sap_Responsive_Page_0" showFooter="true" showHeader="true"
+		showNavButton="true" navButtonPress="onNavBack" showSubHeader="true"
+		title="Train Cleaning App" titleLevel="Auto">
+
+		<m:content>
+			<m:Toolbar design="Info" enabled="true" height="46px"
+				id="np-sap_m_Toolbar_3-1449631326092-13V" visible="true" width="100%">
+				<m:tooltip />
+				<m:content>
+					<m:ToolbarSpacer id="np-sap_m_ToolbarSpacer-1449631326093-13W"
+						visible="true" width="" />
+					<m:Text id="np-sap_m_Text-1449631326093-13X" maxLines="1"
+						text="Select a Cleaning Location" textAlign="Left" textDirection="LTR"
+						width="auto" wrapping="true" />
+					<m:ToolbarSpacer id="np-sap_m_ToolbarSpacer-1449631326093-13Y"
+						visible="true" width="" />
+				</m:content>
+			</m:Toolbar>
+
+			<m:VBox alignItems="Stretch" direction="Column" displayInline="false"
+				fitContainer="false" justifyContent="Start" renderType="Div"
+				visible="true" width="100%">
+				<m:items>
+					<m:List backgroundDesign="Solid" footerText="" growing="false"
+						growingScrollToLoad="false" growingThreshold="20" headerText=""
+						id="CleanLoc" mode="None" width="100%" items="{path:'/matValues'}"
+						itemPress="handleItemPress">
+
+						<m:items>
+							<m:ObjectListItem numberState="Success"
+								selected="false" showMarkers="false" title="{Cleaning Location}"
+								intro="{Cleaning Location}" type="Active" unread="false">
+							</m:ObjectListItem>
+						</m:items>
+						<m:headerToolbar>
+							<m:Toolbar design="Solid" enabled="true" visible="true"
+								width="">
+								<m:content>
+									<m:SearchField id="np-sap_m_SearchField-1450425135621-0AT"
+										showSearchButton="true" visible="true" search="handleValueHelpSearch" />
+								</m:content>
+							</m:Toolbar>
+						</m:headerToolbar>
+					</m:List>
+				</m:items>
+			</m:VBox>
+		</m:content>
+	</m:Page>
+</mvc:View>

@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<ResponsivePopover class="sapUiPopupWithPadding"
+		placement="Right" title="Select System" afterClose="onCloseMjrSystem">
+		<content>
+			<List headerText="" selectionChange="onSelSystem"
+				items="{ path:'majorSystemModel>/listitems' }" backgroundDesign="Transparent"
+				growing="true" growingScrollToLoad="true" growingThreshold="10"
+				includeItemInSelection="true" showSeparators="All" showUnread="true"
+				rememberSelections="false" width="auto" mode="SingleSelectMaster">
+				<items>
+					<StandardListItem title="{majorSystemModel>Zzdescrption}"
+						value="{majorSystemModel>Zzmajorsystem}" adaptTitleSize="true"
+						titleTextDirection="LTR" class="popList" />
+				</items>
+			</List>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

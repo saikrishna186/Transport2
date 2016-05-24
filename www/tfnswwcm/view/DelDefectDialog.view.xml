@@ -1,0 +1,23 @@
+<mvc:View controllerName="tfnsw.erp.wcm.view.DelDefectDialog"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<m:Dialog horizontalScrolling="true" id="sap_m_Dialog_0"
+		showHeader="true" state="None" stretch="false" title="Delete Defect"
+		type="Standard" verticalScrolling="true">
+		<m:beginButton />
+		<m:buttons>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				id="np-sap_m_Button-1452838417941-2XB" press="pressDeleteDefectCancel"
+				text="Cancel" type="Reject" width="auto" />
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				id="np-sap_m_Button-1452838416981-2X9" press="pressDeleteDefectDelete"
+				text="Delete" type="Accept" width="auto" />
+		</m:buttons>
+		<m:content>
+			<m:Text maxLines="1" text="Please confirm deleting this defect."
+				textAlign="Center" textDirection="Inherit" width="100%" wrapping="true" />
+		</m:content>
+		<m:customHeader />
+		<m:endButton />
+		<m:subHeader />
+	</m:Dialog>
+</mvc:View>

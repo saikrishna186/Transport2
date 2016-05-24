@@ -1,0 +1,5 @@
+<mvc:View controllerName="tfnswequip.tfnswmfs.controller.NotFound"
+	xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<MessagePage title="{mFSMsg>NotFound}" text="{mFSMsg>NotFound.text}"
+		description="{mFSMsg>NotFound.description}" />
+</mvc:View>

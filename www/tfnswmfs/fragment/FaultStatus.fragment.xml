@@ -1,0 +1,40 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<ResponsivePopover class="sapUiPopupWithPadding"
+		placement="Bottom" title="Select status" afterClose="onCloseFaultStatus" verticalScrolling="true">
+		<content>
+<!-- 			<List headerText="" selectionChange="onSelectStatus"
+				items="{ path: 'statusModel>/listitems' }" backgroundDesign="Transparent"
+				growing="true" growingScrollToLoad="true" growingThreshold="10"
+				includeItemInSelection="true" showSeparators="All" showUnread="false"
+				rememberSelections="false" width="auto" mode="SingleSelectMaster">
+				<items>
+					<StandardListItem title="{statusModel>Description}"
+						value="{statusModel>Status}" adaptTitleSize="true"
+						titleTextDirection="LTR" class="popList" />
+				</items>
+			</List> -->
+			<Table backgroundDesign="Solid" busy="false" fixedLayout="false"
+				growing="true" growingScrollToLoad="true" growingThreshold="20"
+				headerDesign="Standard" includeItemInSelection="true" itemPress="onSelectStatus"
+				items="{ path:'statusModel>/listitems' }" mode="SingleSelectMaster"
+				rememberSelections="true" showNoData="false" width="auto">
+				<items>
+					<ColumnListItem counter="0" type="Active">
+						<cells>
+							<ObjectIdentifier badgeAttachments="false"
+								badgeNotes="false" badgePeople="false" text="{statusModel>Description}"
+								value="{statusModel>Status}" design="Bold" />
+						</cells>
+					</ColumnListItem>
+				</items>
+				<columns>
+					<Column>
+						<header>
+						</header>
+					</Column>
+				</columns>
+			</Table>			
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

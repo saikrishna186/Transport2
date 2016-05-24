@@ -1,0 +1,50 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout">
+	<Dialog horizontalScrolling="true" showHeader="true" state="None"
+		stretch="false" title="Fault Details: {detailModel>/Qmnum}" type="Standard"
+		verticalScrolling="true" contentWidth="75%" contentHeight="auto">
+		<beginButton />
+		<buttons>
+			<Button enabled="true" text="Close" width="auto"
+				press="onCloseDetailDialog" type="Emphasized" />
+		</buttons>
+		<customHeader />
+		<endButton />
+		<subHeader />
+		<content>
+			<layout:Grid defaultSpan="L12 M12 S12" width="auto"
+				height="auto">
+				<layout:content>
+					<form:SimpleForm minWidth="1024" maxContainerCols="2"
+						editable="false" layout="ResponsiveGridLayout" title=""
+						labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0"
+						columnsL="2" columnsM="2">
+						<form:content>
+							<core:Title text="" />
+							<Label text="Trip Id" design="Bold" />
+							<Text text="{detailModel>/Tripnum}" />
+							<Label text="Position" design="Bold" />
+							<Text text="{detailModel>/PositionDesc}" />
+							<Label text="Report Phase" design="Bold" />
+							<Text text="{detailModel>/RepPhaseDesc}" />
+							<Label text="Temperature" design="Bold" />
+							<Text text="{detailModel>/TempDesc}" />
+							<Label text="Weather" design="Bold" />
+							<Text text="{detailModel>/WeatherDesc}" />
+							<core:Title text="" />
+							<VBox>
+								<items>
+									<Label text="Fault Comments" design="Bold" />
+									<Text text="{detailModel>/FaultComment}" />
+									<ToolbarSpacer height="10px" width="10px" />
+									<Label text="Previous Work Completed Information" design="Bold" />
+									<Text text="{detailModel>/Longtext}" />
+								</items>
+							</VBox>
+						</form:content>
+					</form:SimpleForm>
+				</layout:content>
+			</layout:Grid>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

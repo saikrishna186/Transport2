@@ -1,0 +1,40 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<ResponsivePopover class="sapUiPopupWithPadding"
+		placement="Top" title="Select Weather" contentWidth="auto" contentHeight="auto" horizontalScrolling="false" verticalScrolling="true">
+		<content>
+<!-- 			<List headerText="" selectionChange="onSelectWeather"
+				items="{ path: 'weatherModel>/listitems', sorter: { path: 'sortId' } }" backgroundDesign="Transparent"
+				growing="true" growingScrollToLoad="true" growingThreshold="10"
+				includeItemInSelection="true" showSeparators="All" showUnread="true"
+				rememberSelections="true" width="auto" mode="SingleSelectMaster">
+				<items>
+					<StandardListItem title="{weatherModel>Zzdesc}"
+						value="{weatherModel>Zzweather}" adaptTitleSize="true"
+						titleTextDirection="LTR" class="popList" />
+				</items>
+			</List> -->
+			<Table backgroundDesign="Solid" busy="false" fixedLayout="false"
+				growing="true" growingScrollToLoad="true" growingThreshold="20"
+				headerDesign="Standard" includeItemInSelection="true" itemPress="onSelectWeather"
+				items="{ path: 'weatherModel>/listitems', sorter: { path: 'sortId' } }" mode="SingleSelectMaster"
+				rememberSelections="true" showNoData="false" width="auto">
+				<items>
+					<ColumnListItem counter="0" type="Active">
+						<cells>
+							<ObjectIdentifier badgeAttachments="false"
+								badgeNotes="false" badgePeople="false" text="{weatherModel>Zzdesc}"
+								value="{weatherModel>Zzweather}" design="Bold" />
+						</cells>
+					</ColumnListItem>
+				</items>
+				<columns>
+					<Column>
+						<header>
+						</header>
+					</Column>
+				</columns>
+			</Table>			
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

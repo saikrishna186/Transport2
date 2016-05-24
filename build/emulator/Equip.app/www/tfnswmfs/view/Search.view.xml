@@ -1,0 +1,291 @@
+<mvc:View controllerName="tfnswequip.tfnswmfs.controller.Search"
+	xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<m:App id="App" title="{i18n&gt;appTitle}">
+		<m:pages>
+			<m:Page backgroundDesign="Standard" id="page" title="{i18n&gt;titleSearch}">
+				<m:content>
+					<m:ToolbarSpacer class="height10" />
+					<!-- <layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L3 M3 S12" hSpacing="1" 
+						vSpacing="0" width="100%" id="Init_layout"> <layout:content> <m:VBox justifyContent="Center" 
+						width="100%"> <m:items> <m:Label design="Bold" required="false" text="{i18n&gt;faultID}" 
+						textAlign="Begin" textDirection="Inherit" width="auto" /> <m:Input id="faultID" 
+						maxLength="12" type="Number" class="clearable" value="" width="100%" /> </m:items> 
+						</m:VBox> <m:VBox justifyContent="Center" width="100%"> <m:items> <m:Label 
+						design="Bold" required="false" text="{i18n&gt;faultStatus}" textAlign="Begin" 
+						textDirection="Inherit" width="auto" /> <m:Input id="faultStatus" text="" 
+						value="" class="respOver" width="100%" /> </m:items> </m:VBox> <m:VBox justifyContent="Center" 
+						width="100%"> <m:items> <m:Label design="Bold" required="true" text="{i18n&gt;carNo}" 
+						textAlign="Begin" textDirection="Inherit" width="100%" /> <m:MultiInput filterSuggests="true" 
+						id="carNo" value="" valueHelpRequest="onClickCarHelp" width="100%" /> </m:items> 
+						</m:VBox> <m:VBox justifyContent="Center" width="100%"> <m:items> <m:Label 
+						design="Bold" required="true" text="{i18n&gt;setNo}" textAlign="Begin" textDirection="Inherit" 
+						width="auto" /> <m:MultiInput filterSuggests="true" id="setNo" valueHelpRequest="onClickSetHelp" 
+						width="100%" /> </m:items> </m:VBox> </layout:content> </layout:Grid> -->
+					<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L6 M6 S12"
+						hSpacing="0" vSpacing="0" width="100%" id="Init_layout">
+						<layout:content>
+							<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L6 M6 S12"
+								hSpacing="1" width="auto">
+								<layout:content>
+									<m:VBox justifyContent="Center" width="100%">
+										<m:items>
+											<m:Label design="Bold" required="false" text="{i18n&gt;faultID}"
+												textAlign="Begin" textDirection="Inherit" width="auto" />
+											<m:Input id="faultID" maxLength="12" type="Number"
+												class="clearable" value="" width="100%" />
+										</m:items>
+									</m:VBox>
+									<m:VBox justifyContent="Center" width="100%">
+										<m:items>
+											<m:Label design="Bold" required="false"
+												text="{i18n&gt;faultStatus}" textAlign="Begin"
+												textDirection="Inherit" width="auto" />
+											<m:Input id="faultStatus" text="" value="" class="respOver"
+												width="100%" />
+										</m:items>
+									</m:VBox>
+								</layout:content>
+							</layout:Grid>
+							<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L6 M6 S12"
+								hSpacing="1" width="auto">
+								<layout:content>
+									<m:VBox justifyContent="Center" width="100%">
+										<m:items>
+											<m:Label design="Bold" required="true" text="{i18n&gt;carNo}"
+												textAlign="Begin" textDirection="Inherit" width="100%" />
+											<m:MultiInput filterSuggests="true" id="carNo"
+												value="" valueHelpRequest="onClickCarHelp" width="100%" />
+										</m:items>
+									</m:VBox>
+									<m:VBox justifyContent="Center" width="100%">
+										<m:items>
+											<m:Label design="Bold" required="true" text="{i18n&gt;setNo}"
+												textAlign="Begin" textDirection="Inherit" width="auto" />
+											<m:MultiInput filterSuggests="true" id="setNo"
+												valueHelpRequest="onClickSetHelp" width="100%" />
+										</m:items>
+									</m:VBox>
+								</layout:content>
+							</layout:Grid>
+						</layout:content>
+					</layout:Grid>
+					<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L6 M6 S12"
+						hSpacing="0" id="advSearchFields" visible="false" width="auto">
+						<layout:content>
+							<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L6 M6 S12"
+								hSpacing="1" width="auto">
+								<layout:content>
+									<m:VBox justifyContent="Center" width="100%">
+										<m:items>
+											<m:Label design="Bold" text="{i18n&gt;fromDate}"
+												width="auto" />
+											<m:DateTimeInput change="fromDateSelected"
+												displayFormat="dd-MM-yyyy" id="fromDate" placeholder="dd-MM-yyyy"
+												type="Date" valueFormat="dd-MM-yyyy" width="100%" />
+										</m:items>
+									</m:VBox>
+									<m:VBox justifyContent="Center" width="100%">
+										<m:items>
+											<m:Label design="Bold" text="{i18n&gt;toDate}" width="auto" />
+											<m:DateTimeInput displayFormat="dd-MM-yyyy"
+												change="toDateSelected" id="toDate" placeholder="dd-MM-yyyy"
+												type="Date" valueFormat="dd-MM-yyyy" width="100%" />
+										</m:items>
+									</m:VBox>
+								</layout:content>
+							</layout:Grid>
+							<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L12 M12 S12"
+								hSpacing="1" width="100%">
+								<layout:content>
+									<m:VBox justifyContent="Start" width="100%">
+										<m:items>
+											<m:Label design="Bold" text="{i18n&gt;fltPriority}"
+												width="100%" />
+											<m:Input id="faultPriority" class="respOver" text=""
+												value="" width="100%" />
+										</m:items>
+									</m:VBox>
+								</layout:content>
+							</layout:Grid>
+						</layout:content>
+					</layout:Grid>
+					<layout:Grid defaultSpan="L12 M12 S12" hSpacing="1"
+						id="ADS_Butons_Grid" vSpacing="0" width="100%">
+						<layout:content>
+							<m:HBox>
+								<m:items>
+									<m:Button enabled="true" icon="sap-icon://search"
+										iconDensityAware="true" iconFirst="true" press="onPressSearch"
+										text="{i18n&gt;search}" type="Emphasized" width="auto" />
+									<m:ToolbarSpacer width="10px" />
+									<m:Button enabled="true" icon="sap-icon://navigation-down-arrow"
+										iconDensityAware="true" iconFirst="true" id="ShowAdvSearchButton"
+										press="onPressAdvancedSearch" text="{i18n&gt;showAdvSearch}"
+										type="Transparent" visible="true" width="auto" />
+									<m:Button enabled="true" icon="sap-icon://navigation-up-arrow"
+										iconDensityAware="true" iconFirst="true" id="HideAdvSearchButton"
+										press="onPressHideAdvancedSearch" text="{i18n&gt;hideAdvSearch}"
+										type="Transparent" visible="false" width="auto" />
+									<m:ToolbarSpacer width="10px" />
+									<m:Button enabled="true" icon="sap-icon://delete"
+										iconDensityAware="true" iconFirst="true" id="clear_fields"
+										press="onPressClear" text="{i18n&gt;clr}" type="Transparent"
+										width="auto" />
+								</m:items>
+							</m:HBox>
+						</layout:content>
+					</layout:Grid>
+
+
+					<m:Panel id="ResultsRecordbar" visible="false" headerText="Faults found"
+						width="auto">
+						<m:Table backgroundDesign="Solid" fixedLayout="true"
+							growing="true" growingScrollToLoad="true" growingThreshold="20"
+							id="FaultResultTable" includeItemInSelection="false" inset="false"
+							itemPress="onUpdateFault"
+							items="{ path: 'faultsModel>/listitems', sorter: [{ path: 'Qmdat', descending : true }, { path: 'Qmnum', descending : false }] }"
+							mode="SingleSelectMaster" modeAnimationOn="true" noDataText="No Faults Found"
+							rememberSelections="false" showNoData="true" showOverlay="false"
+							showSeparators="All" showUnread="false" swipeDirection="Both"
+							enableBusyIndicator="true" visible="true" width="auto">
+							<m:swipeContent />
+							<m:items>
+								<m:ColumnListItem id="FaultResultList" type="Active">
+									<m:cells>
+										<m:ObjectIdentifier id="listFaultID"
+											text="{faultsModel>Qmnum}" title="" titleActive="false"
+											visible="true" wrapping="false" />
+										<m:Text maxLines="1" text="{faultsModel>Setid}"
+											textAlign="Begin" textDirection="Inherit" width="auto"
+											wrapping="false" />
+										<m:Text maxLines="0" text="{faultsModel>Carid}"
+											textAlign="Begin" textDirection="Inherit" width="auto"
+											wrapping="true" />
+										<m:Text maxLines="0"
+											text="{ parts : [ 'faultsModel>MjrsysDesc', 'faultsModel>SubsysDesc' ],
+											formatter:'tfnswmfs.util.formatter.systemDesc'}"
+											textAlign="Begin" textDirection="Inherit" width="auto"
+											wrapping="true" />
+										<m:Text maxLines="0"
+											text="{ parts : [ 'faultsModel>QmgrpDesc', 'faultsModel>QmcodDesc' ],
+											formatter:'tfnswmfs.util.formatter.descConcatinate'}"
+											textAlign="Begin" textDirection="Inherit" width="auto"
+											wrapping="true" />
+										<m:Text maxLines="1"
+											text="{path:'faultsModel>Qmdat', type: 'sap.ui.model.type.Date', pattern:'dd/mm/yyyy'}"
+											textAlign="Begin" textDirection="Inherit" width="auto"
+											wrapping="false" />
+										<m:Text maxLines="1"
+											text="{ parts : [ 'faultsModel>Primedupflag', 'faultsModel>Primefaultnum' ],
+											formatter:'tfnswmfs.util.formatter.isLinked'}"
+											textAlign="Begin" textDirection="Inherit" width="auto"
+											wrapping="true" />
+									</m:cells>
+								</m:ColumnListItem>
+							</m:items>
+							<m:infoToolbar />
+							<m:columns>
+								<m:Column demandPopin="true" hAlign="Begin"
+									mergeDuplicates="false" mergeFunctionName="getText"
+									minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+									width="auto">
+									<m:header>
+										<m:Label design="Bold" maxLines="1" text="{i18n&gt;faultID}"
+											textAlign="Begin" textDirection="Inherit" width="auto"
+											wrapping="true" />
+									</m:header>
+									<m:footer />
+								</m:Column>
+								<m:Column demandPopin="true" hAlign="Begin"
+									mergeDuplicates="false" mergeFunctionName="getText"
+									minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+									width="auto">
+									<m:header>
+										<m:Label design="Bold" maxLines="1" text="{i18n&gt;setNo2}"
+											textAlign="Begin" textDirection="Inherit" width="auto"
+											wrapping="true" />
+									</m:header>
+									<m:footer />
+								</m:Column>
+								<m:Column demandPopin="true" hAlign="Begin"
+									mergeDuplicates="false" mergeFunctionName="getText"
+									minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+									width="auto">
+									<m:header>
+										<m:Label design="Bold" maxLines="1" text="{i18n&gt;carNo2}"
+											textAlign="Begin" textDirection="Inherit" width="auto"
+											wrapping="true" />
+									</m:header>
+									<m:footer />
+								</m:Column>
+								<m:Column demandPopin="true" hAlign="Begin"
+									mergeDuplicates="false" mergeFunctionName="getText"
+									minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+									width="auto">
+									<m:header>
+										<m:Label design="Bold" maxLines="1" text="{i18n&gt;sys}"
+											textAlign="Begin" textDirection="Inherit" width="auto"
+											wrapping="true" />
+									</m:header>
+									<m:footer />
+								</m:Column>
+								<m:Column demandPopin="true" hAlign="Begin"
+									mergeDuplicates="false" mergeFunctionName="getText"
+									minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+									width="auto">
+									<m:header>
+										<m:Label design="Bold" maxLines="1" text="{i18n&gt;fltSymptom}"
+											textAlign="Begin" textDirection="Inherit" width="auto"
+											wrapping="true" />
+									</m:header>
+									<m:footer />
+								</m:Column>
+								<m:Column demandPopin="true" hAlign="Begin"
+									mergeDuplicates="false" mergeFunctionName="getText"
+									minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+									width="auto">
+									<m:header>
+										<m:Label design="Bold" maxLines="1" text="{i18n&gt;fltDate}"
+											textAlign="Begin" textDirection="Inherit" width="auto"
+											wrapping="true" />
+									</m:header>
+									<m:footer />
+								</m:Column>
+								<m:Column demandPopin="true" hAlign="Begin"
+									mergeDuplicates="false" mergeFunctionName="getText"
+									minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+									width="auto">
+									<m:header>
+										<m:Label design="Bold" maxLines="1" text="{i18n&gt;linkFault}"
+											textAlign="Begin" textDirection="Inherit" width="auto"
+											wrapping="true" />
+									</m:header>
+									<m:footer />
+								</m:Column>
+							</m:columns>
+						</m:Table>
+					</m:Panel>
+				</m:content>
+				<m:footer>
+					<m:Bar>
+						<m:customData />
+						<m:contentMiddle>
+							<m:Button icon="sap-icon://search" id="s_search" text="{i18n&gt;search}"
+								type="Emphasized" width="auto" />
+							<m:Button icon="sap-icon://create" id="s_create"
+								press="onPressNavToCreate" text="{i18n&gt;crt}" type="Default"
+								width="auto" />
+							<m:Button icon="sap-icon://message-information" id="s_info"
+								press="onPressNavToInfo" text="{i18n&gt;inf}" type="Default"
+								width="auto" />
+
+							<!-- <m:Button activeIcon="" icon="sap-icon://cause" id="s_offline" 
+								text="{i18n&gt;off}" width="100px"/> -->
+						</m:contentMiddle>
+					</m:Bar>
+				</m:footer>
+			</m:Page>
+		</m:pages>
+	</m:App>
+</mvc:View>

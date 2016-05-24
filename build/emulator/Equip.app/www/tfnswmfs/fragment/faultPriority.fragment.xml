@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<ResponsivePopover class="sapUiPopupWithPadding"
+		placement="Left" title="Select Priority" afterClose="onCloseFaultPriority">
+		<content>
+			<List headerText="" selectionChange="onSelectPriority"
+				items="{ path: 'priorityModel>/listitems' }" backgroundDesign="Transparent"
+				growing="true" growingScrollToLoad="true" growingThreshold="10"
+				includeItemInSelection="true" showSeparators="All" showUnread="true"
+				rememberSelections="false" width="auto" mode="SingleSelectMaster">
+				<items>
+					<StandardListItem
+						title="{priorityModel>Zzpriok} - {priorityModel>Zzpriokx}" value="{priorityModel>Zzpriok}"
+						adaptTitleSize="true" titleTextDirection="LTR" press="selectedFltPriority"
+						class="popList" />
+				</items>
+			</List>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

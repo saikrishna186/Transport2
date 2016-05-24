@@ -1,0 +1,51 @@
+.trainCurve .sapMBtnInner {
+	border-radius: 1rem !important;
+}
+.iconSpacing
+{  white-space: normal;
+   line-height: normal;
+   vertical-align: top;
+}
+.cleanFormlabel .sapUiForm .sapMLabel {
+  height: auto;
+  position: relative;
+  padding-right: 0.3em;
+  margin-top: 14px !important;
+}
+.Title {
+	font-weight: bold !important;
+}
+.carPress {
+            display: inline-block;
+            width: 90px;
+
+background-image:url("./images/train.png");
+            background-repeat: no-repeat;
+}
+.carPress>div{
+  background-color: transparent !important;
+    border: 0px solid #bfbfbf;
+}
+.carPress .sapMBtnInner {
+	border-radius: 1rem !important;
+	  
+}
+.carUnpress {
+            display: inline-block;
+            width: 90px;
+
+background-image:url("./images/train_unpress.png");
+            background-repeat: no-repeat;
+}
+.carUnpress>div{
+  background-color: transparent !important;
+    border: 0px solid #bfbfbf;
+}
+.carUnpress .sapMBtnInner {
+	border-radius: 1rem !important;
+	  
+}
+.SelectError{  
+    border: 2px solid #e52929;  
+    border-width: 2px;
+}

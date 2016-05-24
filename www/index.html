@@ -1,0 +1,310 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta charset="UTF-8">
+<title>Equip</title>
+<script src="datajs-1.1.2.min.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script id="sap-ui-bootstrap"
+	src="https://nwgwdev.transport.nsw.gov.au/sap/public/bc/ui5_ui5/1/resources/sap-ui-cachebuster/sap-ui-core.js"
+	data-sap-ui-libs="sap.m" data-sap-ui-theme="sap_bluecrystal"
+	data-sap-ui-compatVersion="edge" data-sap-ui-xx-bindingSyntax="complex"
+	data-sap-ui-resourceroots='{"tfnswequip": "", "tfnswjobcard":"jobcard", "worklog":"worklog","tfnsw.eam.cleaning.view":"cleaning"}'>
+	
+</script>
+
+<link rel="stylesheet" type="text/css" href="CSS/styles.css">
+<link rel="stylesheet" type="text/css" href="jobcard/css/styles.css">
+<script src="Common.js"></script>
+<script src="worklog/models/worklog.model.js"></script>
+<script src="cleaning/models/services.js"></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.46.min.js"></script>
+<link rel="stylesheet" type="text/css" href="cleaning/CSS/styles.css">
+<link rel="stylesheet" type="text/css" href="tfnswmfs/css/style.css">
+<link rel="stylesheet" type="text/css" href="worklog/css/styles.css">
+<link rel="stylesheet" type="text/css" href="tfnswwcm/css/style.css">
+<script>
+	var appId = "com.TfNSW.equip.sap.eam"; // Change this to app id on server
+	var applicationContext = null;
+//	var smpServerProtocol = "http";
+	var smpServerProtocol = "https";
+	//var smpServerHost = "10.25.244.30";
+	var smpServerHost = "gdcwappe0043.transport.nsw.gov.au";
+//	var smpServerPort = "8080";
+	var smpServerPort = "8081";
+	var smpURL = smpServerProtocol + "://" + smpServerHost + ":"
+			+ smpServerPort;
+	var authStr = "";
+	var startTime = null;
+	var online = navigator.onLine;
+	// Optional initial connection context
+	var context = {
+		"serverHost" : smpServerHost, //Place your SMP 3.0 server name here
+		"https" : smpServerProtocol == "https",
+		"serverPort" : smpServerPort,
+		"user" : "", //user name for registration and the OData Endpoint
+		"password" : "", //password for registration and the OData Endpoint
+		//once set can be changed by calling sap.Logon.changePassword()
+		"communicatorId" : "REST",
+		"passcode" : "", //note hardcoding passwords and unlock passcodes are strictly for ease of use during development
+		//once set can be changed by calling sap.Logon.managePasscode()
+		"unlockPasscode" : "",
+		"passcode_CONFIRM" : "",
+		"ssoPasscode" : ""
+	};
+	function onError(msg, url, line) {
+		var idx = url.lastIndexOf("/");
+		var file = "unknown";
+		if (idx > -1) {
+			file = url.substring(idx + 1);
+		}
+		alert("An error occurred in " + file + " (at line # " + line + "): "
+				+ msg);
+		return false; //suppressErrorAlert;
+	}
+
+	function init() {
+		if (sap.Logger) {
+			sap.Logger.setLogLevel(sap.Logger.DEBUG); //enables the display of debug log messages from the Kapsel plugins.
+			sap.Logger.debug("Log level set to DEBUG");
+		}
+		
+	 // ------ below for app update -----
+	sap.AppUpdate.addEventListener("checking", function(e) {
+			console.log("Checking for update");
+	});
+                
+	sap.AppUpdate.addEventListener("noupdate", function(e) {
+			console.log("No update");
+	});
+
+	sap.AppUpdate.addEventListener("downloading", function(e) {
+			console.log("Downloading update");
+	});
+                
+	//SP02 New Feature
+	sap.AppUpdate.addEventListener("progress", function(e) {
+			if (e.lengthComputable) {
+					var percent = Math.round(e.loaded / e.total * 100);
+					console.log("Progress " + percent);
+					//document.getElementById('statusLabel').innerHTML = "Download progress " + percent + "%";
+			}
+	});
+                
+                
+	sap.AppUpdate.addEventListener("error", function(e) {
+				console.log("Error downloading update. statusCode: " + e.statusCode + " statusMessage: " + e.statusMessage);
+	});
+                
+	/*  //Notice that addEventListener adds the function to the chain of functions that are notified.
+					sap.AppUpdate.addEventListener("updateready", function(e) {
+						console.log("Update ready");
+				});
+	*/
+
+	//Notice here that we are overriding the default handler for the updateready event
+		sap.AppUpdate.onupdateready = function() {
+				console.log("Confirming application update");
+					//document.getElementById('statusLabel').innerHTML = "";
+				navigator.notification.confirm("New update available",
+				function(buttonIndex) {
+						if (buttonIndex === 2) {
+									console.log("Applying application update");
+									sap.AppUpdate.reloadApp();
+						}
+				},
+				"Update", ["Later", "Relaunch Now"]);
+		};
+
+	 //------- end of update code   -----
+		register();
+		console.log("init completed");
+	}
+
+	function register() {
+		sap.Logon
+				.init(logonSuccessCallback, logonErrorCallback, appId, context);
+                
+	}
+
+	function logonSuccessCallback(result) {
+		console.log("logonSuccessCallback ");
+		applicationContext = result;
+		//alternatively the authproxy and logon plugincan provide this if SAPKapselHandleHttpRequests=true, (it is by default on iOS)
+		authStr = "Basic "
+				+ btoa(applicationContext.registrationContext.user + ":"
+						+ applicationContext.registrationContext.password);
+ 		onDeviceReady();
+	}
+
+	function logonErrorCallback(error) { //this method is called if the user cancels the registration.
+		console.log("An error occurred:  " + JSON.stringify(error));
+		if (device.platform == "Android") { //Not supported on iOS
+			navigator.app.exitApp();
+		}
+	}
+
+	function unRegister() {
+		sap.Logon.core.deleteRegistration(logonUnregisterSuccessCallback,
+				errorCallback);
+	}
+
+	function logonUnregisterSuccessCallback(result) {
+		console.log("logonUnregisterSuccessCallback ");
+		applicationContext = null;
+	}
+
+	function errorCallback(e) {
+		alert("An error occurred " + JSON.stringify(e));
+		console.log("An error occurred " + JSON.stringify(e));
+	}
+
+	function haveAppId() {
+		if (!applicationContext) {
+			alert("Please register with the SMP Server before proceeding");
+			return false;
+		}
+		return true;
+	}
+
+	function getDeviceStatusString() {
+		if (online) {
+			return "Device is ONLINE";
+		} else {
+			return "Device is OFFLINE";
+		}
+	}
+
+	function isDeviceOnline() {
+		return online;
+	}
+
+	function deviceOnline() {
+		online = true;
+	}
+
+	function deviceOffline() {
+		online = false;
+	}
+	function addToolbarMenuItems(tileController,parentController, screenID) {
+		sap.Toolbar.clear();
+		if (screenID === "tileHome") {
+            sap.Toolbar.clear();
+			sap.Toolbar.addItem({
+				"label" : "Refresh",
+				"icon" : "app_reload",
+				"showAsAction" : sap.Toolbar.SHOW_AS_ACTION_ALWAYS
+
+			}, function() {
+				getApplications(tileController.loapApplications, tileController);
+			});
+			sap.Toolbar.addItem({
+				"label" : "Un Register",
+				"icon" : "unlock",
+				"showAsAction" : sap.Toolbar.SHOW_AS_ACTION_ALWAYS
+			}, function() {
+				tileController.deRegisterDevice();
+				// Call the unregister function
+			});
+		} else if (screenID === "myWorkList" || screenID === "jobCard"
+				|| screenID === "mfs" || screenID === "cleaning"
+				|| screenID === "wcm") {
+            sap.Toolbar.clear();
+			sap.Toolbar
+					.addItem(
+							{
+								"label" : "Home",
+								"icon" : "app_home",
+								"showAsAction" : sap.Toolbar.SHOW_AS_ACTION_ALWAYS
+							},
+							function() {
+								sap.m.MessageBox
+										.show(
+												"Navigation to the home screen will cause any unsaved data to be lost. Are you sure?",
+												{
+													icon : "WARNING",
+													title : "Warning",
+													actions : [
+															sap.m.MessageBox.Action.YES,
+															sap.m.MessageBox.Action.NO ],
+													onClose : function(oAction) {
+														if (oAction === sap.m.MessageBox.Action.YES) {
+															addToolbarMenuItems(
+																	tileController,"",
+																	"tileHome");
+                                                            parentController.getParent().jobWCMTaskOrders = "";
+															parentController
+																	.to("tileHome");
+                                                            getApplications(tileController.loapApplications, tileController);
+
+														} else if (oAction === sap.m.MessageBox.Action.NO) {
+															//Do nothing
+														}
+													}
+												});
+
+							});
+		}
+	}
+//Code for mfs Recomend
+	$(document).on('input', '.clearable', function() {
+		
+	    if($(this).children()[0].value !== "" && $(this).children().length === 1 ){
+	    	$(this).append("<div class='clearIcon sapMInputValHelp' onclick='chearIcon($(this))' ><span data-sap-ui-icon-content='' role='img' aria-label='value-help'  title='sys-cancel' class='clearIcon sapMInputValHelpInner sapUiIcon sapUiIconMirrorInRTL' style='font-family: SAP-icons; cursor: pointer;'/></div>");
+	    }else if($(this).children()[0].value === ""){
+	    	if($(this).children()[1]){
+	    		$(this).children()[1].remove();
+	    	}
+	    }
+	});
+	function chearIcon(val){
+		if(val.parent().children()[0]){
+			if(val.parent().children()[0].value){
+				val.parent().children()[0].value = "";
+			}
+		}
+		if(val.parent().children()[1]){
+			val.parent().children()[1].remove();
+		}
+	}
+	$(document).on('touchstart click', '.respOver2', function() {
+		if(!$(this).children()[0].childNodes[1].childNodes[0].readOnly)
+			$(this).children()[0].childNodes[1].childNodes[0].readOnly = true;
+	});
+// Code end for MFS css recomended
+	document.addEventListener("deviceready", init, false);
+	document.addEventListener("online", deviceOnline, false);
+	document.addEventListener("offline", deviceOffline, false);
+	function onDeviceReady() {
+        if(cordova.require("cordova/platform").id === "ios"){
+            //StatusBar.backgroundColorByName("blue");
+            StatusBar.styleDefault();
+            StatusBar.overlaysWebView(false);
+        }
+		addToolbarMenuItems("", "tileHome");
+		sap.ui.localResources("tfnswmfs");
+		sap.ui.localResources("tfnswwcm");
+		sap.ui.localResources("cleaning");
+		new sap.ui.core.ComponentContainer({
+			height : "100%",
+			width : "100%",
+			name : "tfnswequip"
+		}).placeAt("content");
+	}
+</script>
+<style>
+.tileHomeBackground {
+	background-color: #002664;
+	background-image: linear-gradient(to bottom, #002664 0, #00a1de 50%, #002664 100%)
+}
+
+body#sapUiBody {
+	height: 98%;
+	padding-top: 1rem;
+}
+</style>
+</head>
+<body class="sapUiBody" id="content" height="97%">
+</body>
+</html>

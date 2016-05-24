@@ -1,0 +1,55 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" controllerName="tfnswequip.tfnswwcm.view.MeasureResults">
+	<m:Dialog horizontalScrolling="true" resizable="true" id="sap_m_Dialog_0"
+		showHeader="true" state="None" stretch="true"
+		title="Measurement Submission Results" type="Standard"
+		verticalScrolling="true">
+		<m:beginButton />
+		<m:buttons>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				id="np-sap_m_Button-134" text="OK" width="auto" press="onSave" />
+		</m:buttons>
+		<m:content>
+			<m:Table id="np-sap_m_Table-1452" noDataText="No data"
+				items="{path:'/results'}">
+				<m:items>
+					<m:ColumnListItem counter="0" type="Active">
+						<m:cells>
+							<m:Text class="sapUiSmallMarginTop" maxLines="1"
+								text="{WheelNumber}" width="auto" />
+							<core:Icon maxLines="1" src="sap-icon://status-positive"
+								color="{parts: ['ZzerrorInd'],formatter:'tfnswwcm.util.formatter.iconColorFormat'}"
+								width="auto" />
+							<m:Text class="sapUiSmallMarginTop" maxLines="1"
+								text="{ZzerrorTxt}" width="auto" />
+						</m:cells>
+					</m:ColumnListItem>
+				</m:items>
+				<m:columns>
+					<m:Column demandPopin="true" minScreenWidth="tablet"
+						width="10%">
+						<m:header>
+							<m:Text maxLines="2" text="Wheel No." textAlign="Center"
+								width="auto" />
+						</m:header>
+					</m:Column>
+					<m:Column demandPopin="true" minScreenWidth="tablet"
+						width="10%">
+						<m:header>
+							<m:Text maxLines="2" text="" textAlign="Center" width="auto" />
+						</m:header>
+					</m:Column>
+					<m:Column demandPopin="true" minScreenWidth="tablet"
+						width="15%">
+						<m:header>
+							<m:Text maxLines="2" text="Results" width="auto" />
+						</m:header>
+					</m:Column>
+				</m:columns>
+			</m:Table>
+		</m:content>
+		<m:customHeader />
+		<m:endButton />
+		<m:subHeader />
+	</m:Dialog>
+</mvc:View>

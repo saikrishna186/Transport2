@@ -1,0 +1,272 @@
+#jobCardApp .sapMITBStretch{
+		  		top: 11.5rem !important;
+		  		//position: relative;
+			}
+#jobCardApp .sapMITBStretch>.sapMITBContainerContent>.sapMITBContent {
+	bottom: unset !important;
+	bottom: initial !important;
+}
+#jobCardApp .welcomePage section{
+	overflow-y : hidden !important;
+}
+
+/*.sapMBtnCustomIcon {
+	color : white !important;
+}*/
+#jobCardApp .numPadInput {
+	width: 320px !important;
+	height : 370px !important;
+}
+#jobCardApp .measurementReading{
+	border : solid;
+  border-width: 1px;
+  border-color: #c0c0c0;
+}
+#jobCardApp .conditionInput{
+  border : solid;
+  border-width: 2px;
+  border-color: #c0c0c0;
+}
+#jobCardApp .ratingInputButton {
+  height: 65px !important;
+  width: 90px !important;
+  margin: 2.5% !important;
+}
+#jobCardApp .ratingInputButton .sapMBtnInner{
+	  font-size: 2em !important;
+	  height : 100% !important;
+}
+#jobCardApp .appTitle{
+	//color : white !important;
+}
+#jobCardApp .criticalIcon{
+	margin-right : 3% !important;
+}
+/*.backGroundColor {
+  background-color:white;
+}*/
+#jobCardApp .taskInfoLayout .sapUiTvH5{
+	font-size : 20px  !important;
+	padding : 1% !important;
+}
+#jobCardApp .taskInfoLayout .sapMLabel{
+	font-size : 1rem !important;
+	font-weight : bold !important;
+}
+#jobCardApp .taskInfoLayout {
+  margin: 2%;
+  /*
+  border: solid;
+  border-width: 2px; */
+}
+#jobCardApp .taskInfoLayout .sapUiPanelHdr {
+	padding : 1% !important;
+}
+
+
+#jobCardApp .jobHeader .sapMObjStatusText, .jobHeader .sapMObjectAttributeText{
+	font-size : 1rem !important;
+/*	font-weight : bold !important; */
+	color : black !important;
+}
+
+#jobCardApp .sapMListTbl .sapMText, .sapMListTbl .sapMLabel{
+	font-size : 1rem !important;
+}
+#jobCardApp .paddingUnit
+{
+  padding-top: 0.75em !important;
+	padding-left: 0.3rem !important;
+}
+/*
+.sapMIBar>.sapMBarLeft>.sapMBarChild:last-child, .sapMIBar .sapMBarPH>.sapMBarChild:last-child {
+  color: white;
+}
+*/
+#jobCardApp .currentReadingInput
+{
+width: 65%;
+padding-right: 1%
+}
+/*.navButton .sapMBtnIcon{
+	color : white !important;
+}*/
+#jobCardApp .taskLongText{
+	  pointer-events: all !important;
+	  height: 50% !important;
+}
+#jobCardApp .taskLongText .sapMTextAreaInner{
+  color: black;
+  font-weight: bold; 
+  border: none;
+}
+.taskInformationForm .sapMLabel {
+	font-weight : bold !important;
+	text-align : left !important;
+}
+#jobCardApp .taskInformationForm .sapUiRespGridMedia-Std-Phone.sapUiFormResGridCont>.sapUiFormResGridLbl:not(.sapUiRespGridSpanS12)>.sapMLabel, .sapUiRespGridMedia-Std-Tablet.sapUiFormResGridCont>.sapUiFormResGridLbl:not(.sapUiRespGridSpanM12)>.sapMLabel, .sapUiRespGridMedia-Std-Desktop.sapUiFormResGridCont>.sapUiFormResGridLbl:not(.sapUiRespGridSpanL12)>.sapMLabel{
+	text-align : left !important;
+}
+
+
+#textInfo{
+	/*
+	margin-top : 1%;
+	margin-left : 10%;
+	*/
+	opacity : 1 !important;
+}
+#jobCardApp .taskCodeHeader .sapMOHAttr{
+	text-align : center !important;
+}
+#jobCardApp .tableTitle {
+  font-weight: bold !important;
+}
+#jobCardApp .notesLayout {
+	border-width: 2px;
+	border-radius: 4px;
+	margin-left: 2%;
+	margin-top : 1%;
+}
+#notifyDialog-title
+{
+font-weight: bolder !important;
+}
+#jobCardApp .currentReadInput
+{
+	border:  solid;
+	margin-top : 6%;
+	border-width: 2px;
+  border-color: #c0c0c0;
+}
+#jobCardApp .descriptionHeader{
+	width : 31%;
+}
+#jobCardApp .taskDescriptionBox{
+	opacity : 1 !important;
+	font-size : 1rem !important;
+}
+#jobCardApp .taskDescriptionBox .sapMTextAreaInner{
+	border : none !important;
+}
+#jobCardApp .dialogTable{
+	background: #ffffff;
+}
+#jobCardApp .dialogTable .sapMCbBg, .jobTaskCompChkBox .sapMCbBg{
+padding : 12px !important;
+top : 0.5125rem !important;
+}
+#jobCardApp .sapMITBFilter {
+	//width : 10% !important;
+	//width : 5% !important;
+}
+#jobCardApp .sapMITBText{
+	white-space: normal;
+}
+#jobCardApp .sapMITBTab , .sapMITBText{
+	//width : 100% !important;
+}
+#jobCardApp .barContainer .sapMBtnIcon  {
+	color : white;
+}
+/*.barContainer .sapUiIcon  {
+	color : white;
+}*/
+#jobCardApp .barContainer .sapMLabel {
+	color : white;
+}
+#jobCardApp .userIcon{
+	color : white;
+}
+#jobCardApp #jobList .sapMBar.sapMBar-CTX.sapMContent-CTX.sapMHeader-CTX.sapMIBar.sapMIBar-CTX.sapMPageHeader
+{
+	/*
+	background-image: url("../images/Equip_Logo.png"), url("../images/Equip_Logo_Background.png");
+	background-repeat: no-repeat, repeat;
+	background-position: 50px;
+	background-size: contain, contain;
+	 */
+}
+#empty .sapMBar.sapMBar-CTX.sapMContent-CTX.sapMHeader-CTX.sapMIBar.sapMIBar-CTX.sapMPageHeader,
+#jobList .sapMBar.sapMBar-CTX.sapMContent-CTX.sapMHeader-CTX.sapMIBar.sapMIBar-CTX.sapMPageHeader,
+#jobDetails .sapMBar.sapMBar-CTX.sapMContent-CTX.sapMHeader-CTX.sapMIBar.sapMIBar-CTX.sapMPageHeader,
+#infoDetails .sapMBar.sapMBar-CTX.sapMContent-CTX.sapMHeader-CTX.sapMIBar.sapMIBar-CTX.sapMPageHeader,
+#addMaterial .sapMBar.sapMBar-CTX.sapMContent-CTX.sapMHeader-CTX.sapMIBar.sapMIBar-CTX.sapMPageHeader,
+#measurementPoints .sapMBar.sapMBar-CTX.sapMContent-CTX.sapMHeader-CTX.sapMIBar.sapMIBar-CTX.sapMPageHeader	
+{
+	/*background-image:  url("../images/Equip_Logo_Background.png");
+	background-repeat:  repeat;
+	background-position: 1px;
+	background-size:  contain;*/
+	 
+}
+.whiteBackground {
+ /*	background-color: white !important; */
+}
+.jobHeader{
+	  width: 95%;
+  /* background-color: lightgray; */
+  /*margin-left: 10%; */
+  /*border: solid;*/
+  /*border-width: 2px;*/
+  /*border-radius: 15px;*/
+}
+.jobFilters{
+	width: 100%;
+ /*   margin-left: 10%; */
+}
+.taskIconLayout{
+	margin-left: 3%;
+	margin-right : 3%;
+}
+
+.actionInput{
+	border:  solid;
+	margin-top : 6%;
+	  border-width: 2px;
+   border-color: #c0c0c0;
+}
+#jobCardApp .attributeMaxHeight{
+	max-height: none !important;
+}
+#jobCardApp .sapMITBVertical{
+	height: 8rem;
+}
+#jobCardApp .sapMITBStretch{
+ 		top: 11.5rem !important;
+ 		//position: relative;
+}
+#jobCardApp .sapMITBStretch>.sapMITBContainerContent>.sapMITBContent {
+	bottom: unset !important;
+	bottom: initial !important;
+}
+#jobCardApp-MasterBtn
+{
+ visibility: visible !important;
+}
+ #jobCardApp .hoverDisabled, .hoverDisabled>input:hover{
+ 	opacity: 1 !important;
+	pointer-events: all !important;
+		border:  solid;
+	margin-top : 6%;
+	  border-width: 2px;
+   border-color: #c0c0c0;
+}
+
+#jobCardLongTxt{
+	opacity : 1 !important;
+	pointer-events: all !important;
+}
+.jobCardLongTxtLayout {
+  border: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  width: 95%; 
+  margin-left: 2%;
+  margin-top : 1%;
+  background-color: #F2F2F2 !important;
+}
+
+.pageTitle{
+	color: white;
+}

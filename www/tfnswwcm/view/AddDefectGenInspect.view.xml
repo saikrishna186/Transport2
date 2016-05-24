@@ -1,0 +1,60 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	controllerName="tfnswequip.tfnswwcm.view.AddDefectGenInspect">
+	<m:Dialog horizontalScrolling="true" id="sap_m_Dialog_0"
+		showHeader="true" state="None" stretch="false" title="Add Defect"
+		type="Standard" verticalScrolling="true">
+		<m:beginButton />
+		<m:buttons>
+
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				text="Cancel" width="auto" press="onExit" />
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				text="Save" width="auto" press="onSave" />
+		</m:buttons>
+		<m:content>
+			<form:SimpleForm breakpointL="1024" breakpointM="600"
+				columnsL="2" columnsM="1" editable="false" emptySpanL="0"
+				emptySpanM="0" emptySpanS="0"
+				id="np-sap_ui_layout_form_SimpleForm-1452566741459-0X7"
+				labelMinWidth="192" labelSpanL="4" labelSpanM="2" labelSpanS="12"
+				layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="-1"
+				visible="true">
+				<form:title />
+				<form:content>
+					<m:Label design="Standard" required="false" text="Wheel No."
+						textAlign="Begin" textDirection="Inherit" width="auto" />
+					<m:Text
+						text="{parts: ['/WheelNo'],formatter:'tfnswwcm.util.formatter.iconTitleFormat'}"
+						maxLines="0" />
+					<m:Label design="Standard" required="false" text="Defect Type"
+						textAlign="Begin" textDirection="Inherit" width="auto" />
+					<m:ComboBox editable="true" enabled="true" id="defectType"
+						maxWidth="100%" selectedKey="{/DefectTypeKey}" value="{/DefectTypeText}"
+						showValueStateMessage="true" valueState="None" visible="true"
+						width="192px" items="{path:'/DefectTypeData',templateShareable : true}">
+						<m:items>
+							<core:Item enabled="true" text="{Description}" key="{Value}"
+								textDirection="Inherit" />
+						</m:items>
+					</m:ComboBox>
+					<m:Label design="Standard" required="false" text="Defect Class"
+						textAlign="Begin" textDirection="Inherit" width="auto" />
+					<m:ComboBox editable="true" enabled="true" maxWidth="100%"
+						selectedKey="{/DefectClassKey}" id="defectClass" value="{/DefectClassText}"
+						showValueStateMessage="true" valueState="None" visible="true"
+						width="192px" items="{path:'/DefectClassData',templateShareable : true}">
+						<m:items>
+							<core:Item enabled="true" text="{Description}" key="{Value}"
+								textDirection="Inherit" />
+
+						</m:items>
+					</m:ComboBox>
+				</form:content>
+			</form:SimpleForm>
+		</m:content>
+		<m:customHeader />
+		<m:endButton />
+		<m:subHeader />
+	</m:Dialog>
+</mvc:View>

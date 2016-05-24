@@ -1,0 +1,574 @@
+<mvc:View controllerName="tfnswequip.tfnswmfs.controller.Create"
+	xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<m:App id="App" title="{i18n&gt;appTitle}">
+		<m:pages>
+			<m:Page backgroundDesign="Standard" id="page" title="{i18n&gt;c_title}"
+				class="cPage">
+				<m:subHeader>
+					<m:Toolbar width="100%" class="subHeader">
+						<m:content height="auto">
+							<m:HBox alignItems="Center" justifyContent="Start" width="100%"
+								class="cMessageBar">
+								<m:items>
+									<m:ToolbarSpacer width="10px" />
+									<core:Icon src="sap-icon://message-error" class="waringIcon" />
+									<m:ToolbarSpacer width="10px" />
+									<m:Text text="" id="messageBar" />
+								</m:items>
+							</m:HBox>
+						</m:content>
+					</m:Toolbar>
+				</m:subHeader>
+				<m:content>
+					<!-- <m:HBox alignItems="Center" justifyContent="Start" width="auto" 
+						class="cMessageBar"> <m:items> <m:ToolbarSpacer width="10px" /> <core:Icon 
+						src="sap-icon://message-error" class="waringIcon" /> <m:ToolbarSpacer width="10px" 
+						/> <m:Text text="" id="messageBar" /> </m:items> </m:HBox> -->
+					<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L12 M12 S12"
+						hSpacing="1" vSpacing="0" width="auto">
+						<layout:content>
+							<layout:HorizontalLayout>
+								<layout:content>
+									<m:VBox alignItems="Start" justifyContent="Center"
+										width="100%">
+										<m:items>
+											<m:ToolbarSpacer class="height15" width="10px" />
+											<m:Label design="Bold" text="{i18n>setorCar}" width="auto"
+												required="true" />
+											<layout:HorizontalLayout
+												allowWrapping="false">
+												<layout:content>
+													<!-- <m:Input id="setorCar" maxLength="4" width="auto"/> -->
+													<m:SearchField id="setorCar" width="auto"
+														placeholder="" enableSuggestions="false" showSearchButton="false"
+														showRefreshButton="false" liveChange="resetSearch"
+														maxLength="4" />
+													<m:Button class="leftSpace" id="searchSetorCarButton"
+														press="searchSetorCar" text="Go" enabled="true" width="120px"
+														type="Emphasized" />
+												</layout:content>
+											</layout:HorizontalLayout>
+										</m:items>
+									</m:VBox>
+									<layout:VerticalLayout id="carSelectButtons"
+										visible="false" width="auto">
+										<layout:content>
+											<m:ToolbarSpacer class="height15" width="10px" />
+											<layout:HorizontalLayout>
+												<layout:content>
+													<m:Label class="leftSpace" design="Bold" text="Car Selector: "
+														width="auto" />
+												</layout:content>
+											</layout:HorizontalLayout>
+											<layout:HorizontalLayout id="carSelectbuttons"
+												allowWrapping="true">
+												<layout:content>
+													<m:Button class="leftSpace" id="car_select_all"
+														press="selectAllCars" text="Select All" enabled="true"
+														width="120px" type="Emphasized" />
+													<m:Button class="leftSpace" id="car_dSelect_all"
+														press="dSelectAllCars" text="Deselect All" enabled="true"
+														width="120px" type="Emphasized" />
+													<m:Button class="leftSpace" id="car_select_confirm"
+														press="onConfirmCars" text="Confirm" visible="false"
+														width="120px" type="Emphasized" />
+												</layout:content>
+											</layout:HorizontalLayout>
+											<m:ToolbarSpacer class="height15" width="10px" />
+										</layout:content>
+									</layout:VerticalLayout>
+								</layout:content>
+							</layout:HorizontalLayout>
+						</layout:content>
+					</layout:Grid>
+					<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L12 M12 S12"
+						hSpacing="1" vSpacing="0" width="100%">
+						<layout:content>
+							<layout:HorizontalLayout id="carsContainer"
+								visible="false" width="100%" allowWrapping="true">
+								<layout:content></layout:content>
+							</layout:HorizontalLayout>
+						</layout:content>
+					</layout:Grid>
+					<m:HBox>
+						<m:items>
+							<m:ToolbarSpacer class="height15" width="10px" />
+						</m:items>
+					</m:HBox>
+					<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L4 M4 S12"
+						hSpacing="1" id="dateRow" vSpacing="0" visible="false" width="100%">
+						<layout:content>
+							<m:VBox justifyContent="Center" width="100%">
+								<m:items>
+									<m:Label design="Bold" text="{i18n>fltDate}" width="100%" />
+									<m:DateTimeInput displayFormat="dd-MM-yyyy" id="fltDate"
+										placeholder="dd-MM-yyyy" dateValue="{faultModel>/FaultDate}"
+										type="Date" valueFormat="dd-MM-yyyy" width="100%" />
+								</m:items>
+							</m:VBox>
+							<m:VBox justifyContent="Center" width="100%">
+								<m:items>
+									<m:Label design="Bold" text="{i18n>fltTime}" width="100%" />
+									<m:DateTimeInput displayFormat="HH:mm" id="fltTime"
+										placeholder="HH:mm" value="{faultModel>/FaultTime}" type="Time"
+										valueFormat="HH:mm" width="100%" />
+								</m:items>
+							</m:VBox>
+							<m:VBox justifyContent="Center" width="100%">
+								<m:items>
+									<m:HBox alignItems="Center" justifyContent="Start"
+										width="100%">
+										<m:items>
+											<m:Label design="Bold" text="{i18n>tripID}" width="auto" />
+											<m:ToolbarSpacer width="10px" />
+											<m:Link text="{i18n>getTrip}" emphasized="true" href=""
+												press="onPressGetTripID" />
+										</m:items>
+									</m:HBox>
+									<m:Input id="tripID" value="{faultModel>/Tripnum}"
+										width="100%" maxLength="10" />
+								</m:items>
+							</m:VBox>
+						</layout:content>
+					</layout:Grid>
+					<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L12 M12 S12"
+						hSpacing="1" id="faultSourceRow" visible="false" vSpacing="0"
+						width="auto">
+						<layout:content>
+							<layout:VerticalLayout width="100%">
+								<layout:content>
+									<m:Label design="Bold" text="{i18n>faultSource}" width="100%"
+										required="true" />
+									<m:Input fieldWidth="auto" id="faultSource" text=""
+										class="respOver" value="" width="100%" />
+								</layout:content>
+							</layout:VerticalLayout>
+							<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L12 M12 S12"
+								hSpacing="0" id="TSR_fields" vSpacing="0" visible="false" width="100%">
+								<layout:content>
+									<layout:VerticalLayout visible="true"
+										width="100%">
+										<layout:content>
+											<m:Label design="Bold" text="{i18n>tsrNo}" required="true"
+												width="100%" />
+											<m:Input id="tsrNo" width="100%" type="Number" />
+										</layout:content>
+									</layout:VerticalLayout>
+								</layout:content>
+							</layout:Grid>
+							<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L6 M6 S12"
+								hSpacing="0" id="Audit_fields" vSpacing="0" visible="false"
+								width="100%">
+								<layout:content>
+									<layout:VerticalLayout width="90%">
+										<layout:content>
+											<m:Label design="Bold" text="{i18n>auditNo}"
+												required="true" width="100%" />
+											<m:Input id="auditNo" value="{faultModel>/AuditNum}"
+												type="Number" width="100%" />
+										</layout:content>
+									</layout:VerticalLayout>
+									<layout:VerticalLayout width="100%">
+										<layout:content>
+											<m:Label design="Bold" text="{i18n>auditType}"
+												required="true" width="100%" />
+											<m:Input fieldWidth="auto" id="auditType" text=""
+												class="respOver" value="" width="100%" />
+										</layout:content>
+									</layout:VerticalLayout>
+								</layout:content>
+							</layout:Grid>
+							<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L12 M12 S12"
+								hSpacing="0" id="TPC_fields" vSpacing="0" visible="false" width="100%">
+								<layout:content>
+									<layout:VerticalLayout visible="true"
+										width="100%">
+										<layout:content>
+											<m:Label design="Bold" text="{i18n>tpcNo}" required="true"
+												width="100%" />
+											<m:Input id="tpcNo" width="100%" type="Number" />
+										</layout:content>
+									</layout:VerticalLayout>
+								</layout:content>
+							</layout:Grid>
+						</layout:content>
+					</layout:Grid>
+					<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L6 M6 S12"
+						hSpacing="1" id="systemsRow" vSpacing="0" visible="false" width="100%">
+						<layout:content>
+							<layout:VerticalLayout width="100%">
+								<layout:content>
+									<m:Label design="Bold" text="{i18n>majorSystem}"
+										required="true" width="auto" />
+									<m:Input fieldWidth="auto" id="majorSystem" text=""
+										class="respOver" value="" width="100%" />
+								</layout:content>
+							</layout:VerticalLayout>
+							<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L12 M12 S12"
+								hSpacing="0" vSpacing="0" width="100%">
+								<layout:content>
+									<m:Label design="Bold" text="{i18n>subSystem}"
+										required="true" width="auto" />
+									<m:Input fieldWidth="auto" id="subSystem" text=""
+										class="respOver" value="" width="100%" />
+								</layout:content>
+							</layout:Grid>
+						</layout:content>
+					</layout:Grid>
+					<m:ToolbarSpacer class="height10" width="5px" />
+					<m:Toolbar class="highlight" id="faultListHeader">
+						<m:Text text="Open Fault List" textAlign="Left" />
+						<m:ToolbarSpacer />
+						<m:Text text="Search Result count" textAlign="Right" id="openCount" />
+						<m:Button icon="sap-icon://sys-add" iconFirst="false"
+							id="list_expand" press="toggleExpand" text="Expand" visible="false"
+							width="120px" />
+						<m:Button activeIcon="sap-icon://sys-minus" icon="sap-icon://sys-minus"
+							iconFirst="false" id="list_collapse" press="toggleExpand" text="Collapse"
+							visible="false" />
+						<m:ToolbarSpacer id="toggleButtonSpacer" width="5px" />
+					</m:Toolbar>
+					<m:Table backgroundDesign="Solid" fixedLayout="true"
+						id="tableOpenFaultHeader" showNoData="false" showOverlay="false"
+						showSeparators="All" visible="true" width="100%" class="cTable">
+						<m:columns>
+							<m:Column demandPopin="true" hAlign="Begin"
+								mergeDuplicates="false" mergeFunctionName="getText"
+								minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+								width="auto">
+								<m:header>
+									<m:Text design="Bold" maxLines="1" text="{i18n&gt;faultID}"
+										textAlign="Begin" textDirection="Inherit" width="auto"
+										wrapping="true" />
+								</m:header>
+								<m:footer />
+							</m:Column>
+							<m:Column demandPopin="true" hAlign="Begin"
+								mergeDuplicates="false" mergeFunctionName="getText"
+								minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+								width="auto">
+								<m:header>
+									<m:Text design="Bold" maxLines="1" text="{i18n&gt;fltDate}"
+										textAlign="Begin" textDirection="Inherit" width="auto"
+										wrapping="true" />
+								</m:header>
+								<m:footer />
+							</m:Column>
+							<m:Column demandPopin="true" hAlign="Begin"
+								mergeDuplicates="false" mergeFunctionName="getText"
+								minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+								width="auto">
+								<m:header>
+									<m:Text design="Bold" maxLines="1" text="{i18n&gt;setNo2}"
+										textAlign="Begin" textDirection="Inherit" width="auto"
+										wrapping="true" />
+								</m:header>
+								<m:footer />
+							</m:Column>
+							<m:Column demandPopin="true" hAlign="Begin"
+								mergeDuplicates="false" mergeFunctionName="getText"
+								minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+								width="auto">
+								<m:header>
+									<m:Text design="Bold" maxLines="1" text="{i18n&gt;carNo2}"
+										textAlign="Begin" textDirection="Inherit" width="auto"
+										wrapping="true" />
+								</m:header>
+								<m:footer />
+							</m:Column>
+							<m:Column demandPopin="true" hAlign="Begin"
+								mergeDuplicates="false" mergeFunctionName="getText"
+								minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+								width="auto">
+								<m:header>
+									<m:Text design="Bold" maxLines="1" text="{i18n&gt;sys}"
+										textAlign="Begin" textDirection="Inherit" width="auto"
+										wrapping="true" />
+								</m:header>
+								<m:footer />
+							</m:Column>
+							<m:Column demandPopin="true" hAlign="Begin"
+								mergeDuplicates="false" mergeFunctionName="getText"
+								minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+								width="auto">
+								<m:header>
+									<m:Text design="Bold" maxLines="1" text="{i18n&gt;fltSymptom}"
+										textAlign="Begin" textDirection="Inherit" width="auto"
+										wrapping="true" />
+								</m:header>
+								<m:footer />
+							</m:Column>
+							<m:Column demandPopin="true" hAlign="Begin"
+								mergeDuplicates="false" mergeFunctionName="getText"
+								minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+								width="auto">
+								<m:header>
+									<m:Text design="Bold" maxLines="1" text="{i18n&gt;linkFault}"
+										textAlign="Begin" textDirection="Inherit" width="auto"
+										wrapping="true" />
+								</m:header>
+								<m:footer />
+							</m:Column>
+						</m:columns>
+					</m:Table>
+					<m:Panel height="50%" id="panelOpenFault" width="100%"
+						class="cPanel">
+						<m:content>
+							<m:Table backgroundDesign="Solid" fixedLayout="true"
+								growing="true" growingScrollToLoad="true" growingThreshold="20"
+								id="tableOpenFault" includeItemInSelection="false" inset="false"
+								itemPress="onUpdateFault"
+								items="{ path: 'openFaultsModel>/listitems', sorter: { path: 'Setid,Carid' } }"
+								mode="SingleSelectMaster" modeAnimationOn="true" noDataText="No Faults Found"
+								rememberSelections="false" showNoData="true" showOverlay="false"
+								showSeparators="All" showUnread="false" swipeDirection="Both"
+								enableBusyIndicator="true" visible="true" width="100%" class="cTable">
+								<m:swipeContent>
+									<m:Button text="Show Fault Detail" press="onFaultDetail"
+										type="Emphasized" width="auto" />
+								</m:swipeContent>
+								<m:items>
+									<m:ColumnListItem id="FaultResultList" type="Active">
+										<m:cells>
+											<m:ObjectIdentifier id="listFaultID"
+												text="{openFaultsModel>Qmnum}" title="" titleActive="false"
+												visible="true" wrapping="false" />
+											<m:DateTimeInput displayFormat="dd MMM yyyy"
+												dateValue="{openFaultsModel>Qmdat}" type="Date" width="auto"
+												editable="false" textAlign="Left" class="displayDate" />
+											<m:Text maxLines="1" text="{openFaultsModel>Setid}"
+												textAlign="Begin" textDirection="Inherit" width="auto"
+												wrapping="false" />
+											<m:Text maxLines="0" text="{openFaultsModel>Carid}"
+												textAlign="Begin" textDirection="Inherit" width="auto"
+												wrapping="true" />
+											<m:Text maxLines="0"
+												text="{ parts : [ 'openFaultsModel>MjrsysDesc', 'openFaultsModel>SubsysDesc','openFaultsModel>CodeGrpDescription','openFaultsModel>CodeDescription' ],
+												formatter:'tfnswmfs.util.Formatter.systemDescW'}"
+												textAlign="Begin" textDirection="Inherit" width="auto"
+												wrapping="true" />
+											<m:Text maxLines="0"
+												text="{ parts : [ 'openFaultsModel>QmgrpDesc', 'openFaultsModel>QmcodDesc' ],
+												formatter:'tfnswmfs.util.Formatter.descConcatinate'}"
+												textAlign="Begin" textDirection="Inherit" width="auto"
+												wrapping="true" />
+											<m:Text maxLines="1"
+												text="{ parts : [ 'openFaultsModel>Primedupflag', 'openFaultsModel>Primefaultnum' ],
+												formatter:'tfnswmfs.util.Formatter.isLinked'}"
+												textAlign="Begin" textDirection="Inherit" width="auto"
+												wrapping="true" />
+										</m:cells>
+									</m:ColumnListItem>
+								</m:items>
+								<m:columns>
+									<m:Column demandPopin="true" hAlign="Begin"
+										mergeDuplicates="false" mergeFunctionName="getText"
+										minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+										width="auto">
+										<m:header>
+											<!-- <m:Text design="Bold" maxLines="1" text="{i18n&gt;faultID}" 
+												textAlign="Begin" textDirection="Inherit" width="auto" wrapping="true" /> -->
+										</m:header>
+										<m:footer />
+									</m:Column>
+									<m:Column demandPopin="true" hAlign="Begin"
+										mergeDuplicates="false" mergeFunctionName="getText"
+										minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+										width="auto">
+										<m:header>
+											<!-- <m:Text design="Bold" maxLines="1" text="{i18n&gt;fltDate}" 
+												textAlign="Begin" textDirection="Inherit" width="auto" wrapping="true" /> -->
+										</m:header>
+										<m:footer />
+									</m:Column>
+									<m:Column demandPopin="true" hAlign="Begin"
+										mergeDuplicates="false" mergeFunctionName="getText"
+										minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+										width="auto">
+										<m:header>
+											<!-- <m:Text design="Bold" maxLines="1" text="{i18n&gt;setNo2}" 
+												textAlign="Begin" textDirection="Inherit" width="auto" wrapping="true" /> -->
+										</m:header>
+										<m:footer />
+									</m:Column>
+									<m:Column demandPopin="true" hAlign="Begin"
+										mergeDuplicates="false" mergeFunctionName="getText"
+										minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+										width="auto">
+										<m:header>
+											<!-- <m:Text design="Bold" maxLines="1" text="{i18n&gt;carNo2}" 
+												textAlign="Begin" textDirection="Inherit" width="auto" wrapping="true" /> -->
+										</m:header>
+										<m:footer />
+									</m:Column>
+									<m:Column demandPopin="true" hAlign="Begin"
+										mergeDuplicates="false" mergeFunctionName="getText"
+										minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+										width="auto">
+										<m:header>
+											<!-- <m:Text design="Bold" maxLines="1" text="{i18n&gt;sys}" textAlign="Begin" 
+												textDirection="Inherit" width="auto" wrapping="true" /> -->
+										</m:header>
+										<m:footer />
+									</m:Column>
+									<m:Column demandPopin="true" hAlign="Begin"
+										mergeDuplicates="false" mergeFunctionName="getText"
+										minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+										width="auto">
+										<m:header>
+											<!-- <m:Text design="Bold" maxLines="1" text="{i18n&gt;fltSymptom}" 
+												textAlign="Begin" textDirection="Inherit" width="auto" wrapping="true" /> -->
+										</m:header>
+										<m:footer />
+									</m:Column>
+									<m:Column demandPopin="true" hAlign="Begin"
+										mergeDuplicates="false" mergeFunctionName="getText"
+										minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit"
+										width="auto">
+										<m:header>
+											<!-- <m:Text design="Bold" maxLines="1" text="{i18n&gt;linkFault}" 
+												textAlign="Begin" textDirection="Inherit" width="auto" wrapping="true" /> -->
+										</m:header>
+										<m:footer />
+									</m:Column>
+								</m:columns>
+							</m:Table>
+						</m:content>
+					</m:Panel>
+					<m:ToolbarSpacer class="height10" width="10px" />
+					<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L4 M4 S12"
+						hSpacing="1" id="reportPhaseRow" vSpacing="0" width="100%">
+						<layout:content>
+							<layout:VerticalLayout width="100%">
+								<layout:content>
+									<m:Label design="Bold" text="{i18n>reportPhase}" width="100%"
+										required="true" />
+									<m:Input id="reportPhase" class="respOver" width="100%" />
+								</layout:content>
+							</layout:VerticalLayout>
+							<layout:VerticalLayout width="100%">
+								<layout:content>
+									<m:Label design="Bold" text="{i18n>fltSymptom}" width="100%"
+										required="true" />
+									<m:Input id="fltSymptom" class="respOver" width="100%" />
+								</layout:content>
+							</layout:VerticalLayout>
+							<layout:VerticalLayout width="100%">
+								<layout:content>
+									<m:HBox alignItems="Center" justifyContent="Start"
+										width="100%">
+										<m:items>
+											<m:Label design="Bold" text="{i18n>fltPosition}"
+												width="auto" required="true" />
+											<m:ToolbarSpacer width="10px" />
+											<core:Icon class="helpIcon" ActiveBackgroundColor="blue"
+												src="sap-icon://message-error" type="" press="onPressHelp" />
+										</m:items>
+									</m:HBox>
+									<m:Input id="fltPosition" class="respOver" width="100%" />
+								</layout:content>
+							</layout:VerticalLayout>
+						</layout:content>
+					</layout:Grid>
+					<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L12 M12 S12"
+						hSpacing="1" id="graffitiRow" visible="false" vSpacing="0" width="auto">
+						<layout:content>
+							<layout:VerticalLayout width="100%">
+								<layout:content>
+									<m:Label design="Bold" text="{i18n>graffitiType}"
+										width="100%" />
+									<m:Input id="graffitiType" class="respOver" width="100%" />
+								</layout:content>
+							</layout:VerticalLayout>
+						</layout:content>
+					</layout:Grid>
+					<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L4 M4 S12"
+						hSpacing="1" id="rectifiedRow" vSpacing="0" width="100%">
+						<layout:content>
+							<m:HBox alignItems="Start" justifyContent="Start" width="100%">
+								<m:items>
+									<m:VBox justifyContent="SpaceBetween" width="100%">
+										<m:items>
+											<m:ToolbarSpacer class="height10" />
+											<m:ToolbarSpacer class="height10" />
+											<m:HBox alignItems="Center" justifyContent="Center"
+												width="100%">
+												<m:items>
+													<m:CheckBox id="faultRectified" width="auto" />
+													<m:ToolbarSpacer width="10px" />
+													<m:VBox alignItems="Center" justifyContent="Center"
+														width="auto">
+														<m:items>
+															<m:Text text="{i18n>faultRectified}" design="Bold"
+																width="100%" />
+														</m:items>
+													</m:VBox>
+												</m:items>
+											</m:HBox>
+										</m:items>
+									</m:VBox>
+									<!-- <m:ToolbarSpacer class="height10" /> <m:VBox alignItems="End" 
+										justifyContent="Center" width="auto"> <m:items> <m:ToolbarSpacer class="height10" 
+										/> <m:ToolbarSpacer class="height10" /> <m:Button icon="sap-icon://map" id="map" 
+										press="onPressMap" width="100%" /> </m:items> </m:VBox> -->
+								</m:items>
+							</m:HBox>
+							<m:VBox justifyContent="Center" width="100%">
+								<m:items>
+									<m:Label design="Bold" text="{i18n&gt;temp}" width="99%" />
+									<m:Input fieldWidth="auto" id="temp" text="" class="respOver"
+										value="{faultModel&gt;/TempDesc}" width="99%" />
+								</m:items>
+							</m:VBox>
+							<m:VBox justifyContent="Center" width="100%">
+								<m:items>
+									<m:Label design="Bold" text="{i18n&gt;weather}" width="99%" />
+									<m:Input fieldWidth="auto" id="weather" class="respOver"
+										text="{faultModel&gt;/WeatherDesc}" width="99%" />
+								</m:items>
+							</m:VBox>
+						</layout:content>
+					</layout:Grid>
+					<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L12 M12 S12"
+						hSpacing="1" id="commentsRow" vSpacing="0" visible="false" width="100%">
+						<layout:content>
+							<m:VBox justifyContent="Center" width="100%">
+								<m:items>
+									<m:Label design="Bold" text="{i18n&gt;fltComments}"
+										width="100%" required="true" />
+									<m:TextArea id="fltComments" rows="5"
+										showValueStateMessage="false" value="{faultModel>/FaultComment}"
+										width="100%" wrapping="Soft" />
+									<m:ToolbarSpacer class="height10" />
+								</m:items>
+							</m:VBox>
+						</layout:content>
+					</layout:Grid>
+				</m:content>
+				<m:footer>
+					<m:Bar>
+						<m:contentRight>
+							<m:Button press="onPressCancel" text="{i18n&gt;cancel}"
+								type="Reject" width="auto" />
+							<m:Button press="onPressSubmit" id="faultSubmitButton"
+								text="{i18n&gt;submit}" type="Emphasized" width="auto" />
+						</m:contentRight>
+						<m:contentMiddle>
+							<m:Button icon="sap-icon://search" id="s_search"
+								press="onPressNavToSearch" text="{i18n&gt;search}" type="Default"
+								width="auto" />
+							<m:Button icon="sap-icon://create" id="s_create" text="{i18n&gt;crt}"
+								type="Emphasized" width="100px" />
+							<m:Button icon="sap-icon://message-information" id="s_info"
+								press="onPressNavToInfo" text="{i18n&gt;inf}" type="Default"
+								width="auto" />
+							<!-- <m:Button icon="sap-icon://cause" id="s_offline" text="{i18n&gt;off}" 
+								type="Default" width="auto"/> -->
+						</m:contentMiddle>
+					</m:Bar>
+				</m:footer>
+			</m:Page>
+		</m:pages>
+	</m:App>
+</mvc:View>

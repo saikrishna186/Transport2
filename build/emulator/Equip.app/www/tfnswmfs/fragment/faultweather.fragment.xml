@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<ResponsivePopover class="sapUiPopupWithPadding"
+		placement="Top" title="Select Weather" afterClose="onCloseWeather">
+		<content>
+			<List headerText="" selectionChange="onSelectWeather"
+				items="{ path: 'weatherModel>/listitems' }" backgroundDesign="Transparent"
+				growing="true" growingScrollToLoad="true" growingThreshold="10"
+				includeItemInSelection="true" showSeparators="All" showUnread="true"
+				rememberSelections="true" width="auto" mode="SingleSelectMaster">
+				<items>
+					<StandardListItem title="{weatherModel>Zzdesc}"
+						value="{weatherModel>Zzweather}" adaptTitleSize="true"
+						titleTextDirection="LTR" class="popList" />
+				</items>
+			</List>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

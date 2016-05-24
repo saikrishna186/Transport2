@@ -1,0 +1,68 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:m="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<m:ResponsivePopover class="sapUiPopupWithPadding"
+		placement="Auto" title="Select Damage" contentHeight="auto"
+		contentWidth="auto" PlacementType="auto" verticalScrolling="true"
+		afterClose="onCloseDamage">
+		<m:content>
+			<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L6 M6 S6"
+				hSpacing="1" vSpacing="0" width="auto">
+				<layout:content>
+					<m:Table backgroundDesign="Solid" busy="false" fixedLayout="true"
+						growing="false" growingScrollToLoad="true" growingThreshold="20"
+						headerDesign="Standard" height="95%" includeItemInSelection="true"
+						itemPress="onSelectDamageGroup"
+						items="{ path: 'damageGroupModel>/listitems', sorter: { path: 'ZzkurztextCg' } }"
+						mode="SingleSelectMaster" rememberSelections="false" showNoData="false"
+						width="auto">
+						<m:customData>
+							<core:CustomData key="sap-ui-fastnavgroup" value="true"
+								writeToDom="true" />
+						</m:customData>
+						<m:items>
+							<m:ColumnListItem counter="0" type="Active">
+								<m:cells>
+									<m:ObjectIdentifier badgeAttachments="false"
+										badgeNotes="false" badgePeople="false"
+										text="{damageGroupModel>ZzkurztextCg}" value="{damageGroupModel>Zzcodegruppe}" />
+								</m:cells>
+							</m:ColumnListItem>
+						</m:items>
+						<m:columns>
+							<m:Column>
+								<m:header>
+									<m:Label design="Bold" text="Damage Group" />
+								</m:header>
+							</m:Column>
+						</m:columns>
+					</m:Table>
+					<m:Table backgroundDesign="Solid" busy="false" fixedLayout="false"
+						growing="true" growingScrollToLoad="true" growingThreshold="20"
+						headerDesign="Standard" height="95%" includeItemInSelection="true"
+						itemPress="onSelectDamageCode"
+						items="{ path: 'damageCodeModel>/listitems', sorter: { path: 'ZzkurztextC' } }"
+						mode="SingleSelectMaster" noDataText="No symptoms Found"
+						rememberSelections="false" showNoData="false" width="auto">
+						<m:items>
+							<m:ColumnListItem counter="0" type="Active">
+								<m:cells>
+									<m:ObjectIdentifier badgeAttachments="false"
+										badgeNotes="false" badgePeople="false" text="{damageCodeModel>ZzkurztextC}"
+										value="{damageCodeModel>Zzcode}" />
+								</m:cells>
+							</m:ColumnListItem>
+						</m:items>
+						<m:columns>
+							<m:Column>
+								<m:header>
+									<m:Label design="Bold" text="Damage" />
+								</m:header>
+							</m:Column>
+						</m:columns>
+					</m:Table>
+				</layout:content>
+			</layout:Grid>
+		</m:content>
+	</m:ResponsivePopover>
+</core:FragmentDefinition>

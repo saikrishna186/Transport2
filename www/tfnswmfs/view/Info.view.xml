@@ -1,0 +1,52 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form"
+	xmlns:layout="sap.ui.layout" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	controllerName="tfnswequip.tfnswmfs.controller.Info" xmlns:wt="sap.ui.demo.wt.control">
+	<m:App id="App" title="{i18n&gt;appTitle}">
+		<m:pages>
+			<m:Page title="{i18n>i_info}" id="page" backgroundDesign="Standard">
+<!-- 				<m:customHeader>
+					<m:Bar>
+						<m:contentLeft>
+							<core:Icon src="sap-icon://home" size="1.5em" press="toTileHome"></core:Icon>
+						</m:contentLeft>
+					</m:Bar>
+				</m:customHeader> -->
+				<m:content>
+					<layout:Grid containerQuery="false" defaultIndent="L0 M0 S0"
+						defaultSpan="L12 M12 S12" labelSpanL="4" labelSpanM="4"
+						labelSpanS="12" hSpacing="2" id="Init_layout" position="Center"
+						vSpacing="2" width="auto">
+						<layout:content>
+							<layout:VerticalLayout>
+								<layout:content>
+									<m:ToolbarSpacer class="height15" width="10px" />
+									<m:Text text="" maxLines="0" id="line1" design="Bold" />
+									<m:ToolbarSpacer class="height15" width="10px" />
+									<m:Text text="" maxLines="0" id="line2" design="Bold" />
+								</layout:content>
+							</layout:VerticalLayout>
+						</layout:content>
+					</layout:Grid>
+				</m:content>
+				<m:footer>
+					<m:Bar id="__bar0">
+						<m:customData>
+						</m:customData>
+						<m:contentMiddle>
+							<m:Button icon="sap-icon://search" id="s_search"
+								press="onPressNavToSearch" text="{i18n&gt;search}" type="Default"
+								width="auto" />
+							<m:Button icon="sap-icon://create" id="s_create"
+								press="onPressNavToCreate" text="{i18n&gt;crt}" type="Default"
+								width="auto" />
+							<m:Button icon="sap-icon://message-information" id="s_info"
+								text="{i18n&gt;inf}" type="Emphasized" width="auto" />
+							<!-- <m:Button text="{i18n&gt;off}" width="100px" id="s_offline" activeIcon="" 
+								icon="sap-icon://cause"/> -->
+						</m:contentMiddle>
+					</m:Bar>
+				</m:footer>
+			</m:Page>
+		</m:pages>
+	</m:App>
+</mvc:View>

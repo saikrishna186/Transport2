@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<ResponsivePopover class="sapUiPopupWithPadding"
+		placement="Top" title="Select Position" afterClose="onClosePosition">
+		<content>
+			<List headerText="" selectionChange="onSelPosition"
+				items="{ path:'positionModel>/listitems' }" backgroundDesign="Transparent"
+				growing="true" growingScrollToLoad="true" growingThreshold="10"
+				includeItemInSelection="true" showSeparators="All" showUnread="true"
+				rememberSelections="false" width="auto" mode="SingleSelectMaster">
+				<items>
+					<StandardListItem title="{positionModel>Zzdesc}"
+						value="{positionModel>Zzcode}" adaptTitleSize="true"
+						titleTextDirection="LTR" class="popList" />
+				</items>
+			</List>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

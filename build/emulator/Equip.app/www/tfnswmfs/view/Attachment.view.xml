@@ -1,0 +1,22 @@
+<mvc:View controllerName="tfnswequip.tfnswmfs.controller.Attachment"
+	height="100%" xmlns:cust="tfnswequip.tfnswmfs.control" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+	<Page enableScrolling="false" class="sapUiContentPadding"
+		navButtonPress="onNavBack" showNavButton="true" title="{i18n>titleAttach}">
+		<subHeader>
+			<Toolbar>
+				<Title text="Fault ID: attachments found" level="H3"
+					id="attachmentsTitle" />
+			</Toolbar>
+		</subHeader>
+		<TileContainer editable="true" id="container"
+			tileDelete="handleTileDelete" tiles="{attachments>/files}" width="100%"
+			height="100%">
+			<cust:BackgroundTile press="onPressImage"
+				Filename="{attachments>Filename}" Qmnum="{attachments>Qmnum}"
+				backgroundImage="{attachments>imgSrc}" objectId="{attachments>SoObjNo}"
+				removable="{attachments>removable}" DocUrl="{attachments>src}"
+				imageType="{attachments>imageType}" />
+		</TileContainer>
+	</Page>
+</mvc:View>

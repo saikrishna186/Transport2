@@ -1,0 +1,107 @@
+<mvc:View controllerName="tfnsw.eam.cleaning.view.Attachments" xmlns:core="sap.ui.core" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<m:Page class="sapUiContentPadding" enableScrolling="false" id="sap_Responsive_Page_0" navButtonPress="onNavBack" showFooter="true"
+		showHeader="true" showNavButton="true" showSubHeader="true" title="Train Cleaning App" titleLevel="Auto">
+		<m:content>
+		<m:Panel id="oDocumentListPanel">
+				<m:headerToolbar>
+					<m:Toolbar design="Solid" enabled="true" height="46px" id="np-sap_m_Toolbar_3-1449708664189-0Q4" visible="true" width="100%">
+						<m:tooltip/>
+						<m:content>
+							<m:ToolbarSpacer id="np-sap_m_ToolbarSpacer-1449708664190-0Q5" visible="true" width="20px"/>
+							<m:Text id="id_attachmentTitle" maxLines="1" text="Attachments" textAlign="Begin" textDirection="Inherit" width="113px"
+								wrapping="true"/>
+							<m:ToolbarSpacer/>
+							<m:Button enabled="true" icon="sap-icon://add" iconDensityAware="false" iconFirst="false" id="id_AddAttachment" text=""
+								type="Transparent" width="auto" press="_onPressAdd"/>
+						</m:content>
+					</m:Toolbar>
+				</m:headerToolbar>
+				<m:content>
+					<m:List id="attachmentlist" mode="Delete" delete="handleDelete"
+						showUnread="true" itemPress="listPress">
+					</m:List>
+				</m:content>
+			</m:Panel>
+		<!-- <m:Panel id="oDocumentListPanel">
+			<m:List id="attachmentlist" mode="Delete" delete="handleDelete" enableBusyIndicator="true" headerText="Attachments" growing="true" itemPress="listPress">
+				<m:items>
+					<m:ColumnListItem id="Attachment1" type="Active">
+						<m:cells id="Attachment1cell">
+							<m:HBox alignItems="Stretch" direction="Row" displayInline="false" fitContainer="false" height="48px" id="np-sap_m_HBox-1449708664189-0PR"
+								renderType="Div" visible="true">
+								<m:items>
+										<core:Icon decorative="true" height="37px" id="np-sap_ui_core_Icon-1449708664189-0PS" size="40px" src="sap-icon://attachment-photo"
+											visible="true" width="50px"/>
+										<m:ObjectIdentifier id="np-sap_m_ObjectIdentifier-1449708664189-0PU" text="04-07-2015" title="Graffiti.png" titleActive="true"
+											visible="true"/>
+								</m:items>
+								<m:layoutData/>
+							</m:HBox>
+						</m:cells>
+					</m:ColumnListItem>
+					<m:ColumnListItem id="Attachment2" type="Active">
+						<m:cells>
+							<m:HBox alignItems="Stretch" direction="Row" displayInline="false" fitContainer="false" height="48px" id="np-sap_m_HBox-1449708664189-0PY"
+								renderType="Div" visible="true">
+								<m:items>
+										<core:Icon decorative="true" height="37px" id="np-sap_ui_core_Icon-1449708664189-0PZ" size="40px" src="sap-icon://pdf-attachment"
+											visible="true" width="50px"/>
+										<m:ObjectIdentifier id="np-sap_m_ObjectIdentifier-1449708664189-0Q1" text="05-04-2015" title="FaultNotification.pdf" titleActive="true"
+											visible="true"/>
+								</m:items>
+								<m:layoutData/>
+							</m:HBox>
+						</m:cells>
+					</m:ColumnListItem>
+					<m:ColumnListItem id="Attachment3" type="Active">
+						<m:cells>
+							<m:HBox alignItems="Stretch" direction="Row" displayInline="false" fitContainer="false" height="48px" id="np-sap_m_HBox-1449708682298-0RS"
+								renderType="Div" visible="true">
+								<m:items>
+										<core:Icon decorative="true" height="37px" id="np-sap_ui_core_Icon-1449708682298-0RT" size="40px" src="sap-icon://attachment-text-file"
+											visible="true" width="50px"/>
+										<m:ObjectIdentifier id="np-sap_m_ObjectIdentifier-1449708682298-0RV" text="04-07-2015" title="Cleaning.doc" titleActive="true"
+											visible="true"/>
+								</m:items>
+								<m:layoutData/>
+							</m:HBox>
+						</m:cells>
+					</m:ColumnListItem>
+				</m:items>
+				<m:infoToolbar/>
+				<m:headerToolbar>
+					<m:Toolbar design="Solid" enabled="true" height="46px" id="np-sap_m_Toolbar_3-1449708664189-0Q4" visible="true" width="100%">
+						<m:tooltip/>
+						<m:content>
+							<m:ToolbarSpacer id="np-sap_m_ToolbarSpacer-1449708664190-0Q5" visible="true" width="20px"/>
+							<m:Text id="id_attachmentTitle" maxLines="1" text="Attachments" textAlign="Begin" textDirection="Inherit" width="113px"
+								wrapping="true"/>
+							<m:ToolbarSpacer/>
+							<m:Button enabled="true" icon="sap-icon://add" iconDensityAware="false" iconFirst="false" id="id_AddAttachment" text=""
+								type="Transparent" width="auto" press="_onPressAdd"/>
+						</m:content>
+					</m:Toolbar>
+				</m:headerToolbar>
+				<m:columns>
+					<m:Column demandPopin="true" hAlign="Begin" id="np-sap_m_Column_Product-1449708664190-0Q9" mergeDuplicates="false"
+						mergeFunctionName="getText" minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit" width="auto">
+						<m:header/>
+						<m:footer/>
+					</m:Column>
+				</m:columns>
+			</m:List>
+			</m:Panel> -->
+		</m:content>
+		<!-- <m:footer>
+			<m:Toolbar design="Solid" enabled="true" height="35px" id="sap_m_Toolbar_1" visible="true" width="auto">
+				<m:tooltip/>
+				<m:content>
+					<m:ToolbarSpacer id="sap_m_ToolbarSpacer_2" visible="true" width=""/>
+				</m:content>
+			</m:Toolbar>
+		</m:footer> -->
+		<m:headerContent/>
+		<m:subHeader/>
+		<m:customHeader/>
+	</m:Page>
+</mvc:View>

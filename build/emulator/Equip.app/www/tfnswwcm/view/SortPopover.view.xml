@@ -1,0 +1,30 @@
+<mvc:View controllerName="tfnswequip.tfnswwcm.view.SortPopover"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<m:Popover bounce="false" contentHeight="225px" contentWidth="250px"
+		enableScrolling="true" horizontalScrolling="true" id="sap_m_Popover_0"
+		modal="false" offsetX="0" offsetY="0" placement="Right" showHeader="false"
+		title="Title" verticalScrolling="true" visible="true">
+		<m:beginButton />
+		<m:content>
+			<m:ObjectListItem id="np-sap_m_ObjectListItem-1453701223345-03O"
+				intro="" number="" numberState="Success" numberUnit="" selected="false"
+				showMarkers="false" title="Highest" type="Active" unread="false"></m:ObjectListItem>
+			<m:ObjectListItem id="np-sap_m_ObjectListItem-1453701396593-041"
+				intro="" number="" numberState="Success" numberUnit="" selected="false"
+				showMarkers="false" title="Lowest" type="Active" unread="false"></m:ObjectListItem>
+			<m:ObjectListItem id="np-sap_m_ObjectListItem-1453701445192-063"
+				intro="" number="" numberState="Success" numberUnit="" selected="false"
+				showMarkers="false" title="Newest" type="Active" unread="false"></m:ObjectListItem>
+			<m:ObjectListItem id="np-sap_m_ObjectListItem-1453701487402-06G"
+				intro="" number="" numberState="Success" numberUnit="" selected="false"
+				showMarkers="false" title="Oldest" type="Active" unread="false"></m:ObjectListItem>
+		</m:content>
+		<m:customHeader />
+		<m:endButton>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				id="sap_m_Button_1" text="Close" type="Default" width="auto" />
+		</m:endButton>
+		<m:footer />
+		<m:subHeader />
+	</m:Popover>
+</mvc:View>

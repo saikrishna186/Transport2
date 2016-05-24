@@ -1,0 +1,110 @@
+<mvc:View controllerName="tfnswequip.tfnswmfs.controller.ValueHelper"
+	xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<m:App id="App" title="value helper">
+		<m:pages>
+			<m:Page class="sapUiContentPadding" navButtonPress="onNavBack"
+				showNavButton="true" title="{i18n>appTitle}">
+				<m:content>
+					<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L12 M12 S12"
+						hSpacing="0" width="auto">
+						<layout:content>
+							<m:Panel headerText="{i18n>srcSetNo}" width="auto">
+								<m:content>
+									<layout:Grid defaultSpan="L12 M12 S12" width="auto">
+										<layout:content>
+											<layout:HorizontalLayout>
+												<layout:content>
+													<m:Input id="setNo" width="auto" />
+													<m:Button activeIcon="sap-icon://search" class="leftSpace"
+														icon="sap-icon://search" press="searchSetNo" text="{i18n>search}"
+														width="auto" />
+												</layout:content>
+											</layout:HorizontalLayout>
+										</layout:content>
+									</layout:Grid>
+								</m:content>
+							</m:Panel>
+							<m:Panel headerText="{i18n>srcResults}" 
+								id="setResultsPanel" width="100%">
+								<m:content>
+									<m:Table backgroundDesign="Solid" fixedLayout="true"
+										growing="true" growingScrollToLoad="true" growingThreshold="20"
+										id="setResultsTable" includeItemInSelection="false" inset="false"
+										itemPress="onSelectionsetNo"
+										items="{ path: 'setIdModel>/listitems', sorter: { path: 'ID' }}"
+										mode="SingleSelectMaster" modeAnimationOn="true"
+										noDataText="No Set numbers Found" rememberSelections="false"
+										showNoData="true" showOverlay="false" showSeparators="All"
+										showUnread="false" swipeDirection="Both" visible="true" width="90%">
+										<m:swipeContent />
+										<m:items>
+											<m:ColumnListItem counter="0" id="setResultsList"
+												press="onSelectionsetNo" type="Active">
+												<m:cells>
+													<m:ObjectIdentifier id="resultSetNo"
+														maxLines="0" text="{setIdModel&gt;SetId}" />
+													<m:Text maxLines="0" text="{setIdModel&gt;SetDesc}" />
+												</m:cells>
+											</m:ColumnListItem>
+										</m:items>
+										<m:columns>
+											<m:Column>
+												<m:header>
+													<m:Label design="Bold" text="{i18n>setNo}" />
+												</m:header>
+											</m:Column>
+											<m:Column>
+												<m:header>
+													<m:Label design="Bold" text="{i18n>desc}" />
+												</m:header>
+											</m:Column>
+										</m:columns>
+									</m:Table>
+								</m:content>
+							</m:Panel>
+							<m:Panel headerText="{i18n>srcResults}" 
+								id="carResultsPanel" width="100%">
+								<m:content>
+									<m:Table backgroundDesign="Solid" fixedLayout="true"
+										growing="true" growingScrollToLoad="true" growingThreshold="20"
+										id="carResultsTable" includeItemInSelection="false" inset="false"
+										itemPress="onSelectionscarNo"
+										items="{ path: 'carIdModel>/listitems', sorter: { path: 'CarId' } }"
+										mode="SingleSelectMaster" modeAnimationOn="true"
+										noDataText="No Set numbers Found" rememberSelections="false"
+										showNoData="true" showOverlay="false" showSeparators="All"
+										showUnread="false" swipeDirection="Both" visible="true" width="auto">
+										<m:swipeContent />
+										<m:items>
+											<m:ColumnListItem counter="0" id="carResultsList"
+												press="onSelectionscarNo" type="Active">
+												<m:cells>
+													<m:ObjectIdentifier id="resultCarNo"
+														maxLines="0" text="{carIdModel&gt;CarId}" />
+													<m:Text maxLines="0" text="{carIdModel&gt;CarDesc}" />
+												</m:cells>
+											</m:ColumnListItem>
+										</m:items>
+										<m:columns>
+											<m:Column>
+												<m:header>
+													<m:Label design="Bold" text="{i18n>carNo}" />
+												</m:header>
+											</m:Column>
+											<m:Column>
+												<m:header>
+													<m:Label design="Bold" text="{i18n>desc}" />
+												</m:header>
+											</m:Column>
+										</m:columns>
+									</m:Table>
+								</m:content>
+							</m:Panel>
+						</layout:content>
+					</layout:Grid>
+				</m:content>
+			</m:Page>
+		</m:pages>
+	</m:App>
+</mvc:View>

@@ -1,0 +1,68 @@
+<mvc:View controllerName="tfnsw.erp.wcm.view.EditDefectDialog"
+	xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:m="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<m:Dialog horizontalScrolling="false" id="sap_m_Dialog_0"
+		showHeader="true" state="None" stretch="false" title="Edit Defect"
+		type="Standard" verticalScrolling="false">
+		<m:beginButton>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				press="_onPressNpsapmButton14533498681191FM" text="Cancel" width="auto" />
+		</m:beginButton>
+		<m:buttons />
+		<m:content>
+			<form:SimpleForm breakpointL="1024" breakpointM="600"
+				columnsL="2" columnsM="1" editable="false" emptySpanL="0"
+				emptySpanM="0" emptySpanS="0"
+				id="np-sap_ui_layout_form_SimpleForm-1453349811128-1EM"
+				labelMinWidth="192" labelSpanL="4" labelSpanM="2" labelSpanS="12"
+				layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="-1"
+				visible="true">
+				<form:title />
+				<form:content>
+					<m:Label design="Standard" id="np-sap_m_Label-1453349811128-1EP"
+						required="false" text="Defect No." textAlign="Begin"
+						textDirection="Inherit" width="auto" />
+					<m:Text id="np-sap_m_Text-1453349811128-1EQ" maxLines="1"
+						text="{/count}" textAlign="Begin" textDirection="Inherit" width="100%"
+						wrapping="true" />
+					<m:Label design="Standard" id="np-sap_m_Label-1453349811128-1ER"
+						required="false" text="Defect Type" textAlign="Begin"
+						textDirection="Inherit" width="auto" />
+					<m:ComboBox editable="true" enabled="true"
+						id="np-sap_m_ComboBox-1453349811128-1ES" maxWidth="100%"
+						showValueStateMessage="true" valueState="None" visible="true"
+						width="192px" selectedKey="{/defectTypeKey}" value="{/defectType}"
+						items="{path:'/DefectTypeData',templateShareable : true}">
+						<m:items>
+							<core:Item enabled="true" text="{Description}" key="{Value}"
+								textDirection="Inherit" />
+						</m:items>
+					</m:ComboBox>
+					<m:Label design="Standard" id="np-sap_m_Label-1453349811128-1EW"
+						required="false" text="Defect Class" textAlign="Begin"
+						textDirection="Inherit" width="auto" />
+					<m:ComboBox editable="true" enabled="true"
+						id="np-sap_m_ComboBox-1453349811128-1EX" maxWidth="100%"
+						showValueStateMessage="true" valueState="None" visible="true"
+						width="192px" selectedKey="{/defectClass}" value="{/defectClassText}"
+						items="{path:'/DefectClassData',templateShareable : true}">
+						<m:items>
+							<core:Item enabled="true" text="{Description}" key="{Value}"
+								textDirection="Inherit" />
+						</m:items>
+					</m:ComboBox>
+					<m:Text id="np-sap_m_Text-14533-1EQ" maxLines="1" text="{/WheelNo}"
+						textAlign="Begin" textDirection="Inherit" width="100%" wrapping="true"
+						visible="false" />
+				</form:content>
+			</form:SimpleForm>
+		</m:content>
+		<m:customHeader />
+		<m:endButton>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				press="_onPressNpsapmButton14533498648971FK" text="Save Changes"
+				width="auto" />
+		</m:endButton>
+		<m:subHeader />
+	</m:Dialog>
+</mvc:View>

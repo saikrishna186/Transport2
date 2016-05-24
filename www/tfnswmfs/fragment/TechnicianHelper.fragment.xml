@@ -1,0 +1,73 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout">
+	<Dialog horizontalScrolling="true" showHeader="true" state="None"
+		stretch="false" title="Select Maintainer" type="Standard"
+		verticalScrolling="true" contentWidth="75%" afterOpen="afterOpenTechnicianDialog"
+		beforeOpen="beforeOpen" contentHeight="75%">
+		<beginButton />
+		<buttons>
+			<Button enabled="true" text="Cancel" width="auto"
+				press="onCancelTechDialog" type="Emphasized" />
+		</buttons>
+		<content>
+			<Panel headerText="Select Depot and Work Centre" width="100%">
+				<content>
+					<layout:Grid defaultSpan="L6 M6 S12">
+						<layout:content>
+							<VBox xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form"
+								xmlns:layout="sap.ui.layout" justifyContent="Center" width="100%">
+								<items>
+									<Label design="Bold" text="Depot:" textAlign="Left"
+										width="100%" />
+									<Input fieldwidth="100%" id="depot" class="respOver"
+										text="" value="" width="100%" />
+								</items>
+							</VBox>
+							<VBox xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form"
+								xmlns:layout="sap.ui.layout" justifyContent="Center" width="100%">
+								<items>
+									<Label design="Bold" text="Work Centre" textAlign="Left"
+										width="100%" />
+									<Input fieldwidth="100%" id="workCentre" class="respOver"
+										text="" value="" width="100%" />
+								</items>
+							</VBox>
+						</layout:content>
+					</layout:Grid>
+				</content>
+			</Panel>
+			<Panel headerText="Select Maintainer" height="auto" width="100%">
+				<content>
+					<Table backgroundDesign="Solid" fixedLayout="true" growing="true"
+						growingScrollToLoad="true" growingThreshold="20" id="TechniciansTable"
+						includeItemInSelection="false" inset="false" itemPress="onSelectTechnician"
+						items="{ path:'techniciansModel>/listitems' }" mode="SingleSelectMaster"
+						modeAnimationOn="true" noDataText="No Maintainer Found"
+						rememberSelections="false" showNoData="true" showOverlay="false"
+						showSeparators="All" showUnread="false" swipeDirection="Both"
+						visible="true" width="99%">
+						<items>
+							<ColumnListItem counter="0" press="onSelectTechnician"
+								type="Active">
+								<cells>
+									<Text maxLines="0" text="{techniciansModel>Stext}"
+										textAlign="Left" textDirection="LTR" />
+								</cells>
+							</ColumnListItem>
+						</items>
+						<columns>
+							<Column width="100%" hAlign="Center">
+								<header>
+									<Label design="Bold" textAlign="Center" text="Maintainer" />
+								</header>
+							</Column>
+						</columns>
+					</Table>
+				</content>
+			</Panel>
+		</content>
+		<customHeader />
+		<endButton />
+		<subHeader />
+	</Dialog>
+</core:FragmentDefinition>

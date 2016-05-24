@@ -1,0 +1,12 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="tfnswequip.tfnswwcm.view.App" height="100%">
+	<SplitApp id="idSplitApp" displayBlock="true"
+		afterDetailNavigate="handleNavigation" mode="HideMode">
+		<masterPages>
+			<!-- filled dynamically by routing -->
+		</masterPages>
+		<detailPages>
+			<!-- filled dynamically by routing -->
+		</detailPages>
+	</SplitApp>
+</core:View>

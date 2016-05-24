@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <script src="datajs-1.1.2.min.js"></script>
+        <script>
+            window.onerror = onError;
+            var appCID = window.localStorage.getItem("appcid");
+            var connectionData = {
+                DeviceType : "Windows" // Windows, iOS, Android etc
+            };
+
+            function onError(msg, url, line) {
+                var idx = url.lastIndexOf("/");
+                var file = "unknown";
+                if (idx > -1) {
+                    file = url.substring(idx + 1);
+                }
+                alert("An error occurred in " + file + " (at line # " + line + "): " + msg);
+                return false; //suppressErrorAlert;
+            }
+
+            function getSMPURL() {
+                return "https://" + document.getElementById("host").value + ":8082";
+            }
+
+            function register() {
+                if (appCID) {
+                    alert("Already Registered");
+                    return;
+                }
+                sUrl = getSMPURL() + "/odata/applications/latest/x509client/Connections";
+                var oHeaders = {};
+                var request = {
+                    headers : oHeaders,
+                    requestUri : sUrl,
+                    data: connectionData,
+                    method : "POST"
+                };
+                OData.request(request, onSuccessForRegister, onRegError);
+            }
+
+            function unRegister() {
+                if (!appCID) {
+                    alert("Not Registered");
+                    return;
+                }
+                sUrl = getSMPURL()   + "/odata/applications/latest/x509client/Connections('" + appCID + "')";
+                var oHeaders = {};
+
+                var request = {
+                    headers : oHeaders,
+                    requestUri : sUrl,
+                    method : "DELETE"
+                };
+                appCID = "";
+                window.localStorage.setItem("appcid", "");
+                OData.request(request, onSuccessForUnRegister, onRegError);
+            }
+
+            function onSuccessForRegister(result) {
+                appCID = result.ApplicationConnectionId;
+                window.localStorage.setItem("appcid", appCID);
+                alert("Successfully Registered");
+            }
+
+            function onSuccessForUnRegister(result) {
+                alert("Successfully Unregistered");
+            }
+
+            function onRegError(error) {
+                if ((error.response != null) && (error.response.statusCode != null) && (error.response.statusCode == 200)) {
+                    //successful unregister appears to call the error callback
+                    alert("Successfully Unregistered");
+                    return;
+                }
+                alert("An error occurred:  " + JSON.stringify(error));
+            }
+            
+        </script>
+        
+    </head>
+    <body>
+        <h1>Register Sample 5 (Mutual Authentication)</h1>
+        SMP 3.0 Host: <input type="text" id="host" value="xdcwapps0001.transport.nsw.gov.au"><br>
+        <button id="register" onclick="register()">Register</button>
+        <button id="unregister" onclick="unRegister()">Unregister</button>
+    </body>
+</html>
+

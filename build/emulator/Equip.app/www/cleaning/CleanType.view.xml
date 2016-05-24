@@ -1,0 +1,89 @@
+<mvc:View controllerName="tfnsw.eam.cleaning.view.CleanType" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc">
+	<m:Page horizontalScrolling="false" id="cleanType" showHeader="true" state="None" stretch="false"
+		title="Train Cleaning App" type="Standard" verticalScrolling="true" showFooter = "true" showNavButton="true" navButtonPress="onNavBack">
+<m:content width = "95%">
+		<m:Toolbar design="Info" enabled="true" height="46px" id="np-sap_m_Toolbar_3-1449631608707-1GK" visible="true" width="100%">
+				<m:tooltip/>
+				<m:content>
+					<m:ToolbarSpacer id="np-sap_m_ToolbarSpacer-1449631608707-1GL" visible="true" width=""/>
+					<m:Text id="np-sap_m_Text-1449631608707-1GM" maxLines="1" text="Select Clean Type " textAlign="Left" textDirection="LTR" width="auto"
+						wrapping="true"/>
+					<m:ToolbarSpacer id="np-sap_m_ToolbarSpacer-1449631608707-1GN" visible="true" width=""/>
+				</m:content>
+			</m:Toolbar>
+			<m:Table backgroundDesign="Translucent" fixedLayout="true" growing="false" growingScrollToLoad="false" growingThreshold="20"
+				id="cleanTypeTable" includeItemInSelection="false" inset="false" mode="None" modeAnimationOn="true"
+				noDataText="No data" rememberSelections="true" showNoData="true" showOverlay="false" showSeparators="All" showUnread="false"
+				swipeDirection="Both" visible="true" width="100%" itemPress="onAccept" items="{path:'/cleanTypeValues'}">
+				<m:swipeContent/>
+				<m:items>
+				
+											<m:ColumnListItem type="Active">
+												<m:cells>
+													<m:Text text="{Zzcleantype}" />
+													<m:Text text="{ZzcleanDesc}" />
+												</m:cells>
+											</m:ColumnListItem>
+										
+					<!-- <m:ColumnListItem id="np-sap_m_ColumnListItem-1450062768712-0WB" type="Active">
+						<m:cells>
+							<m:ObjectIdentifier id="np-sap_m_ObjectIdentifier-1450062768712-0WC" text="Level A Clean (Daily Clean)" title="" titleActive="false"
+								visible="true"/>
+							<m:Text id="np-sap_m_Text-1450062768712-0WD" maxLines="1" text="Supplier Name" textAlign="Begin" textDirection="Inherit" width="auto"
+								wrapping="true"/>
+							<m:ObjectNumber id="np-sap_m_ObjectNumber-1450062768712-0WE" number="150.00" state="None" unit="USD"/>
+						</m:cells>
+					</m:ColumnListItem>
+					<m:ColumnListItem id="np-sap_m_ColumnListItem-1450062768712-0WF" type="Active">
+						<m:cells>
+							<m:ObjectIdentifier id="np-sap_m_ObjectIdentifier-1450062768712-0WG" text="Level B Clean" title="" titleActive="false" visible="true"/>
+							<m:Text id="np-sap_m_Text-1450062768712-0WH" maxLines="1" text="Supplier Name" textAlign="Begin" textDirection="Inherit" width="auto"
+								wrapping="true"/>
+							<m:ObjectNumber id="np-sap_m_ObjectNumber-1450062768712-0WI" number="150.00" state="None" unit="USD"/>
+						</m:cells>
+					</m:ColumnListItem>
+					<m:ColumnListItem id="np-sap_m_ColumnListItem-1450062768712-0WJ" type="Active">
+						<m:cells>
+							<m:ObjectIdentifier id="np-sap_m_ObjectIdentifier-1450062768712-0WK" text="Level C Clean" title="" titleActive="false" visible="true"/>
+							<m:Text id="np-sap_m_Text-1450062768712-0WL" maxLines="1" text="Supplier Name" textAlign="Begin" textDirection="Inherit" width="auto"
+								wrapping="true"/>
+							<m:ObjectNumber id="np-sap_m_ObjectNumber-1450062768712-0WM" number="150.00" state="None" unit="USD"/>
+						</m:cells>
+					</m:ColumnListItem> -->
+				</m:items>
+				<m:infoToolbar/>
+				<m:headerToolbar/>
+				<m:columns>
+					<m:Column demandPopin="true" hAlign="Begin" id="np-sap_m_Column_Product-1450062768712-0WR" mergeDuplicates="false"
+						mergeFunctionName="getText" minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit" width="50%">
+						<m:header>
+							<m:Text id="np-sap_m_Text-1450062768713-0WS" maxLines="1" text="Clean Type" textAlign="Begin" textDirection="Inherit" width="auto"
+								wrapping="true"/>
+						</m:header>
+						</m:Column>
+						<m:Column demandPopin="true" hAlign="Begin" id="descCleanType" mergeDuplicates="false"
+						mergeFunctionName="getText" minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit" width="50%">
+						<m:header>
+							<m:Text maxLines="1" text="Description" textAlign="Begin" textDirection="Inherit" width="auto"
+								wrapping="true"/>
+						</m:header>
+						</m:Column>
+				</m:columns>
+			</m:Table>
+		</m:content>
+		<!-- <m:footer>
+		<m:Toolbar design="Solid" enabled="true" height="35px" id="sap_m_Toolbar_1" visible="true" width="auto">
+				<m:tooltip/>
+				<m:content>
+					<m:ToolbarSpacer id="sap_m_ToolbarSpacer_2" visible="true" width=""/>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false" id="np-sap_m_Button-1450063019443-14P"
+				press="onAccept" text="OK" type="Emphasized" width="auto"/>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false" id="np-sap_m_Button-1450063032745-14R" text="Cancel" type="Emphasized"
+				width="auto"/>
+				</m:content>
+			</m:Toolbar>
+		</m:footer> -->
+		<m:customHeader/>
+		<m:subHeader/>
+	</m:Page>
+</mvc:View>

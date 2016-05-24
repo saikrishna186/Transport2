@@ -1,0 +1,44 @@
+<mvc:View controllerName="tfnswequip.tfnswwcm.view.MasterWOList"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:sap.ui.core="sap.ui.core">
+	<m:Page enableScrolling="true" showFooter="true" showHeader="true"
+		showNavButton="false" showSubHeader="false" title="Work Orders"
+		titleLevel="Auto">
+		<m:content>
+			<m:PullToRefresh refresh="onRefresh" />
+			<m:List backgroundDesign="Solid" footerText="" growing="false"
+				growingScrollToLoad="false" headerText="Header" id="sap_m_List_1"
+				mode="SingleSelectMaster" width="100%" includeItemInSelection="true"
+				items="{path:'/masterValues'}" itemPress="_onPressSapmObjectListItem">
+				<m:items>
+					<m:ObjectListItem number="{Carid}" numberState="None"
+						numberUnit="{Setid}" title="{WheelType}" type="Active">
+						<m:attributes>
+							<m:ObjectAttribute text="{Workoder}" />
+							<m:ObjectAttribute text="{PrioriDesc}" />
+						</m:attributes>
+						<m:firstStatus />
+						<m:secondStatus />
+					</m:ObjectListItem>
+				</m:items>
+				<m:headerToolbar>
+					<m:Toolbar design="Solid" enabled="true" visible="true"
+						width="">
+						<m:content>
+							<m:SearchField showSearchButton="true" visible="true"
+								search="handleSearch" />
+						</m:content>
+					</m:Toolbar>
+				</m:headerToolbar>
+			</m:List>
+		</m:content>
+		<m:footer>
+			<m:Bar design="Footer" enableFlexBox="false" translucent="false">
+				<m:contentLeft />
+				<m:contentMiddle />
+				<m:contentRight>
+
+				</m:contentRight>
+			</m:Bar>
+		</m:footer>
+	</m:Page>
+</mvc:View>

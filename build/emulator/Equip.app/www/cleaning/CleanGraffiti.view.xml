@@ -1,0 +1,470 @@
+<mvc:View controllerName="tfnsw.eam.cleaning.view.CleanGraffiti" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:m="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+  <!-- Header  -->	
+	<m:Page class="sapUiContentPadding" enableScrolling="true" id="sap_Responsive_Page_0" showFooter="true" showHeader="true" showNavButton="false" showSubHeader="true"
+		title="Train Cleaning App" titleLevel="Auto" >
+<!--        <m:customHeader>-->
+<!--            <m:Bar>-->
+<!--                <m:contentLeft>-->
+<!--                    <core:Icon src="sap-icon://home" size="1.5em" press="toTileHome"></core:Icon>-->
+<!--                </m:contentLeft>-->
+<!--            </m:Bar>-->
+<!--        </m:customHeader>-->
+		<m:content>
+			<m:Toolbar design="Solid" enabled="true" height="60px" id="np-sap_m_Toolbar_3-1449636735600-3LR" visible="true" width="auto">
+				<m:tooltip/>
+				<m:content>
+					<m:ToolbarSpacer/>
+					<m:Label class="Title" id="np-sap_m_Label-1449636748619-3M2" required="true" text="Cleaning Location:" textAlign="Begin"
+						textDirection="Inherit" width="auto"/>
+					<m:Input fieldWidth="50%" filterSuggests="true" id="CleaningLocationInput"
+						showSuggestion="true"  showValueHelp="true" startSuggestion="1" type="Text" value="{/cleanLoc}" 
+						change="handleLocChange"  valueState="None"  valueStateText=""
+						valueHelpOnly="false" valueHelpRequest="_onValueHelpRequestNpsapmInput14496367681033M7" valueLiveUpdate="false" width="200px">
+					</m:Input>
+					<m:ToolbarSpacer/>
+					<m:Label class="Title" id="np-sap_m_Label-1449636785560-3MA" required="true" text="Set Number:" textAlign="Begin" textDirection="Inherit"
+						width="auto"/>
+					<m:Input fieldWidth="50%" filterSuggests="true" id="setInput" maxLength="0"
+						showSuggestion="true" showValueHelp="true" startSuggestion="1" type="Text" value="{/set}"
+						change="handleSetChange"  valueState="None" valueHelpOnly="false" valueHelpRequest="_onValueHelpRequestNpsapmInput14496367957873MD" valueLiveUpdate="false" width="200px">
+					</m:Input>
+					<m:ToolbarSpacer/>
+				</m:content>
+			</m:Toolbar>
+			<m:IconTabBar applyContentPadding="true" backgroundDesign="Solid" expandable="true" expanded="true"
+				id="tabBar" selectedKey="Ok" stretchContentHeight="false" upperCase="true" visible="true" select = "confirmSave">
+				<m:content>
+					<m:Text id="np-sap_m_Text-1449531066174-080" maxLines="1" text="Tab Bar Content goes here ..." textAlign="Begin" textDirection="Inherit"
+						width="300px" wrapping="true"/>
+				</m:content>
+				<m:items>
+					<m:IconTabFilter count="" design="Vertical" enabled="false" icon="sap-icon://e-care" iconColor="Neutral" iconDensityAware="false"
+						id="cleanTab" showAll="false" text="Clean" textDirection="Inherit" visible="true">
+						<m:content>
+						<form:SimpleForm breakpointL="1024" breakpointM="800" columnsL="2" columnsM="1" editable="false" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+								id="cleanForm" labelMinWidth="192" labelSpanL="4" labelSpanM="2" labelSpanS="12"
+								layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="20" visible="true" class="cleanFormlabel">
+								<form:title/>
+								<form:content>
+									<m:Label class="Title" id="np-sap_m_Label-1449536225283-0D1" required="true" text="Car Numbers"/>
+									<m:HBox id = "carBox" alignItems="Stretch" direction="Row" displayInline="false" fitContainer="true" height="48px" 
+									justifyContent="Start" renderType="Div" visible="true">
+									</m:HBox>
+									<!-- <m:Text id="np-sap_m_Text-1449536225283-0D2" maxLines="1" text="" textAlign="Begin" textDirection="Inherit" width="300px"
+										wrapping="true"/> -->
+									<m:Label class="Title" id="np-sap_m_Label-1449536225283-0D3" required="true" text="Clean Type"/>
+									<m:Input width="300px" filterSuggests="true" id="cleanTypeInput" maxLength="0"
+										showSuggestion="false" showTableSuggestionValueHelp="true" showValueHelp="true" startSuggestion="1" type="Text" valueHelpOnly="true"
+											valueHelpRequest="CleanTypevaluehelp" valueLiveUpdate="false"><!-- tokens = "{path:'/clean/selectedTokens'}">
+											<tokens>
+											<token key="{/cleanId}" text = "{/description}"/></tokens>  --></m:Input>
+									<m:Label class="Title" id="np-sap_m_Label-1449536225283-0D5" required="true" text="Number of Cleaners"/>
+									<m:HBox alignItems="Stretch" direction="Row" displayInline="false" fitContainer="true" height="48px" id="np-sap_m_HBox-1449553258257-0ID"
+										justifyContent="Start" renderType="Div" visible="true">
+										<m:items>
+											<m:HBox alignItems="Stretch" direction="Row" displayInline="false" fitContainer="false" height="48px" id="np-sap_m_HBox-1449553345813-0JE"
+												justifyContent="Start" renderType="Div" visible="true">
+												<m:items>
+													<m:Button enabled="true" icon="sap-icon://slim-arrow-down" iconDensityAware="false" iconFirst="true"
+														id="np-sap_m_Button-numberofcleanersdown" press="_onPressSapmbnumberofcleanersdown" text="" type="Transparent" width="50px"/>
+													<m:Input fieldWidth="40px" filterSuggests="true" id="numberofcleanersinput" type="Text" width="45px" value="{/clean/noOfCleaner}"></m:Input>
+													<m:Button enabled="true" icon="sap-icon://slim-arrow-up" iconDensityAware="false" iconFirst="true" id="np-sap_m_Button-numberofcleanersup"
+														press="_onPressSapmbnumberofcleanersup" text="" type="Transparent" width="50px"/>
+												</m:items>
+												<m:layoutData/>
+											</m:HBox>
+										</m:items>
+										<m:layoutData/>
+									</m:HBox>
+									<m:Label class="Title" id="np-sap_m_Label-1449536225284-0D8" required="true" text="Cleaned by"/>
+									<m:Select id= "cleanedByInput" width="300px" change = "cleanedByChange" valueState="None"
+                    forceSelection="false"
+                    items="{
+						path: '/cleanedByValues',
+						sorter: { path: 'Zzcleanedby' }
+					}">
+					<core:Item key="{Zzcleanedby}" text="{Zzcleanedby}" />
+				</m:Select>
+									<!-- <m:Input fieldWidth="50%" filterSuggests="true" id="cleanedByInput" maxLength="0"
+										showSuggestion="false" showTableSuggestionValueHelp="true" showValueHelp="true" startSuggestion="1" type="Text" valueHelpOnly="true"
+									   valueHelpRequest="Cleanedbyvaluehelp" valueLiveUpdate="false" width="auto" value = "{/clean/cleanedBy}"></m:Input> -->
+									<m:Label class="Title" id="np-sap_m_Label-1449536225284-0DA" required="true" text="Date and Time"/>
+									<m:DateTimeInput enabled="true" id="id_DateTimeClean" placeholder="Enter a date or date and time..." type="DateTime"
+										visible="true" width="300px"/>
+									<m:Label class="Title" id="np-sap_m_Label-1449536225284-0DC" required="false" text="Comments"/>
+									<m:TextArea cols="20" width = "600px" id="np-sap_m_TextArea-1449536225284-0DD" maxLength="40" rows="2" wrapping="Soft" value = "{/clean/comments}"/>
+								</form:content>
+							</form:SimpleForm>
+						</m:content>
+					</m:IconTabFilter>
+					<m:IconTabSeparator icon="" iconDensityAware="false" id="np-sap_m_IconTabSeparator-1449531066176-08P"/>
+					<m:IconTabFilter count="" design="Vertical" enabled="false" icon="sap-icon://signature" iconColor="Neutral" iconDensityAware="false"
+						id="graffitiTab" showAll="false" text="Graffiti" textDirection="Inherit" visible="true" >
+						<m:content>
+						<!--// Car Numbers and Graffiti Identification Date //-->
+								<form:SimpleForm breakpointL="1024" breakpointM="1000" columnsL="2" columnsM="1" editable="true" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+								id="CarsNumGraffifiIdentForm" labelMinWidth="192" labelSpanL="4" labelSpanM="2" labelSpanS="12"
+								layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="20" visible="true">
+								<form:title/>
+								<form:content>
+									<m:Label class="Title" id="np-sap_m_Label-1449536229363-0DV" required="true" text="Car Numbers"/>
+									<m:HBox id = "carBoxGraffiti" alignItems="Stretch" direction="Row" displayInline="false" fitContainer="true" height="48px" 
+									justifyContent="Start" renderType="Div" visible="true">
+									</m:HBox>
+									<!-- <m:Text id="np-sap_m_Text-1449536229363-0DW" maxLines="1" text="Text 1" textAlign="Begin" textDirection="Inherit" width="300px"
+										wrapping="true"/> -->
+									<m:Label class="Title" id="np-sap_m_Label-1449536229363-0DX" required="true" text="Graffiti Identification Date" />
+									<m:DateTimeInput enabled="true" id="id_GraffitiDate" placeholder="Nov 19, 2015" type="DateTime" visible="true"
+										width="300px"/>
+								</form:content>
+							</form:SimpleForm>
+							<!--// Table//-->
+							<m:Table backgroundDesign="Solid" id="PositionGrafTable" rememberSelections="true"
+								showNoData="true" showOverlay="false" showSeparators="Inner" width="auto">
+								<m:items>
+									<m:ColumnListItem id="PositionInternal">
+										<m:cells>
+											<m:ObjectIdentifier id="np-sap_m_ObjectIdentifier-1449536398100-0EY" text="" title="Internal" titleActive="false" visible="true"/>
+											<m:HBox alignItems="Stretch" direction="Row" displayInline="false" fitContainer="false" height="48px" id="np-sap_m_HBox-1449549328134-0BG"
+												justifyContent="Start" renderType="Div" visible="true">
+												<m:items>
+													<m:Button enabled="true" icon="sap-icon://slim-arrow-down" iconDensityAware="false" iconFirst="true" id="np-sap_m_Button-1449549599386-0BY"
+														press="_onPressInternalTotaldown" type="Transparent" width="50px"/>
+													<m:Input
+														fieldWidth="40px" filterSuggests="true"
+														id="id_InternalTotal" maxLength="0" showSuggestion="false"
+														showTableSuggestionValueHelp="true" showValueHelp="false"
+														startSuggestion="1" type="Text" value="0"
+														valueHelpOnly="false" valueLiveUpdate="false" width="45px"
+														change="_onChangeInternalTotal">
+													</m:Input>
+													<m:Button enabled="true" icon="sap-icon://slim-arrow-up" iconDensityAware="false" iconFirst="true" id="np-sap_m_Button-1449549617828-0C2"
+														 press="_onPressInternalTotalup" type="Transparent" width="50px"/>
+												</m:items>
+												<m:layoutData/>
+											</m:HBox>
+											<m:HBox alignItems="Stretch" direction="Row" displayInline="false" fitContainer="false" height="48px" id="np-sap_m_HBox-1449549772916-0C8"
+												justifyContent="Start" renderType="Div" visible="true">
+												<m:items>
+													<m:Button enabled="true" icon="sap-icon://slim-arrow-down" iconDensityAware="false" iconFirst="true" id="np-sap_m_Button-1449549772916-0C9"
+													press="_onPressIntGrafCleaneddown" type="Transparent" width="50px"/>
+													<m:Input
+														fieldWidth="40px" filterSuggests="true"
+														id="id_InternalCleaned" maxLength="1"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														showValueHelp="false" startSuggestion="1" type="Text"
+														value="0" valueHelpOnly="false" valueLiveUpdate="false"
+														width="45px" change="_onChangeInternalCleaned">
+													</m:Input>
+													<m:Button enabled="true" icon="sap-icon://slim-arrow-up" iconDensityAware="false" iconFirst="true" id="np-sap_m_Button-1449549772916-0CB"
+														press="_onPressIntGrafCleanedup" type="Transparent" width="50px"/>
+												</m:items>
+												<m:layoutData/>
+											</m:HBox>
+											<m:Text id="id_InternalRemaining" maxLines="1" text="0" textAlign="Right" textDirection="RTL" width="58.99305725097656px"
+												wrapping="true"/>
+											<m:Button enabled="true" iconDensityAware="false" iconFirst="false" id="np-sap_m_Button-1449547119226-06F" text="Button" type="Default"
+												width="auto"/>
+										</m:cells>
+									</m:ColumnListItem>
+									<m:ColumnListItem id="PositionExternalAbove">
+										<m:cells>
+											<m:ObjectIdentifier id="np-sap_m_ObjectIdentifier-1449536398100-0F2" text="" title="External (Above Gutter)" titleActive="false"
+												visible="true"/>
+											<m:HBox alignItems="Stretch" direction="Row" displayInline="false" fitContainer="false" height="48px" id="np-sap_m_HBox-1449550366506-0CN"
+												justifyContent="Start" renderType="Div" visible="true">
+												<m:items>
+													<m:Button enabled="true" icon="sap-icon://slim-arrow-down" iconDensityAware="false" iconFirst="true" id="np-sap_m_Button-1449550366506-0CO"
+														press="_onPressExtAbvTotaldown" type="Transparent" width="50px"/>
+													<m:Input
+														fieldWidth="40px" filterSuggests="true"
+														id="id_ExtAboveTotal" maxLength="0" showSuggestion="false"
+														showTableSuggestionValueHelp="true" showValueHelp="false"
+														startSuggestion="1" type="Text" value="0"
+														valueHelpOnly="false" valueLiveUpdate="false" width="45px"
+														change="_onChangeExternalAboveTotal">
+													</m:Input>
+													<m:Button enabled="true" icon="sap-icon://slim-arrow-up" iconDensityAware="false" iconFirst="true" id="np-sap_m_Button-1449550366506-0CQ"
+															press="_onPressExtAbvTotalup" type="Transparent" width="50px"/>
+												</m:items>
+												<m:layoutData/>
+											</m:HBox>
+											<m:HBox alignItems="Stretch" direction="Row" displayInline="false" fitContainer="false" height="48px" id="np-sap_m_HBox-1449550438004-0CX"
+												justifyContent="Start" renderType="Div" visible="true">
+												<m:items>
+													<m:Button enabled="true" icon="sap-icon://slim-arrow-down" iconDensityAware="false" iconFirst="true" id="np-sap_m_Button-1449550438004-0CY"
+															press="_onPressExtAbvGrafCleaneddown" type="Transparent" width="50px"/>
+													<m:Input
+														fieldWidth="40px" filterSuggests="true"
+														id="id_ExtAboveCleaned" maxLength="0"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														showValueHelp="false" startSuggestion="1" type="Text"
+														value="0" valueHelpOnly="false" valueLiveUpdate="false"
+														width="45px" change="_onChangeExternalAboveCleaned">
+													</m:Input>
+													<m:Button enabled="true" icon="sap-icon://slim-arrow-up" iconDensityAware="false" iconFirst="true" id="np-sap_m_Button-1449550438004-0D0"
+													press="_onPressExtAbvGrafCleanedup" type="Transparent" width="50px"/>
+												</m:items>
+												<m:layoutData/>
+											</m:HBox>
+											<m:Text id="id_ExtAboveRemaining" maxLines="1" text="0" textAlign="Right" textDirection="RTL" width="58.99305725097656px"
+												wrapping="true"/>
+										</m:cells>
+									</m:ColumnListItem>
+									<m:ColumnListItem id="PositionExternalBelow">
+										<m:cells>
+											<m:ObjectIdentifier id="np-sap_m_ObjectIdentifier-1449536398100-0F6" text="" title="External (Below Gutter)" titleActive="false"
+												visible="true"/>
+											<m:HBox alignItems="Stretch" direction="Row" displayInline="false" fitContainer="false" height="48px" id="np-sap_m_HBox-1449550468918-0D7"
+												justifyContent="Start" renderType="Div" visible="true">
+												<m:items>
+													<m:Button enabled="true" icon="sap-icon://slim-arrow-down" iconDensityAware="false" iconFirst="true" id="np-sap_m_Button-1449550468918-0D8"
+														press="_onPressExtBelTotaldown" type="Transparent" width="50px"/>
+													<m:Input
+														fieldWidth="40px" filterSuggests="true"
+														id="id_ExtBelowTotal" maxLength="0" showSuggestion="false"
+														showTableSuggestionValueHelp="true" showValueHelp="false"
+														startSuggestion="1" type="Text" value="0"
+														valueHelpOnly="false" valueLiveUpdate="false" width="45px"
+														change="_onChangeExternalBelowTotal">
+													</m:Input>
+													<m:Button enabled="true" icon="sap-icon://slim-arrow-up" iconDensityAware="false" iconFirst="true" id="np-sap_m_Button-1449550468918-0DA"
+														press="_onPressExtBelTotalup" type="Transparent" width="50px"/>
+												</m:items>
+												<m:layoutData/>
+											</m:HBox>
+											<m:HBox alignItems="Stretch" direction="Row" displayInline="false" fitContainer="false" height="48px" id="np-sap_m_HBox-1449550481214-0DR"
+												justifyContent="Start" renderType="Div" visible="true">
+												<m:items>
+													<m:Button enabled="true" icon="sap-icon://slim-arrow-down" iconDensityAware="false" iconFirst="true" id="np-sap_m_Button-1449550481214-0DS"
+														press="_onPressExtBelGrafCleaneddown" type="Transparent" width="50px"/>
+													<m:Input
+														fieldWidth="40px" filterSuggests="true"
+														id="id_ExtBelowCleaned" maxLength="0"
+														showSuggestion="false" showTableSuggestionValueHelp="true"
+														showValueHelp="false" startSuggestion="1" type="Text"
+														value="0" valueHelpOnly="false" valueLiveUpdate="false"
+														width="45px" change="_onChangeExternalBelowCleaned">
+													</m:Input>
+													<m:Button enabled="true" icon="sap-icon://slim-arrow-up" iconDensityAware="false" iconFirst="true" id="np-sap_m_Button-1449550481214-0DU"
+														press="_onPressExtBelGrafCleanedup" type="Transparent" width="50px"/>
+												</m:items>
+												<m:layoutData/>
+											</m:HBox>
+											<m:Text id="id_ExtBelowRemaining" maxLines="1" text="0" textAlign="Right" textDirection="RTL" width="58.99305725097656px"
+												wrapping="true"/>
+										</m:cells>
+									</m:ColumnListItem>
+								</m:items>
+								<m:infoToolbar/>
+								<m:headerToolbar/>
+								<m:columns>
+									<m:Column demandPopin="false" hAlign="Begin" id="np-sap_m_Column_Product-1449536398100-0FD" mergeDuplicates="false"
+										mergeFunctionName="getText" minScreenWidth="Tablet" popinDisplay="Inline" vAlign="Inherit" width="auto">
+										<m:header>
+											<m:Text id="np-sap_m_Text-1449536398101-0FE" maxLines="1" text="Position" textAlign="Begin" textDirection="Inherit" width="auto"
+												wrapping="true"/>
+										</m:header>
+										<m:footer/>
+									</m:Column>
+									<m:Column demandPopin="true" hAlign="Begin" id="np-sap_m_Column_Supplier-1449536398101-0FF" mergeDuplicates="false"
+										mergeFunctionName="getText" minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit" width="auto">
+										<m:header>
+											<m:Text id="np-sap_m_Text-1449536398101-0FG" maxLines="1" text="Total Found(A4 Pages)" textAlign="Center" textDirection="Inherit" width="150px"
+												wrapping="true"/>
+										</m:header>
+										<m:footer/>
+									</m:Column>
+									<m:Column demandPopin="true" hAlign="Begin" id="np-sap_m_Column_Price-1449536398101-0FH" mergeDuplicates="false" mergeFunctionName="getText"
+										minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit" width="auto">
+										<m:header>
+											<m:Text id="np-sap_m_Text-1449536398101-0FI" maxLines="1" text="Graffiti Cleaned" textAlign="Center" textDirection="Inherit" width="150px"
+												wrapping="true"/>
+										</m:header>
+										<m:footer/>
+									</m:Column>
+									<m:Column demandPopin="true" hAlign="Begin" id="np-sap_m_Column-1449536498358-0GW" mergeDuplicates="false" mergeFunctionName="getText"
+										minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit" width="auto">
+										<m:header>
+											<m:Text id="np-sap_m_Text-1449536498360-0GX" maxLines="2" text="Graffiti Remaining" textAlign="Center" textDirection="LTR" width="auto"
+												wrapping="false"/>
+										</m:header>
+										<m:footer/>
+									</m:Column>
+								</m:columns>
+							</m:Table>
+							<!--Remaining Graffiti Quantity Notification -->
+							<form:SimpleForm breakpointL="1024" breakpointM="800" columnsL="2" columnsM="1" editable="true" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+								id="remainingID" labelMinWidth="192" labelSpanL="4" labelSpanM="2" labelSpanS="12"
+								layout="ResponsiveGridLayout" maxContainerCols="3" minWidth="4" visible="true">
+								<form:title>
+									<core:Title emphasized="false" icon="sap-icon://flag" id="np-sap_ui_core_Title-1449545504732-05Y" level="H4"
+										text="Remaining Graffiti Quantity Notification"/>
+								</form:title>
+								<form:content>
+									<m:Label class="Title" id="np-sap_m_Label-1449545504732-05Z" required="true" text="Comments" />
+									<m:HBox alignItems="Inherit" direction="Row" displayInline="false" fitContainer="true" height="48px" id="np-sap_m_HBox-1449550812243-0EW"
+										justifyContent="Start" renderType="Div" visible="true">
+										<m:items>
+											<m:Input fieldWidth="50%" filterSuggests="true" id="id_Comments" maxLength="0"
+												placeholder="Mandatory for when Internal/Ext below Gutter has > 0 Graffiti Remaining" showSuggestion="false"
+												showTableSuggestionValueHelp="true" showValueHelp="false" startSuggestion="1" type="Text" valueHelpOnly="false" valueLiveUpdate="false"
+												width="581px" enabled ="{/graffiti/remaining}">
+											</m:Input>
+											<!-- <m:Button enabled="true" icon="sap-icon://attachment" iconDensityAware="false" iconFirst="true" id="id_FormAttachmentButton"
+												press="_onPressAttachmentButton" text="" type="Default" width="40px"/> -->
+										</m:items>
+										<m:layoutData/>
+									</m:HBox>
+									<m:Label class="Title" id="np-sap_m_Label-1449547523472-073" required="true" text="Graffiti Type"/>
+									<m:HBox alignItems="Stretch" direction="Row" displayInline="false" fitContainer="false" height="48px" id="id_GraffitiTypesBox"
+										justifyContent="Start" renderType="Div" visible="true">
+										<m:items>
+												<m:ToggleButton enabled="true" iconDensityAware="false" iconFirst="false" id="OffensiveGrafTypeButton" press="onPressOffGrafType"
+												pressed = "false" text="Offensive" width="100px"/>
+											<m:ToggleButton enabled="true" iconDensityAware="false" iconFirst="false" id="OtherGrafTypeButton" press="onPressOthGrafType"
+													pressed = "false" text="Other" width="100px"/>
+											<m:ToggleButton enabled="true" iconDensityAware="false" iconFirst="false" id="MuralGrafTypeButton" press="onPressMuralGrafType"
+													pressed = "false" text="Mural" width="100px"/>
+										</m:items>
+										<m:layoutData/>
+									</m:HBox>
+								</form:content>
+							</form:SimpleForm>
+							<!--// Close fault table //-->
+							<m:Panel expandable="true" headerText="Outstanding Faults">
+							<m:Toolbar design="Solid" enabled="true" height="45.989585876464844px" id="np-sap_m_Toolbar_3-1450058335256-0BO" visible="true"
+								width="auto" justifyContent="SpaceBetween">
+								<m:content>
+									<m:ToolbarSpacer />
+									<m:Title text="Outstanding Faults (Graffiti)" level="H3"/>
+									<m:ToolbarSpacer />
+									<m:Button enabled="true" icon="sap-icon://close-command-field" iconDensityAware="false" iconFirst="true" id="np-sap_m_Button-1450058342815-0BY"
+										text="Close Fault" type="Default" width="auto" press="handleCloseFaults"/>
+								</m:content>
+							</m:Toolbar>
+							<m:Table backgroundDesign="Translucent" fixedLayout="true" growing="false" growingScrollToLoad="false" growingThreshold="20"
+								id="CloseFaultTable" includeItemInSelection="true" inset="false" mode="MultiSelect" modeAnimationOn="true" noDataText="No data"
+								rememberSelections="true" showNoData="true" showOverlay="false" showSeparators="All" showUnread="false" swipeDirection="Both" visible="true"
+								width="100%" >
+								<m:items>
+									<m:ColumnListItem id="Fault1">
+										<m:cells>
+											<m:ObjectIdentifier id="np-sap_m_ObjectIdentifier-1449548003524-07Q" text="" title="302334" titleActive="false" visible="true"/>
+											<m:Text id="np-sap_m_Text-1449548404546-0A6" maxLines="1" text="9037" textAlign="Begin" textDirection="Inherit" width="50px" wrapping="true"/>
+											<m:Text id="np-sap_m_Text-1449548405392-0A8" maxLines="1" text="Other" textAlign="Begin" textDirection="Inherit" width="50px"
+												wrapping="true"/>
+											<m:Text id="np-sap_m_Text-1449548409064-0AA" maxLines="1" text="15 Nov 2015" textAlign="Begin" textDirection="Inherit" width="100px"
+												wrapping="true"/>
+											<m:HBox alignItems="End" direction="Row" displayInline="false" fitContainer="true" height="auto" id="np-sap_m_HBox-1449552043725-0HM"
+												justifyContent="SpaceBetween" renderType="Div" visible="true" width="50%">
+												<m:items>
+													<m:Text id="np-sap_m_Text-1449552043725-0HN" maxLines="1" text="No Image Attached" textAlign="Begin" textDirection="Inherit" width="100%"
+														wrapping="true"/>
+													<m:Button enabled="true" icon="sap-icon://attachment" iconDensityAware="true" iconFirst="true" id="np-sap_m_Button-1449552043725-0HP"
+														text="" type="Transparent" width="30%"/>
+												</m:items>
+												<m:layoutData/>
+											</m:HBox>
+										</m:cells>
+									</m:ColumnListItem>
+									<m:ColumnListItem id="Fault2">
+										<m:cells>
+											<m:ObjectIdentifier id="np-sap_m_ObjectIdentifier-1449548003525-07U" text="" title="302335" titleActive="false" visible="true"/>
+											<m:Text id="np-sap_m_Text-1449548003525-07V" maxLines="1" text="9037" textAlign="Begin" textDirection="Inherit" width="auto" wrapping="true"/>
+											<m:Text id="np-sap_m_Text-1449551255576-0G5" maxLines="1" text="Other" textAlign="Begin" textDirection="Inherit" width="300px"
+												wrapping="true"/>
+											<m:Text id="np-sap_m_Text-1449551258925-0G7" maxLines="1" text="15 Nov 2015" textAlign="Begin" textDirection="Inherit" width="300px"
+												wrapping="true"/>
+											<m:HBox alignItems="Stretch" direction="Row" displayInline="false" fitContainer="true" height="41px" id="np-sap_m_HBox-1449551438353-0GU"
+												justifyContent="SpaceBetween" renderType="Div" visible="true" width="50%">
+												<m:items>
+													<m:Text id="np-sap_m_Text-1449551438353-0GW" maxLines="1" text="No Image Attached" textAlign="Begin" textDirection="Inherit" width="100%"
+														wrapping="true"/>
+													<m:Button enabled="true" icon="sap-icon://attachment" iconDensityAware="true" iconFirst="true" id="np-sap_m_Button-1449551988702-0HG"
+														press="_onPressNpsapmButton14495519887020HG" text="" type="Transparent" width="30%"/>
+												</m:items>
+												<m:layoutData/>
+											</m:HBox>
+											<m:Text id="np-sap_m_Text-1449551276006-0GB" maxLines="2" text="No Image Attached" textAlign="Begin" textDirection="Inherit" width="80px"
+												wrapping="true"/>
+										</m:cells>
+									</m:ColumnListItem>
+								</m:items>
+								<m:infoToolbar/>
+								<m:headerToolbar/>
+								<m:columns>
+									<m:Column demandPopin="true" hAlign="Begin" id="np-sap_m_Column_Product-1449548003525-085" mergeDuplicates="false"
+										mergeFunctionName="getText" minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit" width="auto">
+										<m:header>
+											<m:Text id="np-sap_m_Text-1449548003525-086" maxLines="1" text="Fault ID" textAlign="Begin" textDirection="Inherit" width="auto"
+												wrapping="true"/>
+										</m:header>
+										<m:footer/>
+									</m:Column>
+									<m:Column demandPopin="true" hAlign="Begin" id="np-sap_m_Column_Supplier-1449548003525-087" mergeDuplicates="false"
+										mergeFunctionName="getText" minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit" width="auto">
+										<m:header>
+											<m:Text id="np-sap_m_Text-1449548003525-088" maxLines="1" text="Description" textAlign="Begin" textDirection="Inherit" width="auto"
+												wrapping="true"/>
+										</m:header>
+										<m:footer/>
+									</m:Column>
+									<m:Column demandPopin="true" hAlign="Begin" id="np-sap_m_Column_Price-1449548003525-089" mergeDuplicates="false" mergeFunctionName="getText"
+										minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit" width="auto">
+										<m:header>
+											<m:Text id="np-sap_m_Text-1449548003525-08A" maxLines="1" text="Graffiti Type" textAlign="Begin" textDirection="Inherit" width="auto"
+												wrapping="true"/>
+										</m:header>
+										<m:footer/>
+									</m:Column>
+									<m:Column demandPopin="true" hAlign="Begin" id="np-sap_m_Column-1449548099868-09C" mergeDuplicates="false" mergeFunctionName="getText"
+										minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit" width="auto" wrapping="true">
+										<m:header> 
+											<m:Text id="np-sap_m_Text-1449548099869-09D" maxLines="1" text="Date Identified" textAlign="Begin" textDirection="Inherit" width="auto"
+												wrapping="true"/>
+										</m:header>
+										<m:footer/>
+									</m:Column>
+									<!-- <m:Column demandPopin="true" hAlign="Begin" id="np-sap_m_Column-1449548103616-09O" mergeDuplicates="false" mergeFunctionName="getText"
+										minScreenWidth="Tablet" popinDisplay="Block" vAlign="Inherit" width="25%">
+										<m:header>
+											<m:Text id="np-sap_m_Text-1449548103616-09P" maxLines="1" text="Additional Info" textAlign="Center" textDirection="Inherit" width="auto"
+												wrapping="true"/>
+										</m:header>
+										<m:footer/>
+									</m:Column> -->
+									<m:Column demandPopin="true"
+										hAlign="Begin" id="Attachment_header" mergeDuplicates="false" 
+										vAlign="Top" width="auto" minScreenWidth="Tablet"
+										popinDisplay="Block" wrapping = "true">
+										<m:header> 
+											<m:Text id="attach_id" maxLines="1" text = "View Attachments" textAlign="Begin" textDirection="Inherit" width="auto"
+												wrapping="true"/>
+										</m:header>
+										<m:footer/>
+									</m:Column>
+								</m:columns>
+							</m:Table>
+							</m:Panel>
+						</m:content>
+					</m:IconTabFilter>
+				</m:items>
+			</m:IconTabBar>
+		</m:content>
+		<m:footer>
+			<m:Toolbar design="Solid" enabled="true" height="35px" id="sap_m_Toolbar_1" visible="true" width="auto">
+				<m:tooltip/>
+				<m:content>
+					<m:ToolbarSpacer id="sap_m_ToolbarSpacer_2" visible="true" width=""/>
+					<m:Button enabled="true" iconDensityAware="false" iconFirst="false" id="id_Submit" press="_onPressSubmit" text="Submit"
+						type="Emphasized" width="auto"/>
+				</m:content>
+			</m:Toolbar>
+		</m:footer>
+		<m:headerContent/>
+		<m:subHeader/>
+		<m:customHeader/>
+	</m:Page>
+</mvc:View>

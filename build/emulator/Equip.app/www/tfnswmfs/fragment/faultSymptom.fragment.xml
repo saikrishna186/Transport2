@@ -1,0 +1,68 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:m="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<m:ResponsivePopover class="sapUiPopupWithPadding"
+		placement="Top" title="Select Symptom" contentHeight="auto"
+		contentWidth="auto" PlacementType="auto" verticalScrolling="true"
+		afterClose="onCloseSysmptom">
+		<m:content>
+			<layout:Grid defaultIndent="L0 M0 S0" defaultSpan="L6 M6 S6"
+				hSpacing="1" vSpacing="0" width="auto">
+				<layout:content>
+					<m:Table backgroundDesign="Solid" busy="false" fixedLayout="true"
+						growing="false" growingScrollToLoad="true" growingThreshold="20"
+						headerDesign="Standard" height="95%" includeItemInSelection="true"
+						itemPress="onSelectSympGroup"
+						items="{ path: 'symptomGroupModel>/listitems', sorter: { path: 'Codegruppe' } }"
+						mode="SingleSelectMaster" noDataText="No Symptom groups Found"
+						rememberSelections="false" showNoData="false" width="auto">
+						<m:customData>
+							<core:CustomData key="sap-ui-fastnavgroup" value="true"
+								writeToDom="true" />
+						</m:customData>
+						<m:items>
+							<m:ColumnListItem counter="0" type="Active">
+								<m:cells>
+									<m:ObjectIdentifier badgeAttachments="false"
+										badgeNotes="false" badgePeople="false"
+										text="{symptomGroupModel>CodegrText}" value="{symptomGroupModel>Codegruppe}" />
+								</m:cells>
+							</m:ColumnListItem>
+						</m:items>
+						<m:columns>
+							<m:Column>
+								<m:header>
+									<m:Label design="Bold" text="{i18n>symptGrp}" />
+								</m:header>
+							</m:Column>
+						</m:columns>
+					</m:Table>
+					<m:Table backgroundDesign="Solid" busy="false" fixedLayout="false"
+						growing="true" growingScrollToLoad="true" growingThreshold="20"
+						headerDesign="Standard" height="95%" includeItemInSelection="true"
+						itemPress="onSelectSymptom"
+						items="{ path: 'symptomModel>/listitems', sorter: { path: 'Codegruppe' } }"
+						mode="SingleSelectMaster" noDataText="No symptoms Found"
+						rememberSelections="false" showNoData="false" width="auto">
+						<m:items>
+							<m:ColumnListItem counter="0" type="Active">
+								<m:cells>
+									<m:ObjectIdentifier badgeAttachments="false"
+										badgeNotes="false" badgePeople="false" text="{symptomModel>CodeText}"
+										value="{symptomModel>Code}" />
+								</m:cells>
+							</m:ColumnListItem>
+						</m:items>
+						<m:columns>
+							<m:Column>
+								<m:header>
+									<m:Label design="Bold" text="{i18n>symptom}" />
+								</m:header>
+							</m:Column>
+						</m:columns>
+					</m:Table>
+				</layout:content>
+			</layout:Grid>
+		</m:content>
+	</m:ResponsivePopover>
+</core:FragmentDefinition>

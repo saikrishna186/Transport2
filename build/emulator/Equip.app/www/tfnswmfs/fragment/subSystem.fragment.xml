@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<ResponsivePopover class="sapUiPopupWithPadding"
+		placement="Left" title="Select Sub System" afterClose="onClosesubSystem">
+		<content>
+			<List headerText="" selectionChange="onSelSubSystem"
+				items="{ path:'subSystemModel>/listitems' }" backgroundDesign="Transparent"
+				growing="true" growingScrollToLoad="true" growingThreshold="10"
+				includeItemInSelection="true" showSeparators="All" showUnread="true"
+				rememberSelections="false" width="auto" mode="SingleSelectMaster">
+				<items>
+					<StandardListItem title="{subSystemModel>SubsysDesc}"
+						value="{subSystemModel>SubSystem}" adaptTitleSize="true"
+						titleTextDirection="LTR" class="popList" />
+				</items>
+			</List>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

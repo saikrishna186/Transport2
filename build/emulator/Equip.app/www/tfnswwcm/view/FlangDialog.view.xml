@@ -1,0 +1,40 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" controllerName="tfnsw.erp.wcm.view.FlangDialog">
+	<m:Dialog horizontalScrolling="true" id="sap_m_Dialog_0"
+		showHeader="true" state="None" stretch="false" title="Flange Thickness measurement "
+		type="Standard" verticalScrolling="true">
+		<m:beginButton />
+		<m:buttons>
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				id="np-sap_m_Button-1452566787610-0XR" text="Save" type="Accept"
+				width="auto" press="onSave" />
+			<m:Button enabled="true" iconDensityAware="false" iconFirst="false"
+				id="np-sap_m_Button-1452566788673-0XT" text="Cancel" type="Reject"
+				width="auto" press="onExit" />
+		</m:buttons>
+		<m:content>
+			<form:SimpleForm breakpointL="1024" breakpointM="600"
+				columnsL="2" columnsM="1" editable="false" emptySpanL="0"
+				emptySpanM="0" emptySpanS="0"
+				id="np-sap_ui_layout_form_SimpleForm-1452566741459-0X7"
+				labelMinWidth="192" labelSpanL="4" labelSpanM="2" labelSpanS="12"
+				layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="-1"
+				visible="true">
+				<form:title />
+				<form:content>
+					<m:Label design="Standard" id="np-sap_m_Label-1452566741459-0X9"
+						required="false" text="Reading" textAlign="Begin" textDirection="Inherit"
+						width="auto" />
+					<m:Input fieldWidth="510%" filterSuggests="true" maxLength="0"
+						showSuggestion="false" showTableSuggestionValueHelp="true"
+						showValueHelp="false" startSuggestion="1" type="Text"
+						valueHelpOnly="false" valueLiveUpdate="false" width="auto"
+						value="{/flangReading}"></m:Input>
+				</form:content>
+			</form:SimpleForm>
+		</m:content>
+		<m:customHeader />
+		<m:endButton />
+		<m:subHeader />
+	</m:Dialog>
+</mvc:View>

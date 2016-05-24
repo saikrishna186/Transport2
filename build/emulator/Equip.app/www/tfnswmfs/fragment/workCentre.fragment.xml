@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<ResponsivePopover class="sapUiPopupWithPadding"
+		placement="Bottom" title="Select Work Centre">
+		<content>
+			<List headerText="" selectionChange="onSelWorkCentre"
+				items="{ path:'workCentreModel>/listitems' }" backgroundDesign="Transparent"
+				growing="true" growingScrollToLoad="true" growingThreshold="10"
+				includeItemInSelection="true" showSeparators="All" showUnread="true"
+				rememberSelections="true" width="auto" mode="SingleSelectMaster">
+				<items>
+					<StandardListItem title="{workCentreModel>Ktext}"
+						value="{workCentreModel>Arbpl}" adaptTitleSize="true"
+						titleTextDirection="LTR" class="popList" />
+				</items>
+			</List>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>
